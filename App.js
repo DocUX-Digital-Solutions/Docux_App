@@ -18,7 +18,11 @@ function App() {
     <UserProvider>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+            cardStyle: { backgroundColor: '#f5f5f7' }, // Set your desired background color here
+          }}>
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Stack.Screen name="VisitPage" component={VisitPage} options={{ headerShown: false }} />

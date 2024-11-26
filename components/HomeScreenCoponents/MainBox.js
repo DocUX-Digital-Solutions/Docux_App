@@ -70,7 +70,6 @@ const MainBox = ({ navigation, setSideMenuVisible }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#f5f5f7",
         flex: 1,
     },
     topBar: {},

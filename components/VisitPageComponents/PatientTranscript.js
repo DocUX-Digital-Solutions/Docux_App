@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, FlatList } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const PatientInfoBox = ({ timeAppointment, namePatient, symptoms, navigation }) => {
+const PatientTranscript = () => {
     const [lateOnTimeTextColor, setLateOnTimeTextColor] = useState('red');
     const [opacityValue, setOpacityValue] = useState(1);
     const [appointmentTime, setAppointmentTime] = useState(null);
@@ -31,31 +32,33 @@ const PatientInfoBox = ({ timeAppointment, namePatient, symptoms, navigation }) 
 
     return (
         <View style={styles.container}>
-            <View style={styles.textPatientCard}>
-                <Text style={styles.headerText}>Transcript</Text>
-            </View>
-            <View style={styles.innerContainerBox}>
-                <View style={styles.transcriptBox}>
-                    <FlatList
-                        data={data}
-                        renderItem={renderItem}
-                        keyExtractor={(item) => item.id}
-                        scrollEnabled={false} // Disable scrolling
-                    />
-                </View>
-            </View>
+ 
+ <FlatList
+                    data={data}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderItem}
+                    style={styles.flatListContent}
+                    showsVerticalScrollIndicator={false}
+                    scrollEventThrottle={16}
+                    contentContainerStyle={{ paddingVertical: 25 }}
+                />
+  
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#fff',
         borderRadius: 10,
         alignItems: 'center',
-        width: '58%',
-       paddingBottom:30
+        width: '90%',
+    
         
+    },
+    flatListContent: {
+        width: '100%',
+        height: '100%',
     },
     smallTextStyle: {
         fontSize: 11,
@@ -101,14 +104,14 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     transcriptText: {
-        fontSize: 12,
+        fontSize: 18,
     },
     transcriptTextBox: {
         flexDirection: 'row',
         alignItems: 'flex-start', // Align items to the top
         marginBottom: 20,
-        width:"95%"
+        width:"90%"
     },
 });
 
-export default PatientInfoBox;
+export default PatientTranscript;

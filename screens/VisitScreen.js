@@ -24,7 +24,6 @@ const VisitPage = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f5f5f7",
     flexDirection: 'row',
     height: '100%',
   },

@@ -6,7 +6,8 @@ import PatientTranscript from './PatientTranscript';
 import RecordingButtons from './RecordingButtons';
 import TopMenu from '../HomeScreenCoponents/TopMenuBar';
 import TopMenuPatient from './TopMenuPatient';
-
+import PatientCard from './PatientCard';
+import Oscilloscope from './Oscilloscope';
 const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigation,setSideMenuVisible }) => {
     const scrollY = useRef(new Animated.Value(0)).current;
     const [listHeight, setListHeight] = useState(0);
@@ -21,10 +22,11 @@ const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigatio
                         <View style={styles.topBar}>
                 <TopMenuPatient appointmentsNumber={20} useExpand={true} setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
             </View>
-            <ScrollView>
-            <View style={styles.patientContent}>
-            </View>
-            </ScrollView>
+            <View style={styles.patientBoxCard}><PatientCard/></View>
+            <Oscilloscope/>
+            <View style={styles.bodyBox}>
+           <PatientTranscript/>
+           </View>
             <View style={styles.bottomBar}>
                 <RecordingButtons appointmentsNumber={20} useExpand={false} navigation={navigation}/>
             </View>
@@ -34,14 +36,25 @@ const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigatio
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#f5f5f7",
         flex: 1,
     },
     bottomBar: {
-        height: 100,
         marginTop: '2%',
         marginBottom:"2%",
         paddingBottom:3,
+        bottom:0,
+        position:'absolute'
+    },
+    patientBoxCard:{
+        paddingBottom:10,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    bodyBox:{
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center',
+        height:'40%',
     },
     listContentContainer: {
         paddingBottom: 20,

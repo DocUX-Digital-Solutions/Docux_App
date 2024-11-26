@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '96%',
         backgroundColor: 'transparent',
-        paddingTop: 40,
+      
 
         borderBottomColor: '#ebebec',
         borderBottomWidth: 1,
