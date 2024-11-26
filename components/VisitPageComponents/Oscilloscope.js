@@ -31,7 +31,9 @@ const Oscilloscope = () => {
         const status = await recording.getStatusAsync();
         if (status.canRecord) {
           setWaveformData(prevData => {
-            const newData = [...prevData, Math.max((60 + status.metering) > 10 ? (60 + status.metering) * 3 : 5, 5)];
+            const newValue = Math.max((60 + status.metering) > 10 ? (60 + status.metering) * 3 : 5, 5);
+            if(newValue ==5){ return prevData;}
+            const newData = [...prevData, newValue];
             if (newData.length > 30) {
               newData.shift(); // Remove the oldest data point to create a scrolling effect
             }
