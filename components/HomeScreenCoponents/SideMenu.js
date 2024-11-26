@@ -15,30 +15,30 @@ const SideMenu = ({ setSideMenuVisible, isSideMenuVisible }) => {
     <View style={styles.menu}>
       {/* If the menu is open, show all elements. If closed, set opacity to 0 */}
       <View style={[styles.logoMenu, { opacity: isSideMenuVisible ? 1 : 0 }]}>
-        <ImageBackground
-          style={styles.rankBackground}
-          source={require('../../assets/logo.png')}
-          resizeMode="contain"
-        />
-        <TouchableOpacity onPress={toggleMenu} >
+       
+        <TouchableOpacity style={styles.arrowIcon} onPress={toggleMenu} >
           <Icon
-            name="arrow-collapse-left"
-            size={20}
+            name="close"
+            size={25}
             color="#fff"
-            style={styles.arrowIcon}
+            
           />
         </TouchableOpacity>
       </View>
 
       {/* Centered icon when the menu is closed */}
-      {!isSideMenuVisible && (
-        <TouchableOpacity style={styles.centeredIcon} onPress={toggleMenu}>
-          <Icon name="arrow-collapse-right" size={20} color="#fff" />
-        </TouchableOpacity>
-      )}
+      
       <View style={[styles.buttonBox, { opacity: isSideMenuVisible ? 1 : 0 }]}>
         <MenuSideButtons />
-        <View style={styles.doctorNameTextBox}><Text style={styles.doctorNameText}>{jsonData.doctorsName}</Text></View>
+        <TouchableOpacity style={styles.doctorNameTextBox}>
+        <Icon
+              name="calendar-edit"
+              size={30}
+              color="#fff"
+
+            />
+          <Text style={styles.doctorNameText}>Logoff</Text>
+          </TouchableOpacity>
       </View>
       
     </View>
@@ -53,28 +53,31 @@ const styles = StyleSheet.create({
   },
   logoMenu: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    marginTop: 50,
+    marginRight:30,
     position: 'absolute',
     top: 0,
-    left: 0,
+    right: '1%',
     zIndex: 11, // Ensures the menu elements are on top when visible
     width: '100%', // Makes sure the menu spans the full width
-    height:'15%'
+    
   },
   buttonBox: {
-    alignContent: 'center',
+    alignContent: 'flex-start',
     height: '100%',
-    justifyContent: 'center',
+    marginTop: 150,
+    justifyContent: 'flex-start',
+    
   },
   arrowIconButton: {
     // Makes the button take up 50% of the width of the menu
-    width: '50%',
+    width: '100%',
     // Ensures the TouchableOpacity is invisible by making it transparent
     backgroundColor: 'black', 
-    justifyContent: 'center',  // Centers the icon within the button
-    alignItems: 'center', // Centers the icon horizontally
+    justifyContent: 'flex-end',  // Centers the icon within the button
+    alignItems: 'flex-end', // Centers the icon horizontally
   },
   rankBackground: {
     width: "80%",
@@ -84,7 +87,8 @@ const styles = StyleSheet.create({
     left:10
   },
   arrowIcon: {
-    marginLeft: 10,
+    //backgroundColor:'#000',
+    
   },
   centeredIcon: {
     position: 'absolute',
@@ -100,18 +104,33 @@ const styles = StyleSheet.create({
   },
   doctorNameTextBox: {
     width: '100%',
-    alignSelf: 'center',
-    position: 'absolute', // Position it at the bottom of the container
-    bottom: 10, // Ensure it aligns with the bottom of the parent container
+    bottom: '0', // Position it at the very bottom of the screen
     padding: 10, // Optional: Add some padding for spacing inside the text box
-    alignContent:'center',
-    left:'10%'
+    alignContent: 'center',
+    left: '10%',
+    backgroundColor: 'black',
   },
   doctorNameText:{
     color:'white',
     fontSize:15,
     fontWeight:'500',
-  }
+  },
+  doctorNameTextBox: {
+    position: 'absolute', // Position it absolutely within the parent view
+    alignContent: 'flex-end',
+    top:"72%",
+    left:19,
+    flexDirection:'row',
+    justifyContent:'center',
+    
+
+  },
+  doctorNameText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '500',
+    marginLeft:10
+  },
 
 });
 

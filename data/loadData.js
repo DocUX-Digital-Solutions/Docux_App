@@ -4,57 +4,25 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [jsonData, setJsonData] = useState({ "hi": "hello" });
-    const [organizedAppointments, setOrganizedAppointments] = useState({});
-
+    const [organizedAppointments, setOrganizedAppointments] = useState([]);
+      
     const organizeAppointmentsByHour = (appointments) => {
-        const organizedData = {};
-      
-        // Loop through the appointments
-        Object.entries(appointments).forEach(([key, appointment]) => {
-          const date = new Date(appointment.timeAppointment); // Convert the time string to Date object
-          const hour = date.getHours(); // Get the hour (24-hour format)
-          const period = hour < 12 ? 'AM' : 'PM'; // Determine AM or PM
-          
-          // Convert hour to 12-hour format
-          const hour12 = hour % 12 || 12; // Convert 0 to 12 for AM/PM notation
-      
-          // Format the period with the hour (e.g., "3:00 AM", "5:00 PM")
-          const timePeriod = `${hour12}:00 ${period}`;
-      
-          // Ensure the timePeriod exists in the organizedData object
-          if (!organizedData[timePeriod]) {
-            organizedData[timePeriod] = [];
-          }
-      
-          // Add the appointment to the appropriate timePeriod group
-          organizedData[timePeriod].push(appointment);
-        });
-      
-        // Sort the data by hour (AM first, then PM)
-        const sortedKeys = Object.keys(organizedData).sort((a, b) => {
-          // Extract hours from the timePeriod strings ("3:00 AM" -> 3, "5:00 PM" -> 17)
-          const getHour = (time) => {
-            const [hourStr] = time.split(':'); // Get the hour part (e.g., "3" from "3:00 AM")
-            const period = time.split(' ')[1]; // Get AM/PM part (e.g., "AM")
-            let hour = parseInt(hourStr, 10);
-            if (period === 'PM' && hour !== 12) hour += 12; // Convert PM hour to 24-hour format
-            if (period === 'AM' && hour === 12) hour = 0; // Convert 12 AM to 0 hour
-            return hour;
-          };
-      
-          return getHour(a) - getHour(b);
-        });
-      
-        // Create a new sorted object based on the sorted keys
-        const sortedData = {};
-        sortedKeys.forEach((timePeriod) => {
-          sortedData[timePeriod] = organizedData[timePeriod];
-        });
-      
-        return sortedData;
-      };
-      
-    
+      const organized = [];
+  
+      Object.keys(appointments).forEach((key) => {
+          const appointment = appointments[key];
+          const date = new Date(appointment.timeAppointment);
+          const hours = date.getHours();
+          const minutes = date.getMinutes();
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          const formattedTime = `${hours % 12 || 12}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+  
+          organized.push({ ...appointment, formattedTime });
+      });
+      console.log(organized)
+      return organized;
+  };
+  
       
       
     useEffect(() => {

@@ -5,27 +5,15 @@ import MainBox from '../components/HomeScreenCoponents/MainBox';
 import * as ScreenOrientation from 'expo-screen-orientation';
 
 function HomeScreen({ navigation }) {
-  const [isSideMenuVisible, setSideMenuVisible] = useState(true);
-
-  useEffect(() => {
-    const lockOrientation = async () => {
-      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-    };
-
-    lockOrientation();
-
-    return () => {
-      ScreenOrientation.unlockAsync();
-    };
-  }, []);
+  const [isSideMenuVisible, setSideMenuVisible] = useState(false);
 
   return (
     <View style={styles.container}>
-      <View style={[styles.sideMenuContainer, { width: isSideMenuVisible ? '20%' : "6%" }]}>
+      <View style={[styles.sideMenuContainer, { width: isSideMenuVisible ? '95%' : "0%" }]}>
         <SideMenu setSideMenuVisible={setSideMenuVisible} isSideMenuVisible={isSideMenuVisible} />
       </View>
-      <View style={[styles.mainBoxContainer, { width: isSideMenuVisible ? '80%' : '90%' }]}>
-        <MainBox navigation={navigation}/>
+      <View style={[styles.mainBoxContainer, { opacity: isSideMenuVisible ? 0 : 1 }]}>
+        <MainBox navigation={navigation} setSideMenuVisible={setSideMenuVisible}/>
       </View>
     </View>
   );

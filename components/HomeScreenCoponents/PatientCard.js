@@ -7,24 +7,6 @@ const PatientCard = ({ timeAppointment, namePatient, statusPatent, symptoms, nav
     const [opacityValue, setOpacityValue] = useState(1);
     const [appointmentTime, setAppointmentTime] = useState(null)
 
-    useEffect(() => {
-        const currentTime = new Date();
-        const date = new Date(timeAppointment);
-
-        
-
-
-        // Extracting the components
-        let hours = date.getHours();
-        const minutes = date.getMinutes();
-
-        // Determine AM/PM
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-
-        setAppointmentTime(`${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`);
-    }, [timeAppointment]);
 
     
     useEffect(() => {
@@ -56,7 +38,7 @@ const PatientCard = ({ timeAppointment, namePatient, statusPatent, symptoms, nav
             </View>
             <View style={styles.nameTimeStyle}>
                 <Text style={styles.nameText}>{namePatient}</Text>
-                <Text style={styles.timeText}>{appointmentTime}</Text>
+                <Text style={styles.timeText}>{timeAppointment}</Text>
             </View>
             <View style={styles.symptomesStyleBox}>
                 <Text style={styles.nameText}>{symptoms}</Text>

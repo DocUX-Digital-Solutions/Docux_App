@@ -5,7 +5,7 @@ import { SearchBar } from 'react-native-elements';
 
 const screenWidth = Dimensions.get('window').width;
 
-const TopMenu = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterValue }) => {
+const TopMenuPatient = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterValue }) => {
     const [searchValue, setSearchValue] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const [showIcons, setShowIcons] = useState(true); // State to control icon visibility
@@ -110,8 +110,7 @@ const TopMenu = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterV
                     />
                 ) : (
                     <>
-                        <Text style={styles.appointmentsTextToday}>Today: </Text>
-                        <Text style={styles.appointmentsText}> {appointmentsNumber} Patients</Text>
+                        
                     </>
                 )}
             </View>
@@ -249,4 +248,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
-export default TopMenu;
+export default TopMenuPatient;

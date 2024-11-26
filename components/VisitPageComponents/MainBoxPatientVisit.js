@@ -3,43 +3,31 @@ import { View, FlatList, StyleSheet, Animated, Text, ScrollView } from 'react-na
 import PatientBox from '../HomeScreenCoponents/PatientBox';
 import PatientInfoBox from './PatientInfoBox';
 import PatientTranscript from './PatientTranscript';
-import TopMenuRecording from './TopMenuRecording';
-import { UserContext } from '../../data/loadData';
+import RecordingButtons from './RecordingButtons';
+import TopMenu from '../HomeScreenCoponents/TopMenuBar';
+import TopMenuPatient from './TopMenuPatient';
 
-const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigation }) => {
-    const { organizedAppointments } = useContext(UserContext);
+const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigation,setSideMenuVisible }) => {
     const scrollY = useRef(new Animated.Value(0)).current;
     const [listHeight, setListHeight] = useState(0);
     const [contentHeight, setContentHeight] = useState(1);
-
-    const renderItem = ({ item }) => (
-        <PatientBox timeDataBlock={Object.values(item.appointments)} time={item.time} navigation={navigation}/>
-    );
-
-    const handleScroll = Animated.event(
-        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-        { useNativeDriver: false }
-    );
+    const [searchValue, setSearchValue] = useState(null);
 
     const indicatorHeight = listHeight * (listHeight / contentHeight) *1.5;
 
-    const translateY = scrollY.interpolate({
-        inputRange: [0, Math.max(0, contentHeight - listHeight)],
-        outputRange: [0, Math.max(0, listHeight - indicatorHeight) * 0.85], // Stop 10% from the bottom
-        extrapolate: 'clamp',
-    });
 
     return (
         <View style={styles.container}>
-            <View style={styles.topBar}>
-                <TopMenuRecording appointmentsNumber={20} useExpand={false} navigation={navigation}/>
+                        <View style={styles.topBar}>
+                <TopMenuPatient appointmentsNumber={20} useExpand={true} setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
             </View>
             <ScrollView>
             <View style={styles.patientContent}>
-            <PatientInfoBox timeAppointment={timeAppointment} namePatient={namePatient} symptoms={symptoms} navigation={navigation}/>
-            <PatientTranscript timeAppointment={timeAppointment} namePatient={namePatient} symptoms={symptoms} navigation={navigation}/>
             </View>
             </ScrollView>
+            <View style={styles.bottomBar}>
+                <RecordingButtons appointmentsNumber={20} useExpand={false} navigation={navigation}/>
+            </View>
         </View>
     );
 };
@@ -49,8 +37,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#f5f5f7",
         flex: 1,
     },
-    topBar: {
-        height: 65,
+    bottomBar: {
+        height: 100,
         marginTop: '2%',
         marginBottom:"2%",
         paddingBottom:3,

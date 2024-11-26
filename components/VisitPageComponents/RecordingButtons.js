@@ -6,7 +6,7 @@ import * as FileSystem from 'expo-file-system';
 
 const screenWidth = Dimensions.get('window').width;
 
-const TopMenuRecording = ({ appointmentsNumber, useExpand, navigation }) => {
+const RecordingButtons = ({ appointmentsNumber, useExpand, navigation }) => {
     const [recording, setRecording] = useState(null);
     const [sound, setSound] = useState(null);
     const widthAnim = useRef(new Animated.Value(50)).current;
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '96%',
         backgroundColor: 'transparent',
-        paddingTop: 15,
+        paddingTop: 40,
 
         borderBottomColor: '#ebebec',
         borderBottomWidth: 1,
@@ -185,4 +185,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TopMenuRecording;
+export default RecordingButtons;

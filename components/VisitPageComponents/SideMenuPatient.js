@@ -2,10 +2,8 @@ import React, {useContext} from 'react';
 import { Text,View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MenuSideButtonsClipBoards from './MenuSideButtonsClipBoards';
-import { UserContext } from '../../data/loadData';
 
 const SideMenuPatient = ({ setSideMenuVisible, isSideMenuVisible }) => {
-  const { jsonData } = useContext(UserContext);
 
   const toggleMenu = () => {
     setSideMenuVisible(prevState => !prevState);

@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     color: '#97979b',
   },
   cardsContainer: {
-    flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
   },
