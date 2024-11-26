@@ -137,7 +137,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   block:{
-    borderRadius: 30,
+ width: 200,
+    height: 100,
+    backgroundColor: 'blue',
+    borderRadius: 20, 
   }
 });
 
