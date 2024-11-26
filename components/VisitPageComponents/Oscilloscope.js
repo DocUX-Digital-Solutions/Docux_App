@@ -31,18 +31,18 @@ const Oscilloscope = () => {
         const status = await recording.getStatusAsync();
         if (status.canRecord) {
           setWaveformData(prevData => {
-            const newData = [...prevData, 60 + status.metering];
+            const newData = [...prevData, Math.max((60 + status.metering) > 10 ? (60 + status.metering) * 3 : 5, 5)];
             if (newData.length > 30) {
               newData.shift(); // Remove the oldest data point to create a scrolling effect
             }
             return newData;
           });
-          console.log('Volume level:', 60 + status.metering);
+          console.log('Volume level:', Math.max((60 + status.metering) > 10 ? (60 + status.metering) * 3 : 60 + status.metering, 1));
         } else {
           console.log('Recording is not active.');
           clearInterval(intervalId); // Stop the interval if recording is not active
         }
-      }, 100); // Check every 300 milliseconds
+      }, 150); // Check every 300 milliseconds
     } catch (err) {
       console.error('Failed to start recording', err);
     }
@@ -113,6 +113,13 @@ const Oscilloscope = () => {
 
   return (
     <View style={styles.container}>
+      <Text>Recording Time: {recordTime}</Text>
+      <Button title="Start Recording" onPress={startRecording} disabled={recording !== null} />
+      <Button title="Stop Recording" onPress={stopRecording} disabled={recording === null} />
+      <Text>Volume Level: {volume}</Text>
+      <Text>Play Time: {playTime} / {duration}</Text>
+      <Button title="Start Playback" onPress={startPlayback} disabled={!recordingUri} />
+      <Button title="Stop Playback" onPress={stopPlayback} disabled={!sound} />
       <Waveform data={waveformData} />
     </View>
   );
