@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, Text, Alert } from 'react-native';
 import { Audio } from 'expo-av';
 import { Svg, Rect } from 'react-native-svg';
+import { Dimensions } from 'react-native';
 
+const windowWidth = Dimensions.get('window').width;
 const Oscilloscope = () => {
   const [recording, setRecording] = useState(null);
   const [sound, setSound] = useState(null);
@@ -11,7 +13,7 @@ const Oscilloscope = () => {
   const [playTime, setPlayTime] = useState('00:00:00');
   const [duration, setDuration] = useState('00:00:00');
   const [volume, setVolume] = useState(0);
-  const [waveformData, setWaveformData] = useState([10,1,1,1]);
+  const [waveformData, setWaveformData] = useState([1]);
 
   const startRecording = async () => {
     try {
@@ -34,11 +36,12 @@ const Oscilloscope = () => {
             const newValue = Math.max((60 + status.metering) > 10 ? (60 + status.metering) * 3 : 5, 5);
             if(newValue ==5){ return prevData;}
             const newData = [...prevData, newValue];
-            if (newData.length > 30) {
+            if (newData.length > windowWidth/5.5) {
               newData.shift(); // Remove the oldest data point to create a scrolling effect
             }
             return newData;
           });
+          console.log(windowWidth/5)
           console.log('Volume level:', Math.max((60 + status.metering) > 10 ? (60 + status.metering) * 3 : 60 + status.metering, 1));
         } else {
           console.log('Recording is not active.');
@@ -88,9 +91,9 @@ const Oscilloscope = () => {
   };
 
   const Waveform = ({ data }) => {
-    const height = 200;
-    const width = 300;
-    const barWidth = 10;
+    const height = 100;
+    const width = windowWidth-50;
+    const barWidth = 5;
     const maxAmplitude = 100; // Avoid division by zero
 
     return (
