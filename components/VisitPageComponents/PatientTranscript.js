@@ -25,7 +25,6 @@ const PatientTranscript = () => {
 
     const renderItem = ({ item }) => (
         <View style={styles.transcriptTextBox}>
-            <Icon name="checkbox-blank-circle" style={styles.transcriptDot} size={10} color="#336aac" />
             <Text style={styles.transcriptText}>{item.text}</Text>
         </View>
     );
@@ -50,68 +49,31 @@ const PatientTranscript = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        borderRadius: 10,
+        borderRadius: 20,
         alignItems: 'center',
         width: '90%',
-    
-        
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: .1,
     },
     flatListContent: {
         width: '100%',
         height: '100%',
     },
-    smallTextStyle: {
-        fontSize: 11,
-        fontWeight: '500'
-    },
-    textPatientCard: {
-        alignSelf: 'flex-start',
-        marginHorizontal: '6%',
-        marginBottom: 4
-    },
-    innerContainerBox: {
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        width: '100%',
-        minHeight: 200,
-        marginHorizontal: "2%",
-        paddingBottom: 15
-    },
-    headerText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: "#346aac"
-    },
-    transcriptDot:{
-        paddingTop:3,
-        marginRight:10
-    },
-    alertBox: {
-        fontSize: 12,
-        fontWeight: '900',
-        marginBottom: 5
-    },
-    topPatientInforBox: {
-        width: '100%',
-        left: "5%",
-        top: '4%',
-        paddingBottom: 20
-    },
-    transcriptBox: {
-        width: '95%',
-        alignContent: 'center',
-        alignSelf: 'center',
-        marginTop: 30
-    },
     transcriptText: {
         fontSize: 18,
+        flexShrink: 1, // Allow text to shrink if necessary
     },
     transcriptTextBox: {
         flexDirection: 'row',
         alignItems: 'flex-start', // Align items to the top
         marginBottom: 20,
-        width:"90%"
+        width: '100%', // Ensure full width of the container
+        flexWrap: 'wrap', // Allow wrapping of text
+        paddingHorizontal: 10, // Optional: Add padding for better readability
     },
 });
+
 
 export default PatientTranscript;

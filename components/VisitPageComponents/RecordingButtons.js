@@ -6,7 +6,7 @@ import * as FileSystem from 'expo-file-system';
 
 const screenWidth = Dimensions.get('window').width;
 
-const RecordingButtons = ({ appointmentsNumber, useExpand, navigation }) => {
+const RecordingButtons = ({ appointmentsNumber, useExpand, navigation,setIsRecording }) => {
     const [recording, setRecording] = useState(null);
     const [sound, setSound] = useState(null);
     const widthAnim = useRef(new Animated.Value(50)).current;
@@ -19,6 +19,7 @@ const RecordingButtons = ({ appointmentsNumber, useExpand, navigation }) => {
 
     const updateButtonState = async () => {
         if (recordingStateButton !== "PAUSE") {
+            setIsRecording(true);
             //await startRecording();
             setRecordingState("Recording");
             setRecordingStateButton("PAUSE");
@@ -26,8 +27,9 @@ const RecordingButtons = ({ appointmentsNumber, useExpand, navigation }) => {
             setRecordingColor("#346aac");
         } else {
             //await stopRecording();
+            setIsRecording(false);
             setRecordingState("Paused");
-            setRecordingStateButton("RECORD");
+            setRecordingStateButton("RESUME");
             setRecordingIcon("play");
             setRecordingColor("#969696");
         }
@@ -111,15 +113,16 @@ const RecordingButtons = ({ appointmentsNumber, useExpand, navigation }) => {
                     <Text style={styles.visitInProgressText}>Visit In Progress: </Text>
                     <Text style={[styles.recordingText, { color: recordingColor }]}>{recordingState}</Text>
                 </View>*/}
+                                  <TouchableOpacity style={styles.endButton}>
+                        <Text style={styles.buttonText}>END VISIT</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.pausedPlayButton} onPress={updateButtonState}>
                         <View style={styles.playPauseIcon}>
                         <Icon name={recordingIcon} size={30} color="#fff" />
                         </View>
                         <Text style={styles.buttonText}>{recordingStateButton}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.endButton}>
-                        <Text style={styles.buttonText}>END VISIT</Text>
-                    </TouchableOpacity>
+  
         </View>
     );
 };
@@ -131,13 +134,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
       
 
-        borderBottomColor: '#ebebec',
-        borderBottomWidth: 1,
         alignSelf: 'center',
-        paddingBottom: 50,
+        paddingBottom: 20,
         flexDirection: 'row',
         justifyContent:'center',
-        alignItems:'center',
+        alignItems:'flex-end',
     },
 
     menuItem: {
@@ -167,6 +168,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: "3%",
         flexDirection: 'row',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
     },
     endButton: {
         backgroundColor: '#336aac',
@@ -176,6 +181,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: "1%",
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
     },
     buttonText: {
         textAlign: 'center',
