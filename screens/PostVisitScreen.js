@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import SideMenu from '../components/SharedComponents/SideMenu';
-import MainBox from '../components/HomeScreenComponents/MainBox';
-import * as ScreenOrientation from 'expo-screen-orientation';
 
-function HomeScreen({ navigation }) {
+const PostVisitPage = ({ route }) => {
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
+  const { timeAppointment, namePatient, symptoms, navigation } = route.params;
+
 
   return (
     <View style={styles.container}>
@@ -13,7 +13,6 @@ function HomeScreen({ navigation }) {
         <SideMenu setSideMenuVisible={setSideMenuVisible} isSideMenuVisible={isSideMenuVisible} />
       </View>
       <View style={[styles.mainBoxContainer, { opacity: isSideMenuVisible ? 0 : 1 }]}>
-        <MainBox navigation={navigation} setSideMenuVisible={setSideMenuVisible}/>
       </View>
     </View>
   );
@@ -33,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default PostVisitPage;

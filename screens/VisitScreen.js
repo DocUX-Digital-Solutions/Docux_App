@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import SideMenu from '../components/HomeScreenCoponents/SideMenu';
-import MainBox from '../components/HomeScreenCoponents/MainBox';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import SideMenu from '../components/SharedComponents/SideMenu';
 import MainBoxPatientVisit from '../components/VisitPageComponents/MainBoxPatientVisit';
 
 const VisitPage = ({ route }) => {

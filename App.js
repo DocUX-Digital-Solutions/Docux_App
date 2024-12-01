@@ -8,7 +8,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from './screens/HomeScreen';
 import Login from './screens/Login';
 import VisitPage from './screens/VisitScreen';
-import PatientCard from './components/HomeScreenCoponents/PatientCard';
+import PostVisitPage from './screens/PostVisitScreen';
 import { UserProvider } from './data/loadData';
 
 const Stack = createStackNavigator();
@@ -23,9 +23,10 @@ function App() {
             headerShown: false,
             cardStyle: { backgroundColor: '#f5f5f7' }, // Set your desired background color here
           }}>
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-            <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="VisitPage" component={VisitPage} options={{ headerShown: false }} />
+            <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen name="VisitPage" component={VisitPage}/>
+            <Stack.Screen name="PostVisitPage" component={PostVisitPage}/>
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>

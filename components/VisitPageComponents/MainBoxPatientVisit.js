@@ -1,21 +1,47 @@
 import React, { useContext, useRef, useState } from 'react';
 import { View, FlatList, StyleSheet, Animated, Text, ScrollView } from 'react-native';
-import PatientBox from '../HomeScreenCoponents/PatientBox';
+import PatientBox from '../HomeScreenComponents/PatientBox';
 import PatientInfoBox from './PatientInfoBox';
 import PatientTranscript from './PatientTranscript';
 import RecordingButtons from './RecordingButtons';
-import TopMenu from '../HomeScreenCoponents/TopMenuBar';
+import TopMenu from '../HomeScreenComponents/TopMenuBar';
 import TopMenuPatient from './TopMenuPatient';
 import PatientCard from './PatientCard';
 import Oscilloscope from './Oscilloscope';
-const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigation, setSideMenuVisible }) => {
+import ConfirmEnd from './ConfirmEndPopUp';
+const MainBoxPatientVisit = ({navigation, setSideMenuVisible }) => {
     const scrollY = useRef(new Animated.Value(0)).current;
     const [listHeight, setListHeight] = useState(0);
     const [contentHeight, setContentHeight] = useState(1);
     const [searchValue, setSearchValue] = useState(null);
     const [isRecording, setIsRecording] = useState(false)
+    const [overPopup, setOverPopup] = useState(false);
+    const [isOver, setIsOver] = useState(false);
+    const [recordingStateButton, setRecordingStateButton] = useState('START');
+    const [recordingIcon, setRecordingIcon] = useState("play");
 
-    const indicatorHeight = listHeight * (listHeight / contentHeight) * 1.5;
+    const pauseRecordingPopUp =() =>{
+        setIsRecording(false);
+        setOverPopup(true);
+        setRecordingIcon("play");
+        setRecordingStateButton(prev => (prev === "START" ? "START" : "RESUME"));
+
+
+    }
+
+    const continueRecording =() =>{
+        setOverPopup(false)
+
+    }
+
+    const endVisit =() =>{
+        setIsRecording(false);
+        setOverPopup(false);
+        navigation.navigate("PostVisitPage")
+
+    }
+    
+
 
 
     return (
@@ -31,8 +57,18 @@ const MainBoxPatientVisit = ({ timeAppointment, namePatient, symptoms, navigatio
                 <PatientTranscript />
             </View>
             <View style={styles.bottomBar}>
-                <RecordingButtons appointmentsNumber={20} useExpand={false} navigation={navigation} setIsRecording={setIsRecording} />
+                <RecordingButtons setIsRecording={setIsRecording} pauseRecordingPopUp={pauseRecordingPopUp} 
+                     recordingStateButton={recordingStateButton}
+                     setRecordingStateButton={setRecordingStateButton}
+                     recordingIcon={recordingIcon}
+                     setRecordingIcon={setRecordingIcon}
+                />
             </View>
+            {overPopup ? (
+                <View style={styles.confirmEndBox}>
+                <ConfirmEnd continueRecording={continueRecording} endVisit ={endVisit}/>
+                </View>
+                ):null}
         </View>
     );
 };
@@ -88,6 +124,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#194a81',
         borderRadius: 5,
     },
+    confirmEndBox:{
+        position:'absolute',
+        height:'100%',
+        width:'100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        alignContent:'center',
+        justifyContent:'center'
+    }
 });
 
 

@@ -6,16 +6,16 @@ import * as FileSystem from 'expo-file-system';
 
 const screenWidth = Dimensions.get('window').width;
 
-const RecordingButtons = ({ appointmentsNumber, useExpand, navigation,setIsRecording }) => {
+const RecordingButtons = ({setIsRecording,pauseRecordingPopUp, recordingIcon, setRecordingIcon, recordingStateButton, setRecordingStateButton}) => {
     const [recording, setRecording] = useState(null);
     const [sound, setSound] = useState(null);
     const widthAnim = useRef(new Animated.Value(50)).current;
     const opacityAnim = useRef(new Animated.Value(1)).current; // Opacity animation value
     const searchBarRef = useRef(null);
     const [recordingState, setRecordingState] = useState('Not Recording');
-    const [recordingStateButton, setRecordingStateButton] = useState('START');
-    const [recordingIcon, setRecordingIcon] = useState("play");
+
     const [recordingColor, setRecordingColor] = useState("#969696");
+    
 
     const updateButtonState = async () => {
         if (recordingStateButton !== "PAUSE") {
@@ -23,16 +23,14 @@ const RecordingButtons = ({ appointmentsNumber, useExpand, navigation,setIsRecor
             //await startRecording();
             setRecordingState("Recording");
             setRecordingStateButton("PAUSE");
-            setRecordingIcon("pause");
-            setRecordingColor("#346aac");
         } else {
             //await stopRecording();
             setIsRecording(false);
             setRecordingState("Paused");
             setRecordingStateButton("RESUME");
-            setRecordingIcon("play");
-            setRecordingColor("#969696");
         }
+        setRecordingIcon(prev => (prev === "play" ? "pause" : "play"));
+        setRecordingColor(prev => (prev === "#969696" ? "#346aac" : "#969696"));
     };
 
     const handleFocus = () => {
@@ -113,7 +111,7 @@ const RecordingButtons = ({ appointmentsNumber, useExpand, navigation,setIsRecor
                     <Text style={styles.visitInProgressText}>Visit In Progress: </Text>
                     <Text style={[styles.recordingText, { color: recordingColor }]}>{recordingState}</Text>
                 </View>*/}
-                                  <TouchableOpacity style={styles.endButton}>
+                                  <TouchableOpacity style={styles.endButton} onPress={()=>pauseRecordingPopUp()}>
                         <Text style={styles.buttonText}>END VISIT</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.pausedPlayButton} onPress={updateButtonState}>

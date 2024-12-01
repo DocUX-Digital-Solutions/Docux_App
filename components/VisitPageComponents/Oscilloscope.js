@@ -33,11 +33,12 @@ const Oscilloscope = ({ recordingval }) => {
         const status = await recording.getStatusAsync();
         if (status.canRecord) {
           setWaveformData(prevData => {
+            console.log((status.metering))
             const newValue = Math.max((40 + status.metering) > 10 ? (40 + status.metering) * 3 : 5, 5);
 
             if (newValue == 5) { return prevData; }
             const newData = [...prevData, newValue];
-            console.log((windowWidth - 100) / 10)
+
             if (newData.length > 20) {
               newData.shift(); // Remove the oldest data point to create a scrolling effect
             }
@@ -127,10 +128,10 @@ const Oscilloscope = ({ recordingval }) => {
 
   return (
     <View style={styles.container}>
-      {recordingval?(<Waveform data={waveformData} />):(
+      {recordingval ? (<Waveform data={waveformData} />) : (
         <Text style={styles.pausedText}>recording paused</Text>
-        )}
-      
+      )}
+
     </View>
   );
 };
@@ -148,9 +149,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderRadius: 20,
   },
-  pausedText:{
-    color:'#979797',
-    fontSize:20
+  pausedText: {
+    color: '#979797',
+    fontSize: 20
   }
 });
 
