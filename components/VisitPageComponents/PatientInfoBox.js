@@ -13,7 +13,7 @@ const PatientInfoBox = ({ timeAppointment, namePatient, symptoms, navigation }) 
     return (
         <View style={styles.container}>
             <View style={styles.textPatientCard}>
-                <Text style={styles.headerText}>Patient Card</Text>
+                <Text style={[styles.headerText,{color:fontColor}]}>Patient Card</Text>
             </View>
             <View style={styles.innerContainerBox}>
                 <TouchableOpacity style={styles.topdotsMenu}>

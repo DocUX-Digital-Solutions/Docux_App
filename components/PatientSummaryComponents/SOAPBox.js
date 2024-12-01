@@ -1,43 +1,64 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
-import { UserContext } from '../../data/loadData';
-const SOAPBox = ({patientItem}) => {
+import { ScrollView } from 'react-native-gesture-handler';
+
+const SOAPBox = ({ patientItem }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-    const [textButtion, setTextButton] = useState("VIEW");
-    console.log(patientItem);
+    const [textButton, setTextButton] = useState("VIEW");
+    const [fontColor, setFontColor] = useState("#000");
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
-        setTextButton(prev => (prev === "VIEW" ? "HIDE" : "VIEW"))
+        setTextButton((prev) => (prev === "VIEW" ? "HIDE" : "VIEW"));
+        setFontColor((prev) => (prev === "#000" ? "#346AAC" : "#000"));
+        
+    };
+
+    const renderSoapNotes = () => {
+        try {
+            return Object.entries(patientItem.soapNotes).map(([key, value]) => (
+                <View key={key} style={styles.noteContainer}>
+                    <Text style={styles.boldText}>{key}:</Text>
+                    <Text style={styles.normalText}>{value}</Text>
+                </View>
+            ));
+        } catch (error) {
+            return <Text style={styles.errorText}>Unable to load notes</Text>;
+        }
     };
 
     return (
         <View style={styles.container}>
-        <View style={styles.innerBox}>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>SOAP</Text>
-                <TouchableOpacity style={styles.viewButton} onPress={toggleDropdown}>
-                    <Text style={styles.viewButtonText}>{textButtion}</Text>
-                </TouchableOpacity>
+            <View style={styles.innerBox}>
+                <View style={styles.header}>
+                    <Text style={[styles.headerText,{color:fontColor}]}>SOAP</Text>
+                    <TouchableOpacity
+                        style={styles.viewButton}
+                        onPress={toggleDropdown}
+                        accessibilityLabel="Toggle SOAP notes visibility"
+                        accessible={true}
+                    >
+                        <Text style={styles.viewButtonText}>{textButton}</Text>
+                    </TouchableOpacity>
+                </View>
+                {isDropdownVisible && (
+                    <Animated.View style={styles.dropdown}>
+                        <ScrollView>
+                        {renderSoapNotes()}
+                        </ScrollView>
+                    </Animated.View>
+                )}
             </View>
-            {isDropdownVisible && (
-                <Animated.View style={styles.dropdown}>
-                    <Text style={styles.dropdownItem}>Patient Info</Text>
-                    <Text style={styles.dropdownItem}>Appointments</Text>
-                    <Text style={styles.dropdownItem}>Medical History</Text>
-                </Animated.View>
-            )}
         </View>
-    </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         paddingBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        width:'100%'
+        width: '100%',
     },
     innerBox: {
         backgroundColor: '#fff',
@@ -57,7 +78,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 18,
         fontWeight: '600',
-        color: "#000",
+        color: '#000',
     },
     viewButton: {
         paddingHorizontal: 10,
@@ -70,18 +91,31 @@ const styles = StyleSheet.create({
     },
     dropdown: {
         marginTop: 10,
-        backgroundColor: '#f8f8f8',
         borderRadius: 8,
         padding: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
+        maxHeight:400
     },
-    dropdownItem: {
+    noteContainer: {
+        marginBottom: 12,
+        padding: 1,
+        borderRadius: 8,
+    },
+    boldText: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginBottom: 4,
+    },
+    normalText: {
         fontSize: 16,
-        paddingVertical: 5,
         color: '#333',
+    },
+    errorText: {
+        fontSize: 14,
+        color: 'red',
     },
 });
 

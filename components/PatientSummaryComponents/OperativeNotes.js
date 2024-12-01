@@ -4,20 +4,22 @@ import { UserContext } from '../../data/loadData';
 
 const OperativeNotes = () => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-    const [textButtion, setTextButton] = useState("VIEW")
+    const [textButton, setTextButton] = useState("VIEW");
+    const [fontColor, setFontColor] = useState("#000");
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
-        setTextButton(prev => (prev === "VIEW" ? "HIDE" : "VIEW"))
+        setTextButton((prev) => (prev === "VIEW" ? "HIDE" : "VIEW"));
+        setFontColor((prev) => (prev === "#000" ? "#346AAC" : "#000"));
     };
 
     return (
         <View style={styles.container}>
         <View style={styles.innerBox}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>OPERATIVE NOTES</Text>
+                <Text style={[styles.headerText,{color:fontColor}]}>OPERATIVE NOTES</Text>
                 <TouchableOpacity style={styles.viewButton} onPress={toggleDropdown}>
-                    <Text style={styles.viewButtonText}>{textButtion}</Text>
+                    <Text style={styles.viewButtonText}>{textButton}</Text>
                 </TouchableOpacity>
             </View>
             {isDropdownVisible && (
@@ -70,7 +72,6 @@ const styles = StyleSheet.create({
     },
     dropdown: {
         marginTop: 10,
-        backgroundColor: '#f8f8f8',
         borderRadius: 8,
         padding: 10,
         shadowColor: '#000',

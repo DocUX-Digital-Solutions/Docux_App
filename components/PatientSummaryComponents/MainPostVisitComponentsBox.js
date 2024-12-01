@@ -15,13 +15,14 @@ const MainPostVisitComponentsBox = ({setSideMenuVisible,patientItem }) => {
     return (
         <View style={styles.container}>
                 <TopMenuPatient setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
-
+<ScrollView>
                 <PatientCard/>
                 <SOAPBox patientItem={patientItem}/>
                 <TranscriptBox/>
                 <OperativeNotes/>
                 <DiagnosticNotes/>
                 <BillingCodes/>
+                </ScrollView>
             
         </View>
     );
