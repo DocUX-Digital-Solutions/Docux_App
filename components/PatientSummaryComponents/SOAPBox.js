@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
 import { UserContext } from '../../data/loadData';
-
-const PatientCard = () => {
+const SOAPBox = ({patientItem}) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const [textButtion, setTextButton] = useState("VIEW");
+    console.log(patientItem);
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
+        setTextButton(prev => (prev === "VIEW" ? "HIDE" : "VIEW"))
     };
 
     return (
         <View style={styles.container}>
+        <View style={styles.innerBox}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Patient Card</Text>
+                <Text style={styles.headerText}>SOAP</Text>
                 <TouchableOpacity style={styles.viewButton} onPress={toggleDropdown}>
-                    <Text style={styles.viewButtonText}>VIEW</Text>
+                    <Text style={styles.viewButtonText}>{textButtion}</Text>
                 </TouchableOpacity>
             </View>
             {isDropdownVisible && (
@@ -25,11 +28,18 @@ const PatientCard = () => {
                 </Animated.View>
             )}
         </View>
+    </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    container:{
+        paddingBottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width:'100%'
+    },
+    innerBox: {
         backgroundColor: '#fff',
         borderRadius: 10,
         width: '90%',
@@ -75,4 +85,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PatientCard;
+export default SOAPBox;

@@ -5,7 +5,7 @@ import MainBoxPatientVisit from '../components/VisitPageComponents/MainBoxPatien
 
 const VisitPage = ({ route }) => {
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
-  const { timeAppointment, namePatient, symptoms, navigation } = route.params;
+  const { patientItem, navigation } = route.params;
 
 
   return (
@@ -14,7 +14,7 @@ const VisitPage = ({ route }) => {
         <SideMenu setSideMenuVisible={setSideMenuVisible} isSideMenuVisible={isSideMenuVisible} />
       </View>
       <View style={[styles.mainBoxContainer, { opacity: isSideMenuVisible ? 0 : 1 }]}>
-      <MainBoxPatientVisit navigation={navigation} namePatient={namePatient} symptoms={symptoms} timeAppointment={timeAppointment} setSideMenuVisible={setSideMenuVisible}/>
+      <MainBoxPatientVisit navigation={navigation} patientItem={patientItem} setSideMenuVisible={setSideMenuVisible}/>
       </View>
     </View>
   );

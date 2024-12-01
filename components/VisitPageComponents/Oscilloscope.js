@@ -33,7 +33,6 @@ const Oscilloscope = ({ recordingval }) => {
         const status = await recording.getStatusAsync();
         if (status.canRecord) {
           setWaveformData(prevData => {
-            console.log((status.metering))
             const newValue = Math.max((40 + status.metering) > 10 ? (40 + status.metering) * 3 : 5, 5);
 
             if (newValue == 5) { return prevData; }
@@ -53,14 +52,12 @@ const Oscilloscope = ({ recordingval }) => {
   };
 
   const stopRecording = async () => {
-    console.log(waveformData);
     if (recording) {
       try {
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI();
         setRecordingUri(uri);
         setRecording(null);
-        console.log('Recording stopped and stored at', uri);
       } catch (error) {
       }
     }

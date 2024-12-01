@@ -21,10 +21,7 @@ const MainBox = ({ navigation, setSideMenuVisible }) => {
         <View style={styles.cardsContainer}>
             <View style={styles.cardWrapper}>
                 <PatientCard
-                    timeAppointment={item.formattedTime}
-                    namePatient={item.name}
-                    statusPatent={item.status}
-                    symptoms={item.symptoms}
+                    item={item}
                     navigation={navigation}
                 />
             </View>

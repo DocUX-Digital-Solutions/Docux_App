@@ -53,31 +53,26 @@ const RecordingButtons = ({setIsRecording,pauseRecordingPopUp, recordingIcon, se
 
     const startRecording = async () => {
         try {
-            console.log('Requesting permissions..');
             await Audio.requestPermissionsAsync();
             await Audio.setAudioModeAsync({
                 allowsRecordingIOS: true,
                 playsInSilentModeIOS: true,
             });
 
-            console.log('Starting recording..');
             const { recording } = await Audio.Recording.createAsync(
                 Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
             );
             setRecording(recording);
             await recording.startAsync();
-            console.log('Recording started');
         } catch (err) {
             console.error('Failed to start recording', err);
         }
     };
 
     const stopRecording = async () => {
-        console.log('Stopping recording..');
         if (recording) {
             await recording.stopAndUnloadAsync();
             const uri = recording.getURI();
-            console.log('Recording stopped and stored at', uri);
 
             // Move the file to a specific location
             const newUri = `${FileSystem.documentDirectory}recordings/recording-${Date.now()}.m4a`;
@@ -86,7 +81,6 @@ const RecordingButtons = ({setIsRecording,pauseRecordingPopUp, recordingIcon, se
                 from: uri,
                 to: newUri,
             });
-            console.log('Recording moved to', newUri);
 
             const { sound } = await recording.createNewLoadedSoundAsync();
             setSound(sound);
@@ -95,7 +89,6 @@ const RecordingButtons = ({setIsRecording,pauseRecordingPopUp, recordingIcon, se
     };
 
     const playSound = async () => {
-        console.log('Playing sound');
         if (sound) {
             await sound.playAsync();
         }

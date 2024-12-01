@@ -11,6 +11,7 @@ const PatientBox = ({ timeDataBlock,time, navigation }) => {
       <View style={styles.cardsContainer}>
         {timeDataBlock.map((item, index) => (
           <View key={index} style={styles.cardWrapper}>
+            {console.log("hi")}
             <PatientCard
               timeAppointment={item.timeAppointment}
               namePatient={item.name}

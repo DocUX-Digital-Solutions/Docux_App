@@ -1,15 +1,12 @@
 import React, { useContext, useRef, useState } from 'react';
 import { View, FlatList, StyleSheet, Animated, Text, ScrollView } from 'react-native';
-import PatientBox from '../HomeScreenComponents/PatientBox';
-import PatientInfoBox from './PatientInfoBox';
 import PatientTranscript from './PatientTranscript';
 import RecordingButtons from './RecordingButtons';
-import TopMenu from '../HomeScreenComponents/TopMenuBar';
-import TopMenuPatient from './TopMenuPatient';
+import TopMenuPatient from '../SharedComponents/TopMenuPatient';
 import PatientCard from './PatientCard';
 import Oscilloscope from './Oscilloscope';
 import ConfirmEnd from './ConfirmEndPopUp';
-const MainBoxPatientVisit = ({navigation, setSideMenuVisible }) => {
+const MainBoxPatientVisit = ({navigation, setSideMenuVisible, patientItem }) => {
     const scrollY = useRef(new Animated.Value(0)).current;
     const [listHeight, setListHeight] = useState(0);
     const [contentHeight, setContentHeight] = useState(1);
@@ -37,7 +34,7 @@ const MainBoxPatientVisit = ({navigation, setSideMenuVisible }) => {
     const endVisit =() =>{
         setIsRecording(false);
         setOverPopup(false);
-        navigation.navigate("PostVisitPage")
+        navigation.navigate("PostVisitPage",{patientItem:patientItem,navigation:navigation})
 
     }
     
@@ -47,7 +44,7 @@ const MainBoxPatientVisit = ({navigation, setSideMenuVisible }) => {
     return (
         <View style={styles.container}>
             <View style={styles.topBar}>
-                <TopMenuPatient appointmentsNumber={20} useExpand={true} setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
+                <TopMenuPatient setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
             </View>
             <View style={styles.patientBoxCard}><PatientCard /></View>
             <View style={styles.oscilloscopeBox}>

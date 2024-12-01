@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const PatientCard = ({ timeAppointment, namePatient, statusPatent, symptoms, navigation }) => {
+const PatientCard = ({item,navigation}) => {
     const [lateOnTimeTextColor, setLateOnTimeTextColor] = useState('red');
     const [opacityValue, setOpacityValue] = useState(1);
     const [appointmentTime, setAppointmentTime] = useState(null)
+    const [statusPatent,setStatusPatent] = useState(item.status)
+
 
 
     
@@ -37,16 +39,16 @@ const PatientCard = ({ timeAppointment, namePatient, statusPatent, symptoms, nav
                 </TouchableOpacity>
             </View>
             <View style={styles.nameTimeStyle}>
-                <Text style={styles.nameText}>{namePatient}</Text>
-                <Text style={styles.timeText}>{timeAppointment}</Text>
+                <Text style={styles.nameText}>{item.name}</Text>
+                <Text style={styles.timeText}>{item.formattedTime}</Text>
             </View>
             <View style={styles.symptomesStyleBox}>
-                <Text style={styles.nameText}>{symptoms}</Text>
+                <Text style={styles.nameText}>{item.symptoms}</Text>
             </View>
             <View style={styles.buttonContainer}>
             <TouchableOpacity
     style={styles.startButton}
-    onPress={() => navigation.navigate('VisitPage', { timeAppointment:appointmentTime, namePatient:namePatient, symptoms:symptoms, navigation:navigation})}
+    onPress={() => navigation.navigate('VisitPage', { patientItem:item, navigation:navigation})}
 >
                     <Text style={styles.startButtonText}>Start</Text>
                 </TouchableOpacity>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import SideMenu from '../components/SharedComponents/SideMenu';
+import MainPostVisitComponentsBox from '../components/PatientSummaryComponents/MainPostVisitComponentsBox';
 
 const PostVisitPage = ({ route }) => {
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
-  const { timeAppointment, namePatient, symptoms, navigation } = route.params;
+  const {navigation,patientItem } = route.params;
+  
 
 
   return (
@@ -13,6 +15,7 @@ const PostVisitPage = ({ route }) => {
         <SideMenu setSideMenuVisible={setSideMenuVisible} isSideMenuVisible={isSideMenuVisible} />
       </View>
       <View style={[styles.mainBoxContainer, { opacity: isSideMenuVisible ? 0 : 1 }]}>
+        <MainPostVisitComponentsBox setSideMenuVisible={setSideMenuVisible} patientItem={patientItem}/>
       </View>
     </View>
   );
