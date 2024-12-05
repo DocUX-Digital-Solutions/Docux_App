@@ -15,7 +15,7 @@ const PostVisitPage = ({ route }) => {
         <SideMenu setSideMenuVisible={setSideMenuVisible} isSideMenuVisible={isSideMenuVisible} />
       </View>
       <View style={[styles.mainBoxContainer, { opacity: isSideMenuVisible ? 0 : 1 }]}>
-        <MainPostVisitComponentsBox setSideMenuVisible={setSideMenuVisible} patientItem={patientItem}/>
+        <MainPostVisitComponentsBox setSideMenuVisible={setSideMenuVisible} patientItem={patientItem} navigation={navigation}/>
       </View>
     </View>
   );

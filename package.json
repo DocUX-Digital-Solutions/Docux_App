@@ -30,10 +30,12 @@
     "react-native-scroll-indicator": "^0.1.0",
     "react-native-svg": "15.8.0",
     "react-native-vector-icons": "^10.2.0",
-    "typescript": "~5.3.3"
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.3.12",
+    "@types/react-native": "^0.73.0"
   },
   "private": true
 }
