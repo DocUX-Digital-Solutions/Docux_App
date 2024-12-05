@@ -38,13 +38,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    bottomBar: {
-        position: 'absolute', // Make the bottom bar fixed
-        bottom: 0, // Align it to the bottom of the screen
-        width: '100%', // Stretch it across the full width of the screen
-        paddingVertical: 30, // Add vertical padding for spacing
-        alignItems: 'flex-end', // Center content horizontally
-    },
     boxCard: {
         paddingBottom: 30,
         justifyContent: 'center',
