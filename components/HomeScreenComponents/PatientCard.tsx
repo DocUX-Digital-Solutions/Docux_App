@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     symptomsText:{
         fontSize: 18,
-        fontWeight: '600',
+        fontWeight: '400',
         color:"#646464"
     },
     timeBox: {
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '2%',
     },
     startButton: {
-        backgroundColor: '#3875ba',
+        backgroundColor: '#3876BA',
         height: '100%',
         borderRadius: 25,
         width: '50%',
