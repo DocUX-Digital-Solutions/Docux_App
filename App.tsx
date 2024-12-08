@@ -18,10 +18,10 @@ function App() {
     <UserProvider>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home"
+          <Stack.Navigator initialRouteName="Login"
           screenOptions={{
             headerShown: false,
-            cardStyle: { backgroundColor: '#f5f5f7' }, // Set your desired background color here
+            cardStyle: { backgroundColor: '#F5F5F7' }, // Set your desired background color here
           }}>
             <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen name="Home" component={HomeScreen}/>

@@ -34,16 +34,17 @@ const PatientCard = ({item,navigation}) => {
                         <Text style={[styles.timeAriveText, { color: lateOnTimeTextColor, opacity: opacityValue }]}>{statusPatent}</Text>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.topdotsMenu}>
-                    <Icon name="dots-horizontal" size={25} color="#d8dce4" />
-                </TouchableOpacity>
+                
             </View>
             <View style={styles.nameTimeStyle}>
                 <Text style={styles.nameText}>{item.name}</Text>
+                
+            </View>
+            <View style={styles.timeBox}>
                 <Text style={styles.timeText}>{item.formattedTime}</Text>
             </View>
             <View style={styles.symptomesStyleBox}>
-                <Text style={styles.nameText}>{item.symptoms}</Text>
+                <Text style={styles.symptomsText}>{item.symptoms}</Text>
             </View>
             <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -52,9 +53,7 @@ const PatientCard = ({item,navigation}) => {
 >
                     <Text style={styles.startButtonText}>Start</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.notesButton}>
-                    <Text style={styles.notesButtonText}>Notes</Text>
-                </TouchableOpacity>
+            
             </View>
         </View>
     );
@@ -108,32 +107,47 @@ const styles = StyleSheet.create({
         right: "4%",
     },
     nameText: {
+        fontSize: 20,
+        fontWeight: '600'
+    },
+    symptomsText:{
         fontSize: 18,
-        fontWeight: '500'
+        fontWeight: '600',
+        color:"#646464"
+    },
+    timeBox: {
+        position: 'absolute', // Enables absolute positioning
+        top: 10, // Adjust this value to control vertical position
+        right: 10, // Adjust this value to control horizontal position
+        backgroundColor: '#DFE2E6',
+        borderRadius: 20,
+        width: 100,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center', // Center aligns text inside the box
     },
     timeText: {
         fontSize: 18,
         fontWeight: '500',
     },
     buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+    
         width: '100%',
-        height: '25%',
-        position: 'absolute',
-        bottom: 10,
-        paddingHorizontal: '5%',
+        height: '30%',
+      
+        top: 10,
+        paddingHorizontal: '2%',
     },
     startButton: {
         backgroundColor: '#3875ba',
-        height: '90%',
+        height: '100%',
         borderRadius: 25,
-        width: '45%',
+        width: '50%',
         justifyContent: 'center',
     },
     startButtonText: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
         textAlign: 'center',
         fontWeight: '700',
     },

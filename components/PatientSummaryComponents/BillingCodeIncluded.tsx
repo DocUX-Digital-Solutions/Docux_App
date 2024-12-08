@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
-const DiagnosticCodeIncluded = ({ codeInfo, onRemove }) => {
+const BillingCodeIncluded = ({ codeInfo, onRemove }) => {
     return (
         <View style={styles.container}>
             <View style={styles.descriptionTextBox}>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DiagnosticCodeIncluded;
+export default BillingCodeIncluded;

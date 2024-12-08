@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Svg, { Path } from 'react-native-svg';
-import BillingCodeSuggested from './BillingCodeSuggested';
-import BillingCodeIncluded from './BillingCodeIncluded';
-const BillingCodes = () => {
+import DiagnosticCodeSuggested from './DiagnosticCodeSuggested';  // Adjusted import name
+import DiagnosticCodeIncluded from './DiagnosticCodeIncluded';
+
+const DiagnosticCodeBox = () => {
     const [searchValue, setSearchValue] = useState("");
     const searchBarRef = useRef(null);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -61,7 +62,7 @@ const BillingCodes = () => {
 
     const renderCodesIncluded = () => {
         return codesIncluded.map((code) => (
-            <BillingCodeIncluded
+            <DiagnosticCodeIncluded
                 key={code.codeNumber}
                 codeInfo={code}
                 onRemove={() => removeCode(code.codeNumber)} // Pass the removal function
@@ -72,7 +73,7 @@ const BillingCodes = () => {
     const renderCodesSuggested = () => {
         return suggestedCodes.length > 0 ? (
             suggestedCodes.map((code) => (
-                <BillingCodeSuggested
+                <DiagnosticCodeSuggested
                     key={code.codeNumber}
                     codeInfo={code}
                     onRemove={() => addCode(code)} // Add the selected code to `codesIncluded`
@@ -85,7 +86,7 @@ const BillingCodes = () => {
     const renderCodesSuggestedSearch = () => {
         return suggestedCodeSearch.length > 0 ? (
             suggestedCodeSearch.map((code) => (
-                <BillingCodeSuggested
+                <DiagnosticCodeSuggested
                     key={code.codeNumber}
                     codeInfo={code}
                     onRemove={() => addCode(code)} // Add the selected code to `codesIncluded`
@@ -103,14 +104,14 @@ const BillingCodes = () => {
                 style={[
                     styles.innerBox,
                     isDropdownVisible && {
-                        backgroundColor: '#DDECFF',
+                        backgroundColor: '#FFFDF0',
                         paddingBottom: 0,
                     },
                 ]}
             >
                 <View style={styles.header}>
                     <Text style={[styles.headerText, { color: fontColor }]}>
-                        BILLING CODES: {codesIncluded.length}
+                        DIAGNOSTIC CODES - {codesIncluded.length}
                     </Text>
                     <TouchableOpacity style={styles.viewButton} onPress={toggleDropdown}>
                         <Text style={styles.viewButtonText}>{textButton}</Text>
@@ -141,13 +142,13 @@ const BillingCodes = () => {
                                     />
                                 </Svg>
                                 <View style={styles.suggestedBox}>
-                                    <Text style={styles.suggestedText}>SUGGESTED BILLING CODES</Text>
+                                    <Text style={styles.suggestedText}>SUGGESTED DIAGNOSTIC CODES</Text>
                                     {renderCodesSuggested()}
                                 </View>
                             </>
                         ) : (
                             <View style={styles.suggestedBox}>
-                                    <Text style={styles.suggestedText}>SUGGESTED BILLING CODES</Text>
+                                    <Text style={styles.suggestedText}>SUGGESTED DIAGNOSTIC CODES</Text>
                                     {renderCodesSuggestedSearch()}
                                 </View>
                         )}
@@ -210,15 +211,29 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     suggestedBox: {
-        backgroundColor: '#ebf3fc',
+        backgroundColor: '#FFF9D1',
         padding: 10,
     },
     suggestedText: {
         fontWeight: 'bold',
     },
-
-
-
+    codeItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    codeText: {
+        fontSize: 16,
+    },
+    addButton: {
+        color: 'green',
+        fontWeight: 'bold',
+    },
+    removeButton: {
+        color: 'red',
+        fontWeight: 'bold',
+    },
 });
 
-export default BillingCodes;
+export default DiagnosticCodeBox;

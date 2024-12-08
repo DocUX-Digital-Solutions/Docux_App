@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
-const DiagnosticCodeIncluded = ({ codeInfo, onRemove }) => {
+const BillingCodeSuggested = ({ codeInfo, onRemove }) => {
     return (
         <View style={styles.container}>
             <View style={styles.descriptionTextBox}>
@@ -9,7 +9,7 @@ const DiagnosticCodeIncluded = ({ codeInfo, onRemove }) => {
                 <Text style={styles.descriptionText}>{codeInfo.description}</Text>
             </View>
             <TouchableOpacity onPress={onRemove} style={styles.removeButton}>
-                <Text style={styles.removeButtonText}>Remove</Text>
+                <Text style={styles.removeButtonText}>add</Text>
             </TouchableOpacity>
         </View>
     );
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     descriptionTextBox: {
         flex: 1, // Allows the text to occupy the remaining space
         justifyContent: 'flex-start',
+        opacity:.6
     },
     codeText: {
         fontWeight: 'bold',
@@ -49,4 +50,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DiagnosticCodeIncluded;
+export default BillingCodeSuggested;

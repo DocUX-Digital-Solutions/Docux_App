@@ -6,29 +6,22 @@ import * as FileSystem from 'expo-file-system';
 
 const screenWidth = Dimensions.get('window').width;
 
-const BottomButtons = ({navGoHome}) => {
+const BottomButtons = ({ navGoHome }) => {
 
     return (
         <View style={styles.container}>
-                {/*
-                <View style={styles.menuItem}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                    <Icon name="arrow-left-thick" size={30} color="#7a7a7b" />
-                    </TouchableOpacity>
-                    <Text style={styles.visitInProgressText}>Visit In Progress: </Text>
-                    <Text style={[styles.recordingText, { color: recordingColor }]}>{recordingState}</Text>
-                </View>*/}
-                <TouchableOpacity style={styles.editButtonStyle}>
-                        <View style={styles.editIcon}>
-                        <Icon name='note-edit-outline' size={30} color="#fff" />
-                        </View>
-                        <Text style={styles.buttonText}>EDIT</Text>
-                    </TouchableOpacity>
-                                  <TouchableOpacity style={styles.submitButtonStyle} onPress={()=>navGoHome()}>
-                        <Text style={styles.buttonText}>SUBMIT</Text>
-                    </TouchableOpacity>
-                    
-  
+       
+            <TouchableOpacity style={styles.editButtonStyle}>
+                <View style={styles.editIcon}>
+                    <Icon name='note-edit-outline' size={30} color="#fff" />
+                </View>
+                <Text style={styles.buttonText}>EDIT</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.submitButtonStyle} onPress={() => navGoHome()}>
+                <Text style={styles.buttonText}>SUBMIT</Text>
+            </TouchableOpacity>
+
+
         </View>
     );
 };
@@ -36,16 +29,16 @@ const BottomButtons = ({navGoHome}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '96%',
-        backgroundColor: 'transparent',
-      
+        width: '100%',
+        backgroundColor: '#fff',
+        height:10,
 
         alignSelf: 'center',
-        paddingBottom: 40,
+        paddingBottom: 60,
+        paddingTop:10,
         flexDirection: 'row',
-        justifyContent:'center',
-        alignItems:'flex-end',
-        
+        justifyContent: 'center',
+
     },
 
     menuItem: {
@@ -63,8 +56,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    editIcon:{
-        right:"7%"
+    editIcon: {
+        right: "7%"
     },
     editButtonStyle: {
         backgroundColor: '#42526D',
