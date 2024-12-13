@@ -10,11 +10,17 @@ import Login from './screens/Login';
 import VisitPage from './screens/VisitScreen';
 import PostVisitPage from './screens/PostVisitScreen';
 import { UserProvider } from './data/loadData';
-
+import { PatchAppointmentRequest } from './src/hooks/useFetchAppointmentData';
+import { useForm, FormProvider } from 'react-hook-form';
+import { AuthProvider } from './src/contexts/AuthProvider';
 const Stack = createStackNavigator();
-
+import config from './amplifyconfiguration.json'
+import { Amplify } from 'aws-amplify'
+Amplify.configure(config)
 function App() {
+  
   return (
+    <AuthProvider>
     <UserProvider>
       <SafeAreaProvider>
         <NavigationContainer>
@@ -31,6 +37,7 @@ function App() {
         </NavigationContainer>
       </SafeAreaProvider>
     </UserProvider>
+    </AuthProvider>
   );
 }
 

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, Animated, TextInput } from 'react-native';
 import { UserContext } from '../../data/loadData';
 
-const TranscriptBox = () => {
+const TranscriptBox = ({isEditable}) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");
+    const [text, setText] = useState("This is editable text.");
+
+
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
@@ -24,7 +27,17 @@ const TranscriptBox = () => {
             </View>
             {isDropdownVisible && (
                 <Animated.View style={styles.dropdown}>
-                    <Text style={styles.dropdownItem}>Patient Info</Text>
+                   <TextInput
+        style={[styles.input, isEditable ? styles.editable : styles.readOnly]}
+        value={text} // Display initial text
+        onChangeText={setText} // Update state on text change
+        multiline={true} // Allow multiple lines
+        numberOfLines={6} // Sets initial height
+        textAlignVertical="top" // Aligns text to the top
+        editable={isEditable} // Controls whether the text is editable
+        placeholder="Press the button to edit..."
+      />
+                    <Text style={styles.dropdownItem}>Pqatient Info</Text>
                     <Text style={styles.dropdownItem}>Appointments</Text>
                     <Text style={styles.dropdownItem}>Medical History</Text>
                 </Animated.View>

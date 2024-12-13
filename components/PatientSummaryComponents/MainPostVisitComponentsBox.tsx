@@ -11,10 +11,15 @@ import DiagnosticCodeBox from './DiagnosticCodeBox';
 
 const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigation }) => {
     const [searchValue, setSearchValue] = useState(null);
+    const [isEditable, setIsEditable] = useState(false);
+
 
     function navGoHome() {
         navigation.navigate("Home");
     }
+    const toggleEditMode = () => {
+        setIsEditable(!isEditable);
+    };
 
     return (
         <View style={styles.container}>
@@ -25,13 +30,13 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
             >
                 <PatientCard />
                 <SOAPBox patientItem={patientItem} />
-                <TranscriptBox />
+                <TranscriptBox isEditable={isEditable} />
                 <OperativeNotes />
                 <DiagnosticCodeBox />
                 <BillingCodes numCodes={30} />
             </ScrollView>
             <View style={styles.bottomButtons}>
-                <BottomButtons navGoHome={navGoHome} />
+                <BottomButtons navGoHome={navGoHome} toggleEditMode={toggleEditMode} />
             </View>
         </View>
     );

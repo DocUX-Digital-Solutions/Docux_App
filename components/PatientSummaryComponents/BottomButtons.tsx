@@ -6,12 +6,12 @@ import * as FileSystem from 'expo-file-system';
 
 const screenWidth = Dimensions.get('window').width;
 
-const BottomButtons = ({ navGoHome }) => {
+const BottomButtons = ({ navGoHome, toggleEditMode }) => {
 
     return (
         <View style={styles.container}>
        
-            <TouchableOpacity style={styles.editButtonStyle}>
+            <TouchableOpacity style={styles.editButtonStyle} onPress={() => toggleEditMode()}>
                 <View style={styles.editIcon}>
                     <Icon name='note-edit-outline' size={30} color="#fff" />
                 </View>
