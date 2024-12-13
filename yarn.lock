@@ -112,7 +112,7 @@
     "@aws-amplify/api-rest" "4.0.63"
     tslib "^2.5.0"
 
-"@aws-amplify/auth@6.8.3", "@aws-amplify/auth@^6.8.3":
+"@aws-amplify/auth@6.8.3":
   version "6.8.3"
   resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-6.8.3.tgz#f07036a1129d8ec689bb53fd0c307c0303489806"
   integrity sha512-JJHIy4am1t5rsj5SJJmXHEkLEriHeX/D/jgqX4dx54/r+hPUca1ZDep1xkNnJ2sIEkO+zMUMNxz2ynfhJRpM9g==

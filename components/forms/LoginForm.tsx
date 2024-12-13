@@ -13,6 +13,7 @@ interface LoginFormProps {
 }
 
 const handleSignInNextSteps = async (output: SignInOutput) => {
+  console.log(29292)
   if (output.isSignedIn) {
     navigate('/home')
   } else {
@@ -35,13 +36,15 @@ export const LoginForm: React.FC = ({ navigation }) => {
 
   const onSubmit: SubmitHandler<LoginFormProps> = async (data) => {
     setLoginError(null)
-    console.log(data)
-      if (true) {
-        console.log(2)
+    //console.log(data)
+      if (signInOutput) {
+        
         await handleNextStep(signInOutput.nextStep, data)
         navigation.navigate('/home')
       } else {
+        console.log(3838)
         const result = await login(data.username, data.password)
+        console.log(result)
         handleSignInNextSteps(result)
       }
     
