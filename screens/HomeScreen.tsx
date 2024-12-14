@@ -128,7 +128,7 @@ function HomeScreen({ navigation }) {
           setSelectedSideMenu={setSelectedSideMenuFunction}
           lengthToday={categorizedAppointments.today.length}
           lengthTomorrow={categorizedAppointments.tomorrow.length}
-          lengthInReview={categorizedAppointments["In Progress"].length || ""}
+          lengthInReview={categorizedAppointments["In Review"] ? categorizedAppointments["In Review"].length : 0}
 
         />
       </Animated.View>

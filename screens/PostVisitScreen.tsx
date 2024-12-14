@@ -42,44 +42,23 @@ const PostVisitPage = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.sideMenuContainer,
-          { width: sideMenuWidth.interpolate({
-              inputRange: [0, 95],
-              outputRange: ['0%', '95%'],
-            }),
-          },
-        ]}
-      >
-        <SideMenu
-          setSideMenuVisible={setSideMenuVisible}
-          isSideMenuVisible={isSideMenuVisible}
-        />
-      </Animated.View>
-      <Animated.View
-        style={[
-          styles.mainBoxContainer,
-          { opacity: mainBoxOpacity },
-        ]}
-      >
+     
         <MainPostVisitComponentsBox
           setSideMenuVisible={setSideMenuVisible}
           patientItem={patientItem}
           navigation={navigation}
         />
-      </Animated.View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    height: '100%',
+    flex: 1,
+    
+    marginTop:"20%",
   },
   sideMenuContainer: {
-    backgroundColor: '#f8f8f8', // Optional background for visibility
   },
   mainBoxContainer: {
     flex: 1,

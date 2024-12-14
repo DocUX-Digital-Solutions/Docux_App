@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
         position: 'absolute', // Fix the BottomButtons at the bottom
         bottom: 0, // Align it to the bottom of the screen
         width: '100%', // Stretch it across the full width of the screen
-        backgroundColor: '#ffffff', // Optional: Add a background color for visibility
         paddingVertical: 15, // Add padding for spacing inside the buttons container
         alignItems: 'center', // Center the buttons horizontally
         elevation: 5, // Optional: Add shadow on Android for better visibility

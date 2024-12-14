@@ -23,7 +23,8 @@ const VisitPage = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: '100%',
+    
+    marginTop:"20%"
   },
   sideMenuContainer: {
     transition: 'width 0.3s ease-in-out', // Smooth transition for width change
