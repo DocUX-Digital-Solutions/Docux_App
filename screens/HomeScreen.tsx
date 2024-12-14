@@ -1,17 +1,85 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import SideMenu from '../components/SharedComponents/SideMenu';
+import SideMenu from '../components/HomeScreenComponents/SideMenu';
 import MainBox from '../components/HomeScreenComponents/MainBox';
 import * as ScreenOrientation from 'expo-screen-orientation';
-
+import { UserContext } from '../data/loadData';
 function HomeScreen({ navigation }) {
+  const { jsonData } = useContext(UserContext);
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
+  const [selectedSideMenu, setSelectedSideMenu] = useState(1);
+  const [dataItems, setDataItems] = useState(jsonData);
+  const [patientsNumber, setPatientsNumber] = useState(0);
+  
 
   // Animated values for width and opacity
   const sideMenuWidth = useState(new Animated.Value(0))[0];
   const mainBoxOpacity = useState(new Animated.Value(1))[0];
 
+  const setSelectedSideMenuFunction = (item) => {
+    setSelectedSideMenu(item)
+    getCurrentData()
+
+  }
+
+  const groupAppointmentsByDate = () => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+  
+    const categorizedAppointments = {
+      today: [],
+      tomorrow: [],
+      future: [],
+      past: [],
+
+    };
+  
+    jsonData.forEach(appointment => {
+      const appointmentDate = new Date(appointment.scheduledAt);
+      const appointmentDateOnly = new Date(appointmentDate.getFullYear(), appointmentDate.getMonth(), appointmentDate.getDate());
+  
+      if (appointmentDateOnly.getTime() === today.getTime()) {
+        categorizedAppointments.today.push(appointment);
+      } else if (appointmentDateOnly.getTime() === tomorrow.getTime()) {
+        categorizedAppointments.tomorrow.push(appointment);
+      } else if (appointmentDateOnly > tomorrow) {
+        categorizedAppointments.future.push(appointment);
+      } else if (appointmentDateOnly < today) {
+        categorizedAppointments.past.push(appointment);
+      }
+
+      if(appointment.appointmentState.appointmentStateName =="In Progress"){
+        console.log(appointment)
+      }
+      if (!categorizedAppointments[appointment.appointmentState.appointmentStateName]) {
+        categorizedAppointments[appointment.appointmentState.appointmentStateName] =[]
+      }
+      categorizedAppointments[appointment.appointmentState.appointmentStateName].push(appointment)
+    }); 
+  
+    return categorizedAppointments;
+  };
+  const categorizedAppointments = groupAppointmentsByDate();
+  
+  const getCurrentData = () => {
+    // Today Value
+    if (selectedSideMenu == 1) {
+      setDataItems(categorizedAppointments.today);
+
+    } else if (selectedSideMenu == 2) {
+      setDataItems(categorizedAppointments.tomorrow);
+    }
+    else{
+      setDataItems([])
+    }
+   
+    
+  };
+
   useEffect(() => {
+    getCurrentData();
     // Trigger animations when `isSideMenuVisible` changes
     if (isSideMenuVisible) {
       Animated.timing(sideMenuWidth, {
@@ -56,6 +124,12 @@ function HomeScreen({ navigation }) {
         <SideMenu
           setSideMenuVisible={setSideMenuVisible}
           isSideMenuVisible={isSideMenuVisible}
+          selectedSideMenu={selectedSideMenu}
+          setSelectedSideMenu={setSelectedSideMenuFunction}
+          lengthToday={categorizedAppointments.today.length}
+          lengthTomorrow={categorizedAppointments.tomorrow.length}
+          lengthInReview={categorizedAppointments["In Progress"].length || ""}
+
         />
       </Animated.View>
       <Animated.View
@@ -67,6 +141,8 @@ function HomeScreen({ navigation }) {
         <MainBox
           navigation={navigation}
           setSideMenuVisible={setSideMenuVisible}
+          jsonData={dataItems}
+          patientsNumber = {dataItems.length}
         />
       </Animated.View>
     </View>

@@ -3,48 +3,59 @@ import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const PatientCard = ({item,navigation}) => {
-    const [lateOnTimeTextColor, setLateOnTimeTextColor] = useState('red');
+    const [lateOnTimeTextColor, setLateOnTimeTextColor] = useState("#646464");
     const [opacityValue, setOpacityValue] = useState(1);
     const [appointmentTime, setAppointmentTime] = useState(null)
     const [statusPatent,setStatusPatent] = useState(item.status)
 
 
-
+    function formatTime(timeAppointment){
+        const date = new Date(timeAppointment);
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        return `${hours % 12 || 12}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    }
     
     useEffect(() => {
-        if(statusPatent =="ER"){
+        if(item.patientType =="new"){
             setOpacityValue(1);
-            setLateOnTimeTextColor("red");
+            setLateOnTimeTextColor("#54A6FF");
 
-        }else if(statusPatent =="Late"){
+        }else if(item.patientType =="existing"){
             setOpacityValue(1);
-            setLateOnTimeTextColor("#ff974e");
+            setLateOnTimeTextColor("#D21919");
 
         }else{
-            setOpacityValue(0);
+            //setOpacityValue(0);
         }
 
-    }, [statusPatent]);
+    }, [item.patientType]);
+
+    function capitalizeFirstLetter(value) {
+        if (!value) return '';
+        return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+      }
 
     return (
         <View style={styles.container}>
             <View style={styles.rowOneTop}>
                 <View style={styles.timeArive}>
                     <View style={styles.timeAriveTextBox}>
-                        <Text style={[styles.timeAriveText, { color: lateOnTimeTextColor, opacity: opacityValue }]}>{statusPatent}</Text>
+                        <Text style={[styles.timeAriveText, { color: lateOnTimeTextColor }]}>{capitalizeFirstLetter(item.patientType)}</Text>
                     </View>
                 </View>
                 
             </View>
             <View style={styles.nameTimeStyle}>
-                <Text style={styles.nameText}>{item.name}</Text>
+                <Text style={styles.nameText}>{item.patientName}</Text>
                 
             </View>
             <View style={styles.timeBox}>
-                <Text style={styles.timeText}>{item.formattedTime}</Text>
+                <Text style={styles.timeText}>{formatTime(item.scheduledAt)}</Text>
             </View>
             <View style={styles.symptomesStyleBox}>
-                <Text style={styles.symptomsText}>{item.symptoms}</Text>
+                <Text style={styles.symptomsText}>{item.reason}</Text>
             </View>
             <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -73,7 +84,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         height: '15%',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        paddingTop:8,
+        marginBottom:8
     },
     nameTimeStyle: {
         flexDirection: 'row',
@@ -99,8 +112,11 @@ const styles = StyleSheet.create({
         left: "4%",
     },
     timeAriveText: {
-        color: 'red',
-        fontWeight: 'bold'
+        flexDirection: 'row',
+        width: '100%',
+        alignItems: 'flex-start',
+        fontWeight:'bold',
+        fontSize:18,
     },
     topdotsMenu: {
         position: 'absolute',

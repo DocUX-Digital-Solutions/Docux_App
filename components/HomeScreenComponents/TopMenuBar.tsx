@@ -110,7 +110,7 @@ const TopMenu = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterV
                     />
                 ) : (
                     <>
-                        <Text style={styles.appointmentsTextToday}>Today: </Text>
+                        <Text style={styles.appointmentsTextToday}>Total: </Text>
                         <Text style={styles.appointmentsText}> {appointmentsNumber} Patients</Text>
                     </>
                 )}

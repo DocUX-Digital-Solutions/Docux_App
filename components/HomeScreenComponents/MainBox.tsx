@@ -2,21 +2,15 @@ import React, { useContext, useRef, useState } from 'react';
 import { View, FlatList, StyleSheet, Animated, Text } from 'react-native';
 import PatientCard from './PatientCard';
 import TopMenu from './TopMenuBar';
-import { UserContext } from '../../data/loadData';
 
-const MainBox = ({ navigation, setSideMenuVisible }) => {
-    const { organizedAppointments } = useContext(UserContext);
+
+const MainBox = ({ navigation, setSideMenuVisible,jsonData,patientsNumber }) => {
+    
     const scrollY = useRef(new Animated.Value(0)).current;
     const [listHeight, setListHeight] = useState(0);
     const [contentHeight, setContentHeight] = useState(1);
     const [searchValue, setSearchValue] = useState(null);
-
-    const filteredAppointments = searchValue
-        ? organizedAppointments.filter(item =>
-            item.name.toLowerCase().includes(searchValue.toLowerCase())
-          )
-        : organizedAppointments;
-
+    
     const renderItem = ({ item }) => (
         <View style={styles.cardsContainer}>
             <View style={styles.cardWrapper}>
@@ -28,31 +22,18 @@ const MainBox = ({ navigation, setSideMenuVisible }) => {
         </View>
     );
 
-    const handleScroll = Animated.event(
-        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-        { useNativeDriver: false }
-    );
-
-    const indicatorHeight = listHeight * (listHeight / contentHeight) * 1.5;
-
-    const translateY = scrollY.interpolate({
-        inputRange: [0, Math.max(0, contentHeight - listHeight)],
-        outputRange: [0, Math.max(0, listHeight - indicatorHeight) * 0.85],
-        extrapolate: 'clamp',
-    });
-
     return (
         <View style={styles.container}>
             <View style={styles.topBar}>
-                <TopMenu appointmentsNumber={20} useExpand={true} setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
+                <TopMenu appointmentsNumber={patientsNumber} useExpand={true} setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
             </View>
-            {filteredAppointments.length === 0 ? (
+            {jsonData.length === 0 ? (
                 <View style={styles.noPatientsContainer}>
                     <Text style={styles.noPatientsText}>No patients found</Text>
                 </View>
             ) : (
                 <FlatList
-                    data={filteredAppointments}
+                    data={jsonData}
                     keyExtractor={(item) => item.id}
                     renderItem={renderItem}
                     style={styles.flatListContent}

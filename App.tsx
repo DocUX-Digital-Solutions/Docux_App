@@ -1,9 +1,8 @@
-import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import React, { useEffect, useState } from 'react';
 // Import your screens
 import HomeScreen from './screens/HomeScreen';
 import Login from './screens/Login';
@@ -15,16 +14,17 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { AuthProvider } from './src/contexts/AuthProvider';
 const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
-import { Amplify } from 'aws-amplify'
+import { Amplify, Auth  } from 'aws-amplify'
 Amplify.configure(config)
 function App() {
-  
+  const [isAuthenticated, setIsAuthenticated] = useState(false); const [user, setUser] = useState(null);
+  useEffect(() => { const checkUser = async () => { try { const currentUser = await Auth.currentAuthenticatedUser(); setIsAuthenticated(true); setUser(currentUser); } catch (error) { console.log('Not signed in:', error); setIsAuthenticated(false); } }; checkUser(); }, []);
   return (
     <AuthProvider>
     <UserProvider>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login"
+          <Stack.Navigator initialRouteName="Home"
           screenOptions={{
             headerShown: false,
             cardStyle: { backgroundColor: '#F5F5F7' }, // Set your desired background color here

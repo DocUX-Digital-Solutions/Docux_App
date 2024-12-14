@@ -1,25 +1,13 @@
-import React, { useState } from 'react'
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Text,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-} from '@chakra-ui/react'
-import QRCode from 'qrcode.react'
-import { useAuth } from '../../hooks/useAuth'
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import Modal from 'react-native-modal';
+import SvgQRCode from 'react-native-qrcode-svg';
+import { useAuth } from '../../src/hooks/useAuth';
 
 interface TOTPSetupModalProps {
-  isOpen: boolean
-  onClose: () => void
-  setupUri: string
+  isOpen: boolean;
+  onClose: () => void;
+  setupUri: string;
 }
 
 const TOTPSetupModal: React.FC<TOTPSetupModalProps> = ({
@@ -27,55 +15,74 @@ const TOTPSetupModal: React.FC<TOTPSetupModalProps> = ({
   onClose,
   setupUri,
 }) => {
-  const [totpCode, setTotpCode] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { confirmTOTP } = useAuth()
+  const [totpCode, setTotpCode] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { confirmTOTP } = useAuth();
 
   const handleSubmit = async () => {
-    setIsSubmitting(true)
-    setError(null)
+    setIsSubmitting(true);
+    setError(null);
     try {
-      await confirmTOTP(totpCode)
-      onClose()
+      await confirmTOTP(totpCode);
+      onClose();
     } catch (err) {
-      setError('Invalid TOTP code. Please try again.')
+      setError('Invalid TOTP code. Please try again.');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>TOTP Setup</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Text>Scan the QR code below with your authenticator app:</Text>
-          <QRCode value={setupUri} />
-          <FormControl mt={4} isInvalid={!!error}>
-            <FormLabel>Enter TOTP Code</FormLabel>
-            <Input
-              value={totpCode}
-              onChange={e => setTotpCode(e.target.value)}
-              placeholder="Enter the code from your app"
-            />
-            {error && <Text color="red.500">{error}</Text>}
-          </FormControl>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            colorScheme="blue"
-            onClick={handleSubmit}
-            isLoading={isSubmitting}
-          >
-            Verify
-          </Button>
-        </ModalFooter>
-      </ModalContent>
+    <Modal isVisible={isOpen} onBackdropPress={onClose}>
+      <View style={styles.modalContent}>
+        <Text style={styles.header}>TOTP Setup</Text>
+        <Text style={styles.instructions}>Scan the QR code below with your authenticator app:</Text>
+        <SvgQRCode value={setupUri} size={200} />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the code from your app"
+          value={totpCode}
+          onChangeText={setTotpCode}
+        />
+        {error && <Text style={styles.error}>{error}</Text>}
+        <View style={styles.buttonContainer}>
+          <Button title="Verify" onPress={handleSubmit} disabled={isSubmitting} />
+        </View>
+      </View>
     </Modal>
-  )
-}
+  );
+};
 
-export default TOTPSetupModal
+const styles = StyleSheet.create({
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  instructions: {
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+});
+
+export default TOTPSetupModal;

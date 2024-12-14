@@ -42,7 +42,7 @@ export const LoginForm: React.FC = ({ navigation }) => {
         await handleNextStep(signInOutput.nextStep, data)
         navigation.navigate('/home')
       } else {
-        console.log(3838)
+        console.log(login)
         const result = await login(data.username, data.password)
         console.log(result)
         handleSignInNextSteps(result)

@@ -3,7 +3,98 @@ import React, { createContext, useState, useEffect } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [jsonData, setJsonData] = useState({ "hi": "hello" });
+    const [jsonData, setJsonData] = useState([
+        {
+          "appointmentId": 1343,
+          "reason": "Right achilles tear",
+          "patientName": "Kori Carter",
+          "patientType": "new",
+          "scheduledAt": "2024-12-15T14:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "In Progress"
+          }
+        },
+        {
+          "appointmentId": 1335,
+          "reason": "Left ACL sprain",
+          "patientName": "Lionel Messi",
+          "patientType": "existing",
+          "scheduledAt": "2024-12-15T18:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1336,
+          "reason": "Dislocated shoulder",
+          "patientName": "Samantha Smith",
+          "patientType": "new",
+          "scheduledAt": "2024-12-13T19:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1337,
+          "reason": "Post procedure follow-up",
+          "patientName": "Peyton Manning",
+          "patientType": "new",
+          "scheduledAt": "2024-12-13T19:30:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1338,
+          "reason": "Right meniscus tear",
+          "patientName": "Tim Beaver",
+          "patientType": "existing",
+          "scheduledAt": "2024-12-13T20:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1339,
+          "reason": "Elbow injury",
+          "patientName": "Clayton Kershaw",
+          "patientType": "new",
+          "scheduledAt": "2024-12-14T14:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1340,
+          "reason": "Left hip pain",
+          "patientName": "Anthony Davis",
+          "patientType": "new",
+          "scheduledAt": "2024-12-14T15:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1341,
+          "reason": "Left wrist dislocation",
+          "patientName": "Megan Rapinoe",
+          "patientType": "new",
+          "scheduledAt": "2024-12-14T16:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        },
+        {
+          "appointmentId": 1342,
+          "reason": "Right shoulder pain",
+          "patientName": "Taylor Mays",
+          "patientType": "existing",
+          "scheduledAt": "2024-12-14T20:00:00.000Z",
+          "appointmentState": {
+            "appointmentStateName": "Scheduled"
+          }
+        }
+      ]);
     const [organizedAppointments, setOrganizedAppointments] = useState([]);
 
     const organizeAppointmentsByHour = (appointments) => {
@@ -23,91 +114,15 @@ export const UserProvider = ({ children }) => {
     };
 
 
-
+/*
     useEffect(() => {
-        const data = {
-            "doctorsName": "Dr. Mike Smith",
-            "appointments": {
-                "eqwd3142412": {
-                    name: "Jane Doe1",
-                    timeAppointment: "2024-11-09T22:32:06Z",
-                    status: "ER",
-                    symptoms: "headache",
-                    soapNotes: { 
-                        "Subject": "Subjective: The patient presents with a chief complaint of chronic shoulder pain that has been ongoing for the past six months. The pain is described as a constant ache with intermittent sharp sensations, primarily localized to the right shoulder. The patient reports difficulty in performing overhead activities, such as reaching for items on high shelves, and notes that the pain tends to worsen during periods of increased activity. Objective: Physical examination reveals tenderness over the right shoulder, particularly...", 
-                        "Objective": "2", 
-                        "Assessment": "3", 
-                        "Plan": "4", 
-                    }
-                },
-                "eqwd3143412": {
-                    name: "Jane Doe2",
-                    timeAppointment: "2024-11-09T22:30:06Z",
-                    status: "Late",
-                    symptoms: "headache",
-                    soapNotes: { 
-                        "Subject": "1", 
-                        "Objective": "2", 
-                        "Assessment": "3", 
-                        "Plan": "4", 
-                    }
-                },
-                "eqwd31434": {
-                    name: "Jane Doe3",
-                    timeAppointment: "2024-11-09T22:20:06Z",
-                    status: "ER",
-                    symptoms: "headache",
-                    soapNotes: { 
-                        "Subject": "1", 
-                        "Objective": "2", 
-                        "Assessment": "3", 
-                        "Plan": "4", 
-                    }
-                },
-                "15312qdwr32": {
-                    name: "Jane Doe4",
-                    timeAppointment: "2024-11-09T02:32:06Z",
-                    status: "",
-                    symptoms: "headache",
-                    soapNotes: { 
-                        "Subject": "1", 
-                        "Objective": "2", 
-                        "Assessment": "3", 
-                        "Plan": "4", 
-                    }
-                },
-                "nfwlqkn323423": {
-                    name: "Jane Doe5",
-                    timeAppointment: "2024-11-09T4:32:06Z",
-                    status: "ER",
-                    symptoms: "headache",
-                    soapNotes: { 
-                        "Subject": "1", 
-                        "Objective": "2", 
-                        "Assessment": "3", 
-                        "Plan": "4", 
-                    }
-                },
-                "kfnalknflkwe32432": {
-                    name: "Jane Doe6",
-                    timeAppointment: "2024-11-09T8:32:06Z",
-                    status: "",
-                    symptoms: "headache",
-                    soapNotes: { 
-                        "Subject": "1", 
-                        "Objective": "2", 
-                        "Assessment": "3", 
-                        "Plan": "4", 
-                    }
-                }
-            }
-        }
+        const data = 
         setJsonData(data);
-        setOrganizedAppointments(organizeAppointmentsByHour(data.appointments));
+        //setOrganizedAppointments(organizeAppointmentsByHour(data.appointments));
     }, []);
-
+*/
     return (
-        <UserContext.Provider value={{ jsonData, organizedAppointments }}>
+        <UserContext.Provider value={{jsonData}}>
             {children}
         </UserContext.Provider>
     );

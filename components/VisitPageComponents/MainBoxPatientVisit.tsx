@@ -43,9 +43,10 @@ const MainBoxPatientVisit = ({navigation, setSideMenuVisible, patientItem }) => 
 
     return (
         <View style={styles.container}>
+            {/*}
             <View style={styles.topBar}>
                 <TopMenuPatient setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
-            </View>
+            </View>*/}
             <View style={styles.patientBoxCard}><PatientCard /></View>
             <View style={styles.oscilloscopeBox}>
             <Oscilloscope recordingval={isRecording} />

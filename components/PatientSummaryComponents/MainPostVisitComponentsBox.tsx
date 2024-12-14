@@ -23,7 +23,7 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
 
     return (
         <View style={styles.container}>
-            <TopMenuPatient setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
+            {/*<TopMenuPatient setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />*/}
             <ScrollView
                 contentContainerStyle={styles.scrollViewContent}
                 showsVerticalScrollIndicator={true}

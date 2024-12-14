@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated, TextInput } from 'react-native';
-import { UserContext } from '../../data/loadData';
 
 const TranscriptBox = ({isEditable}) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);

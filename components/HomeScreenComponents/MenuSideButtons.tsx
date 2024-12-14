@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MenuSideButtons = ({setPatientValue}) => {
-  const [selected, setSelected] = useState(1); // To track the selected button
+const MenuSideButtons = ({selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInReview}) => {
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[
           styles.button,
-          selected === 1 ? styles.selected : styles.notSelected,
+          selectedSideMenu === 1 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelected(1)}
+        onPress={() => setSelectedSideMenu(1)}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
@@ -24,16 +23,16 @@ const MenuSideButtons = ({setPatientValue}) => {
             />
             <Text style={styles.textLeft}>Today</Text>
           </View>
-          <Text style={styles.textRight}>7</Text>
+          <Text style={styles.textRight}>{lengthToday}</Text>
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[
           styles.button,
-          selected === 2 ? styles.selected : styles.notSelected,
+          selectedSideMenu === 2 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelected(2)}
+        onPress={() => setSelectedSideMenu(2)}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
@@ -45,15 +44,15 @@ const MenuSideButtons = ({setPatientValue}) => {
             />
             <Text style={styles.textLeft}>Tomorrow</Text>
           </View>
-          <Text style={styles.textRight}>7</Text>
+          <Text style={styles.textRight}>{lengthTomorrow}</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
         style={[
           styles.button,
-          selected === 3 ? styles.selected : styles.notSelected,
+          selectedSideMenu === 3 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelected(3)}
+        onPress={() => setSelectedSideMenu(3)}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
@@ -65,7 +64,7 @@ const MenuSideButtons = ({setPatientValue}) => {
             />
             <Text style={styles.textLeft}>In Review</Text>
           </View>
-          <Text style={styles.textRight}>7</Text>
+          <Text style={styles.textRight}>{lengthInReview}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.divider} />
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom:10
   },
-  selected: {
+  selectedSideMenu: {
     backgroundColor: '#1b324d',
   },
   notSelected: {

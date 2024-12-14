@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
-import { UserContext } from '../../data/loadData';
 
 const OperativeNotes = () => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
