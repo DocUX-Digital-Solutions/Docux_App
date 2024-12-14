@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         flexGrow: 1,
         paddingBottom: 100, // Add enough padding to avoid overlap with the fixed BottomButtons
+        paddingTop:10
     },
     bottomButtons: {
         position: 'absolute', // Fix the BottomButtons at the bottom
