@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-docuxui2-dev-3344c-authRole",
+      "UnauthRoleArn": "arn:aws:iam::890641672052:role/amplify-docuxui2-dev-3344c-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::890641672052:role/amplify-docuxui2-dev-3344c-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-docuxui2-dev-3344c-deployment",
+      "UnauthRoleName": "amplify-docuxui2-dev-3344c-unauthRole",
+      "StackName": "amplify-docuxui2-dev-3344c",
+      "StackId": "arn:aws:cloudformation:us-east-1:890641672052:stack/amplify-docuxui2-dev-3344c/e0014520-4bb8-11ef-936c-0affccb0cbdb",
+      "AmplifyAppId": "d3toyqrg223tio"
+    },
+    "categories": {
+      "auth": {
+        "docuxui238e4eabe": {
+          "nativeClientId": "6mdqb729utkllpknemi61cuur6",
+          "userPoolId": "us-east-1_ZRXeRemoP",
+          "userPoolName": "docux-user-pool",
+          "webClientId": "6mdqb729utkllpknemi61cuur6"
+        }
+      }
+    }
+  }
+}

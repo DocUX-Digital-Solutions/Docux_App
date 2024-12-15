@@ -14,17 +14,17 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { AuthProvider } from './src/contexts/AuthProvider';
 const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
-import { Amplify, Auth  } from 'aws-amplify'
+import {withAuthenticator} from 'aws-amplify-react-native'
+
+import {Amplify} from 'aws-amplify';
 Amplify.configure(config)
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); const [user, setUser] = useState(null);
-  useEffect(() => { const checkUser = async () => { try { const currentUser = await Auth.currentAuthenticatedUser(); setIsAuthenticated(true); setUser(currentUser); } catch (error) { console.log('Not signed in:', error); setIsAuthenticated(false); } }; checkUser(); }, []);
   return (
     <AuthProvider>
     <UserProvider>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home"
+          <Stack.Navigator initialRouteName="Login"
           screenOptions={{
             headerShown: false,
             cardStyle: { backgroundColor: '#F5F5F7' }, // Set your desired background color here

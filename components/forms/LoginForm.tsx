@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { StyleSheet, View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../src/hooks/useAuth';
 import { loginFormRules } from '../../src/validations/loginFormRules';
 
@@ -12,53 +13,58 @@ interface LoginFormProps {
   mfaCode?: string;
 }
 
-const handleSignInNextSteps = async (output: SignInOutput) => {
-  console.log(29292)
-  if (output.isSignedIn) {
-    navigate('/home')
-  } else {
-    if (output.nextStep.signInStep === 'CONTINUE_SIGN_IN_WITH_TOTP_SETUP') {
-      setTotpSetupUri(
-        output.nextStep.totpSetupDetails.getSetupUri('DocuX').toString(),
-      )
-      onOpen()
-    }
-  }
-}
-export const LoginForm: React.FC = ({ navigation }) => {
+const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const [totpSetupUri, setTotpSetupUri] = useState<string | null>(null);
 
+  const navigation = useNavigation();
   const { login, signInOutput, handleNextStep } = useAuth();
 
-  const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormProps>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormProps>();
 
   const onSubmit: SubmitHandler<LoginFormProps> = async (data) => {
-    setLoginError(null)
-    //console.log(data)
+    console.log(22)
+    setLoginError(null);
+
+    try {
       if (signInOutput) {
-        
-        await handleNextStep(signInOutput.nextStep, data)
-        navigation.navigate('/home')
+        console.log(22)
+        await handleNextStep(signInOutput.nextStep, data);
+        navigation.navigate('Home');
       } else {
         console.log(login)
-        const result = await login(data.username, data.password)
-        console.log(result)
-        handleSignInNextSteps(result)
+        const result = await login(data.username, data.password);
+        console.log(22)
+        handleSignInNextSteps(result);
       }
-    
-  }
+    } catch (error) {
+      console.log(error)
+      setLoginError('Invalid username/password');
+    }
+  };
+
+  const handleSignInNextSteps = async (output: any) => {
+    if (output.isSignedIn) {
+      navigation.navigate('Home');
+    } else if (output.nextStep.signInStep === 'CONTINUE_SIGN_IN_WITH_TOTP_SETUP') {
+      setTotpSetupUri(output.nextStep.totpSetupDetails.getSetupUri('DocuX').toString());
+    }
+  };
 
   useEffect(() => {
-    if (signInOutput?.challengeName === 'MFA_SETUP') {
-      // Handle TOTP setup
-      const totpSetupUri = `otpauth://totp/DocuX:${signInOutput.username}?secret=${signInOutput.totpSecret}&issuer=DocuX`;
-      setTotpSetupUri(totpSetupUri);
-      // Open your modal here to show the TOTP setup
+    if (
+      signInOutput?.nextStep.signInStep === 'CONTINUE_SIGN_IN_WITH_TOTP_SETUP'
+    ) {
+      setTotpSetupUri(
+        signInOutput.nextStep.totpSetupDetails.getSetupUri('DocuX').toString()
+      );
     }
     if (signInOutput?.isSignedIn) {
-      // Close your modal here
       navigation.navigate('Home');
     }
   }, [signInOutput]);
@@ -106,33 +112,12 @@ export const LoginForm: React.FC = ({ navigation }) => {
               />
             )}
           />
-          <TouchableOpacity onPress={handleTogglePasswordVisibility}>
-            <Icon name={showPassword ? 'eye-slash' : 'eye'} size={20} />
+          <TouchableOpacity onPress={handleTogglePasswordVisibility} style={styles.eyeIcon}>
+            <Icon name={showPassword ? 'eye-slash' : 'eye'} size={20} color="gray" />
           </TouchableOpacity>
         </View>
         {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
       </View>
-
-      {signInOutput?.challengeName === 'SOFTWARE_TOKEN_MFA' && (
-        <View style={styles.formControl}>
-          <Text style={styles.label}>MFA Code</Text>
-          <Controller
-            control={control}
-            name="mfaCode"
-            rules={loginFormRules.mfaCode}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your MFA code"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-              />
-            )}
-          />
-          {errors.mfaCode && <Text style={styles.error}>{errors.mfaCode.message}</Text>}
-        </View>
-      )}
 
       {loginError && <Text style={styles.error}>{loginError}</Text>}
 
@@ -141,7 +126,12 @@ export const LoginForm: React.FC = ({ navigation }) => {
         <Button title="SSO" onPress={() => {}} disabled={isSubmitting} />
       </View>
 
-      {/* Implement your TOTP setup modal here */}
+      {totpSetupUri && (
+        <View>
+          <Text>Scan this QR code for TOTP setup:</Text>
+          <Text>{totpSetupUri}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -157,22 +147,28 @@ const styles = StyleSheet.create({
   },
   label: {
     marginBottom: 5,
+    fontWeight: 'bold',
   },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
     borderRadius: 5,
+    fontSize: 16,
   },
   passwordInputGroup: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  eyeIcon: {
+    marginLeft: 10,
   },
   error: {
     color: 'red',
     marginTop: 5,
   },
   buttonGroup: {
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

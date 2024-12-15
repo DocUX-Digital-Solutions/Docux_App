@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { Auth } from 'aws-amplify';
+import Auth  from 'aws-amplify';
 
 interface LoginFormProps {
   username: string;
@@ -7,6 +7,7 @@ interface LoginFormProps {
   newPassword?: string;
   mfaCode?: string;
 }
+import { signIn } from 'aws-amplify/auth';
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -50,14 +51,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const login = async (username: string, password: string): Promise<any> => {
-    const result = await Auth.signIn(username, password);
-    setSignInOutput(result);
-    if (result.signInUserSession) {
-      setIsAuthenticated(true);
-      const currentUser = await Auth.currentAuthenticatedUser();
-      setUser(currentUser);
+    try {
+      console.log(200)
+      const result = await signIn({ username, password });
+      
+      setSignInOutput(result);
+      if (result.signInUserSession) {
+        setIsAuthenticated(true);
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+      }
+      return result;
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
     }
-    return result;
   };
 
   const logout = async () => {
@@ -72,50 +80,65 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const handleNextStep = async (nextStep: any, data: LoginFormProps) => {
-    switch (nextStep.challengeName) {
-      case 'NEW_PASSWORD_REQUIRED': {
-        const result = await Auth.completeNewPassword(user, data.newPassword || '');
-        setSignInOutput(result);
-        return;
+    try {
+      switch (nextStep.challengeName) {
+        case 'NEW_PASSWORD_REQUIRED': {
+          const result = await Auth.completeNewPassword(user, data.newPassword || '');
+          setSignInOutput(result);
+          return;
+        }
+        case 'SOFTWARE_TOKEN_MFA':
+        case 'SMS_MFA': {
+          await Auth.confirmSignIn(user, data.mfaCode || '');
+          break;
+        }
+        case 'MFA_SETUP': {
+          setSignInOutput({
+            isSignedIn: false,
+            nextStep: nextStep,
+          });
+          return;
+        }
+        case 'DONE':
+          break;
+        default:
+          throw new Error(`Unsupported next step: ${nextStep.challengeName}`);
       }
-      case 'SOFTWARE_TOKEN_MFA':
-      case 'SMS_MFA': {
-        await Auth.confirmSignIn(user, data.mfaCode || '');
-        break;
-      }
-      case 'MFA_SETUP': {
-        setSignInOutput({
-          isSignedIn: false,
-          nextStep: nextStep,
-        });
-        return;
-      }
-      case 'DONE':
-        break;
-      default:
-        throw new Error(`Unsupported next step: ${nextStep.challengeName}`);
-    }
 
-    setSignInOutput(null);
-    setIsAuthenticated(true);
-    const currentUser = await Auth.currentAuthenticatedUser();
-    setUser(currentUser);
-  };
-
-  const confirmTOTP = async (totpCode: string) => {
-    const result = await Auth.confirmSignIn(user, totpCode, 'SOFTWARE_TOKEN_MFA');
-    setSignInOutput(result);
-    if (result.signInUserSession) {
+      setSignInOutput(null);
       setIsAuthenticated(true);
       const currentUser = await Auth.currentAuthenticatedUser();
       setUser(currentUser);
+    } catch (error) {
+      console.error('Error handling next step:', error);
+      throw error;
+    }
+  };
+
+  const confirmTOTP = async (totpCode: string) => {
+    try {
+      const result = await Auth.confirmSignIn(user, totpCode, 'SOFTWARE_TOKEN_MFA');
+      setSignInOutput(result);
+      if (result.signInUserSession) {
+        setIsAuthenticated(true);
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+      }
+    } catch (error) {
+      console.error('Error confirming TOTP:', error);
+      throw error;
     }
   };
 
   const setupTOTP = async (): Promise<string> => {
-    const totpSetupDetails = await Auth.setupTOTP(user);
-    const appName = 'DocuX';
-    return `otpauth://totp/${appName}:${user.username}?secret=${totpSetupDetails}&issuer=${appName}`;
+    try {
+      const totpSetupDetails = await Auth.setupTOTP(user);
+      const appName = 'DocuX';
+      return `otpauth://totp/${appName}:${user.username}?secret=${totpSetupDetails}&issuer=${appName}`;
+    } catch (error) {
+      console.error('Error setting up TOTP:', error);
+      throw error;
+    }
   };
 
   const value = {
