@@ -1,40 +1,21 @@
-import React from "react";
-import { Button, View, StyleSheet, SafeAreaView } from "react-native";
-import { Amplify } from "aws-amplify";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
-import outputs from "./amplifyconfiguration.json";
+// App.js
+import { Amplify } from 'aws-amplify';
+import awsConfig from './src/aws-exports';
 
-Amplify.configure(outputs);
+Amplify.configure(awsConfig);
 
-const SignOutButton = () => {
-  const { signOut } = useAuthenticator();
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import LoginScreen from './src/LoginScreen';
 
+export default function App() {
   return (
-    <View style={styles.signOutButton}>
-      <Button title="Sign Out" onPress={signOut} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <LoginScreen />
+    </SafeAreaView>
   );
-};
+}
 
-const App = () => {
-  return (
-    <Authenticator.Provider>
-      <Authenticator>
-        <SafeAreaView>
-          <SignOutButton />
-        </SafeAreaView>
-      </Authenticator>
-    </Authenticator.Provider>
-  );
-};
-
-const styles = StyleSheet.create({
-  signOutButton: {
-    alignSelf: "flex-end",
-  },
-});
-
-export default App;
 
 
 /*
