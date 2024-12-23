@@ -1,0 +1,405 @@
+
+> Docux_App@1.0.0 android
+> expo run:android
+
+env: load .env
+env: export VITE_REACT_APP_USER_POOL_ID VITE_REACT_APP_USER_POOL_CLIENT_ID VITE_REACT_APP_IDENTITY_POOL_ID VITE_REACT_APP_AWS_REGION VITE_TRANSCRIBE_LANGUAGE_CODE VITE_TRANSCRIBE_SAMPLING_RATE VITE_TRANSCRIBE_AUDIO_SOURCE VITE_STREAM_ARN VITE_QUEUE_ARN VITE_STREAM_NAME VITE_TRANSCRIPT_BUCKET VITE_AUDIO_BUCKET VITE_API_URL
+› Building app...
+Configuration on demand is an incubating feature.
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+
+> Configure project :app
+WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
+
+This Android Gradle plugin (8.5.0) was tested up to compileSdk = 34.
+
+You are strongly encouraged to update your project to use a newer
+Android Gradle plugin that has been tested with compileSdk = 35.
+
+If you are already using the latest version of the Android Gradle plugin,
+you may need to wait until a newer version with support for compileSdk = 35 is available.
+
+For more information refer to the compatibility table:
+https://d.android.com/r/tools/api-level-support
+
+To suppress this warning, add/update
+    android.suppressUnsupportedCompileSdk=35
+to this project's gradle.properties.
+
+> Configure project :expo-modules-core
+WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+
+> Configure project :expo
+
+Using expo modules
+  - [32mexpo-asset[0m (11.0.1)
+  - [32mexpo-constants[0m (17.0.3)
+  - [32mexpo-file-system[0m (18.0.6)
+  - [32mexpo-font[0m (13.0.2)
+  - [32mexpo-keep-awake[0m (14.0.1)
+  - [32mexpo-modules-core[0m (2.1.2)
+
+WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
+
+This Android Gradle plugin (8.5.0) was tested up to compileSdk = 34.
+
+You are strongly encouraged to update your project to use a newer
+Android Gradle plugin that has been tested with compileSdk = 35.
+
+If you are already using the latest version of the Android Gradle plugin,
+you may need to wait until a newer version with support for compileSdk = 35 is available.
+
+For more information refer to the compatibility table:
+https://d.android.com/r/tools/api-level-support
+
+To suppress this warning, add/update
+    android.suppressUnsupportedCompileSdk=35
+to this project's gradle.properties.
+
+> Task :app:generateAutolinkingNewArchitectureFiles
+> Task :app:generateAutolinkingPackageList
+> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :app:generateCodegenArtifactsFromSchema SKIPPED
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:generateDebugBuildConfig
+
+> Task :aws-amplify_react-native:generateCodegenSchemaFromJavaScript
+
+> Task :aws-amplify_react-native:generateCodegenArtifactsFromSchema
+> Task :aws-amplify_react-native:preBuild
+> Task :aws-amplify_react-native:preDebugBuild
+> Task :aws-amplify_react-native:writeDebugAarMetadata
+> Task :expo:generateExpoModulesPackageListTask
+> Task :expo:preBuild
+> Task :expo:preDebugBuild
+> Task :expo-asset:preBuild UP-TO-DATE
+> Task :expo-asset:preDebugBuild UP-TO-DATE
+> Task :expo:writeDebugAarMetadata
+> Task :expo-asset:writeDebugAarMetadata
+> Task :expo-constants:createExpoConfig UP-TO-DATE
+> Task :expo-constants:preBuild UP-TO-DATE
+> Task :expo-constants:preDebugBuild UP-TO-DATE
+> Task :expo-file-system:preBuild UP-TO-DATE
+> Task :expo-file-system:preDebugBuild UP-TO-DATE
+> Task :expo-constants:writeDebugAarMetadata
+> Task :expo-font:preBuild UP-TO-DATE
+> Task :expo-font:preDebugBuild UP-TO-DATE
+> Task :expo-file-system:writeDebugAarMetadata
+> Task :expo-keep-awake:preBuild UP-TO-DATE
+> Task :expo-keep-awake:preDebugBuild UP-TO-DATE
+> Task :expo-font:writeDebugAarMetadata
+> Task :expo-modules-core:preBuild UP-TO-DATE
+> Task :expo-modules-core:preDebugBuild UP-TO-DATE
+> Task :expo-keep-awake:writeDebugAarMetadata
+> Task :expo-modules-core:writeDebugAarMetadata
+> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript
+> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema
+> Task :react-native-async-storage_async-storage:preBuild
+> Task :react-native-async-storage_async-storage:preDebugBuild
+> Task :react-native-community_netinfo:preBuild UP-TO-DATE
+> Task :react-native-community_netinfo:preDebugBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:writeDebugAarMetadata
+> Task :react-native-community_netinfo:writeDebugAarMetadata
+> Task :react-native-get-random-values:preBuild UP-TO-DATE
+> Task :react-native-get-random-values:preDebugBuild UP-TO-DATE
+> Task :react-native-get-random-values:writeDebugAarMetadata
+> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript
+> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema
+> Task :react-native-safe-area-context:preBuild
+> Task :react-native-safe-area-context:preDebugBuild
+> Task :react-native-safe-area-context:writeDebugAarMetadata
+> Task :app:generateDebugResValues
+> Task :aws-amplify_react-native:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :aws-amplify_react-native:generateDebugResources
+> Task :aws-amplify_react-native:packageDebugResources
+> Task :expo:generateDebugResValues FROM-CACHE
+> Task :expo:generateDebugResources FROM-CACHE
+> Task :expo:packageDebugResources
+> Task :expo-asset:generateDebugResValues FROM-CACHE
+> Task :expo-asset:generateDebugResources FROM-CACHE
+> Task :expo-asset:packageDebugResources
+> Task :expo-constants:generateDebugResValues FROM-CACHE
+> Task :expo-constants:generateDebugResources FROM-CACHE
+> Task :expo-constants:packageDebugResources
+> Task :expo-file-system:generateDebugResValues FROM-CACHE
+> Task :expo-file-system:generateDebugResources
+> Task :expo-file-system:packageDebugResources
+> Task :expo-font:generateDebugResValues FROM-CACHE
+> Task :expo-font:generateDebugResources FROM-CACHE
+> Task :expo-font:packageDebugResources
+> Task :expo-keep-awake:generateDebugResValues FROM-CACHE
+> Task :expo-keep-awake:generateDebugResources FROM-CACHE
+> Task :expo-keep-awake:packageDebugResources
+> Task :expo-modules-core:generateDebugResValues FROM-CACHE
+> Task :expo-modules-core:generateDebugResources FROM-CACHE
+> Task :expo-modules-core:packageDebugResources
+> Task :react-native-async-storage_async-storage:generateDebugResValues FROM-CACHE
+> Task :react-native-async-storage_async-storage:generateDebugResources FROM-CACHE
+> Task :react-native-async-storage_async-storage:packageDebugResources
+> Task :react-native-community_netinfo:generateDebugResValues FROM-CACHE
+> Task :react-native-community_netinfo:generateDebugResources FROM-CACHE
+> Task :react-native-community_netinfo:packageDebugResources
+> Task :react-native-get-random-values:generateDebugResValues FROM-CACHE
+> Task :react-native-get-random-values:generateDebugResources FROM-CACHE
+> Task :react-native-get-random-values:packageDebugResources
+> Task :react-native-safe-area-context:generateDebugResValues FROM-CACHE
+> Task :react-native-safe-area-context:generateDebugResources FROM-CACHE
+> Task :react-native-safe-area-context:packageDebugResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :aws-amplify_react-native:extractDeepLinksDebug FROM-CACHE
+> Task :expo:extractDeepLinksDebug FROM-CACHE
+> Task :expo-asset:extractDeepLinksDebug FROM-CACHE
+> Task :expo-constants:extractDeepLinksDebug FROM-CACHE
+> Task :expo-file-system:extractDeepLinksDebug FROM-CACHE
+> Task :expo-font:extractDeepLinksDebug FROM-CACHE
+> Task :app:parseDebugLocalResources
+> Task :expo-keep-awake:extractDeepLinksDebug FROM-CACHE
+> Task :expo-constants:processDebugManifest
+> Task :expo-font:processDebugManifest
+> Task :aws-amplify_react-native:processDebugManifest
+> Task :expo-modules-core:extractDeepLinksDebug FROM-CACHE
+> Task :expo:processDebugManifest
+> Task :app:mergeDebugResources
+
+> Task :expo-file-system:processDebugManifest
+C:\Users\dylan\Documents\Docux\Docux_App\node_modules\expo-file-system\android\src\main\AndroidManifest.xml:6:9-8:20 Warning:
+	provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:6 to replace other declarations but no other declaration present
+
+> Task :expo-asset:processDebugManifest
+> Task :expo-keep-awake:processDebugManifest
+> Task :react-native-async-storage_async-storage:extractDeepLinksDebug FROM-CACHE
+
+> Task :expo-modules-core:processDebugManifest
+C:\Users\dylan\Documents\Docux\Docux_App\node_modules\expo-modules-core\android\src\main\AndroidManifest.xml:8:9-11:45 Warning:
+	meta-data#com.facebook.soloader.enabled@android:value was tagged at AndroidManifest.xml:8 to replace other declarations but no other declaration present
+
+> Task :react-native-community_netinfo:extractDeepLinksDebug FROM-CACHE
+
+> Task :react-native-async-storage_async-storage:processDebugManifest
+package="com.reactnativecommunity.asyncstorage" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-async-storage\async-storage\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.reactnativecommunity.asyncstorage" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-async-storage\async-storage\android\src\main\AndroidManifest.xml.
+
+> Task :react-native-get-random-values:extractDeepLinksDebug FROM-CACHE
+
+> Task :react-native-community_netinfo:processDebugManifest
+package="com.reactnativecommunity.netinfo" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-community\netinfo\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.reactnativecommunity.netinfo" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-community\netinfo\android\src\main\AndroidManifest.xml.
+
+> Task :react-native-safe-area-context:extractDeepLinksDebug FROM-CACHE
+
+> Task :react-native-get-random-values:processDebugManifest
+package="org.linusu" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-get-random-values\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="org.linusu" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-get-random-values\android\src\main\AndroidManifest.xml.
+
+> Task :react-native-safe-area-context:processDebugManifest
+package="com.th3rdwave.safeareacontext" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-safe-area-context\android\src\main\AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.th3rdwave.safeareacontext" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-safe-area-context\android\src\main\AndroidManifest.xml.
+
+> Task :aws-amplify_react-native:compileDebugLibraryResources
+
+> Task :app:processDebugMainManifest
+C:\Users\dylan\Documents\Docux\Docux_App\android\app\src\debug\AndroidManifest.xml:6:5-162 Warning:
+	application@android:usesCleartextTraffic was tagged at AndroidManifest.xml:6 to replace other declarations but no other declaration present
+C:\Users\dylan\Documents\Docux\Docux_App\android\app\src\debug\AndroidManifest.xml Warning:
+	provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+
+> Task :app:processDebugManifest
+> Task :expo:compileDebugLibraryResources FROM-CACHE
+> Task :expo-asset:compileDebugLibraryResources FROM-CACHE
+> Task :aws-amplify_react-native:parseDebugLocalResources
+> Task :expo-asset:parseDebugLocalResources FROM-CACHE
+> Task :expo:parseDebugLocalResources
+> Task :expo-constants:compileDebugLibraryResources FROM-CACHE
+> Task :expo-constants:parseDebugLocalResources FROM-CACHE
+> Task :app:processDebugManifestForPackage
+> Task :expo-asset:generateDebugRFile
+> Task :expo:generateDebugRFile
+> Task :expo-file-system:compileDebugLibraryResources
+> Task :aws-amplify_react-native:generateDebugRFile
+> Task :expo-constants:generateDebugRFile
+> Task :expo-font:compileDebugLibraryResources FROM-CACHE
+> Task :expo-font:parseDebugLocalResources FROM-CACHE
+> Task :expo-file-system:parseDebugLocalResources
+> Task :expo-keep-awake:compileDebugLibraryResources FROM-CACHE
+> Task :expo-font:generateDebugRFile
+> Task :expo-keep-awake:parseDebugLocalResources FROM-CACHE
+> Task :expo-file-system:generateDebugRFile
+> Task :expo-modules-core:compileDebugLibraryResources FROM-CACHE
+> Task :expo-modules-core:parseDebugLocalResources FROM-CACHE
+> Task :expo-keep-awake:generateDebugRFile
+> Task :react-native-async-storage_async-storage:compileDebugLibraryResources FROM-CACHE
+> Task :react-native-async-storage_async-storage:parseDebugLocalResources FROM-CACHE
+> Task :expo-modules-core:generateDebugRFile
+> Task :react-native-community_netinfo:compileDebugLibraryResources FROM-CACHE
+> Task :react-native-community_netinfo:parseDebugLocalResources FROM-CACHE
+> Task :react-native-async-storage_async-storage:generateDebugRFile
+> Task :react-native-get-random-values:compileDebugLibraryResources FROM-CACHE
+> Task :react-native-get-random-values:parseDebugLocalResources FROM-CACHE
+> Task :react-native-community_netinfo:generateDebugRFile
+> Task :react-native-safe-area-context:compileDebugLibraryResources FROM-CACHE
+> Task :react-native-safe-area-context:parseDebugLocalResources FROM-CACHE
+> Task :react-native-get-random-values:generateDebugRFile
+> Task :aws-amplify_react-native:checkKotlinGradlePluginConfigurationErrors
+> Task :react-native-safe-area-context:generateDebugRFile
+> Task :aws-amplify_react-native:generateDebugBuildConfig
+> Task :app:processDebugResources
+> Task :expo:checkKotlinGradlePluginConfigurationErrors
+> Task :aws-amplify_react-native:javaPreCompileDebug
+> Task :expo:generateDebugBuildConfig
+> Task :expo-asset:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-asset:generateDebugBuildConfig
+> Task :expo-modules-core:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-modules-core:generateDebugBuildConfig
+> Task :expo-modules-core:javaPreCompileDebug FROM-CACHE
+> Task :expo-asset:javaPreCompileDebug FROM-CACHE
+> Task :expo-constants:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-constants:generateDebugBuildConfig
+> Task :expo-constants:javaPreCompileDebug FROM-CACHE
+> Task :expo-file-system:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-file-system:generateDebugBuildConfig
+> Task :expo-file-system:javaPreCompileDebug FROM-CACHE
+> Task :expo-font:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-font:generateDebugBuildConfig
+> Task :expo-font:javaPreCompileDebug FROM-CACHE
+> Task :expo-keep-awake:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-keep-awake:generateDebugBuildConfig
+> Task :expo-keep-awake:javaPreCompileDebug FROM-CACHE
+> Task :expo:javaPreCompileDebug FROM-CACHE
+> Task :react-native-async-storage_async-storage:generateDebugBuildConfig
+> Task :react-native-async-storage_async-storage:javaPreCompileDebug FROM-CACHE
+> Task :aws-amplify_react-native:compileDebugKotlin
+
+> Task :react-native-async-storage_async-storage:compileDebugJavaWithJavac
+
+> Task :aws-amplify_react-native:compileDebugJavaWithJavac
+> Task :aws-amplify_react-native:bundleLibCompileToJarDebug
+> Task :react-native-community_netinfo:generateDebugBuildConfig
+> Task :react-native-async-storage_async-storage:bundleLibCompileToJarDebug
+> Task :react-native-community_netinfo:javaPreCompileDebug FROM-CACHE
+
+> Task :react-native-community_netinfo:compileDebugJavaWithJavac
+
+> Task :react-native-community_netinfo:bundleLibCompileToJarDebug
+> Task :react-native-get-random-values:generateDebugBuildConfig
+> Task :react-native-get-random-values:javaPreCompileDebug FROM-CACHE
+> Task :react-native-get-random-values:compileDebugJavaWithJavac
+> Task :react-native-safe-area-context:checkKotlinGradlePluginConfigurationErrors
+> Task :react-native-get-random-values:bundleLibCompileToJarDebug
+> Task :react-native-safe-area-context:generateDebugBuildConfig
+> Task :react-native-safe-area-context:javaPreCompileDebug FROM-CACHE
+> Task :app:javaPreCompileDebug FROM-CACHE
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :aws-amplify_react-native:mergeDebugShaders
+> Task :aws-amplify_react-native:compileDebugShaders NO-SOURCE
+> Task :aws-amplify_react-native:generateDebugAssets UP-TO-DATE
+> Task :aws-amplify_react-native:packageDebugAssets
+> Task :expo:mergeDebugShaders
+> Task :expo:compileDebugShaders NO-SOURCE
+> Task :expo:generateDebugAssets UP-TO-DATE
+> Task :expo:packageDebugAssets
+> Task :expo-asset:mergeDebugShaders
+> Task :expo-asset:compileDebugShaders NO-SOURCE
+> Task :expo-asset:generateDebugAssets UP-TO-DATE
+> Task :expo-asset:packageDebugAssets
+> Task :expo-constants:mergeDebugShaders
+> Task :expo-constants:compileDebugShaders NO-SOURCE
+> Task :expo-constants:generateDebugAssets UP-TO-DATE
+> Task :expo-constants:packageDebugAssets
+> Task :expo-file-system:mergeDebugShaders
+> Task :expo-file-system:compileDebugShaders NO-SOURCE
+> Task :expo-file-system:generateDebugAssets UP-TO-DATE
+> Task :expo-file-system:packageDebugAssets
+> Task :expo-font:mergeDebugShaders
+> Task :expo-font:compileDebugShaders NO-SOURCE
+> Task :expo-font:generateDebugAssets UP-TO-DATE
+> Task :expo-font:packageDebugAssets
+> Task :expo-keep-awake:mergeDebugShaders
+> Task :expo-keep-awake:compileDebugShaders NO-SOURCE
+> Task :expo-keep-awake:generateDebugAssets UP-TO-DATE
+> Task :expo-keep-awake:packageDebugAssets
+> Task :expo-modules-core:mergeDebugShaders
+> Task :expo-modules-core:compileDebugShaders NO-SOURCE
+> Task :expo-modules-core:generateDebugAssets UP-TO-DATE
+> Task :expo-modules-core:packageDebugAssets
+> Task :react-native-async-storage_async-storage:mergeDebugShaders
+> Task :react-native-async-storage_async-storage:compileDebugShaders NO-SOURCE
+> Task :react-native-async-storage_async-storage:generateDebugAssets UP-TO-DATE
+> Task :react-native-async-storage_async-storage:packageDebugAssets
+> Task :react-native-community_netinfo:mergeDebugShaders
+> Task :react-native-community_netinfo:compileDebugShaders NO-SOURCE
+> Task :react-native-community_netinfo:generateDebugAssets UP-TO-DATE
+> Task :react-native-community_netinfo:packageDebugAssets
+> Task :react-native-get-random-values:mergeDebugShaders
+> Task :react-native-get-random-values:compileDebugShaders NO-SOURCE
+> Task :react-native-get-random-values:generateDebugAssets UP-TO-DATE
+> Task :react-native-get-random-values:packageDebugAssets
+> Task :react-native-safe-area-context:mergeDebugShaders
+> Task :react-native-safe-area-context:compileDebugShaders NO-SOURCE
+> Task :react-native-safe-area-context:generateDebugAssets UP-TO-DATE
+> Task :react-native-safe-area-context:packageDebugAssets
+> Task :app:mergeDebugAssets
+> Task :aws-amplify_react-native:bundleLibRuntimeToJarDebug
+> Task :app:compressDebugAssets
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToJarDebug
+> Task :react-native-community_netinfo:bundleLibRuntimeToJarDebug
+> Task :react-native-get-random-values:bundleLibRuntimeToJarDebug
+> Task :app:desugarDebugFileDependencies
+> Task :aws-amplify_react-native:processDebugJavaRes
+> Task :react-native-async-storage_async-storage:processDebugJavaRes NO-SOURCE
+> Task :react-native-community_netinfo:processDebugJavaRes NO-SOURCE
+> Task :react-native-get-random-values:processDebugJavaRes NO-SOURCE
+> Task :app:mergeDebugStartupProfile
+> Task :app:checkDebugDuplicateClasses
+> Task :aws-amplify_react-native:bundleLibRuntimeToDirDebug
+
+> Task :react-native-safe-area-context:compileDebugKotlin
+w: file:///C:/Users/dylan/Documents/Docux/Docux_App/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaContextPackage.kt:27:11 'constructor ReactModuleInfo(String, String, Boolean, Boolean, Boolean, Boolean, Boolean)' is deprecated. use ReactModuleInfo(String, String, boolean, boolean, boolean, boolean)]
+w: file:///C:/Users/dylan/Documents/Docux/Docux_App/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaContextPackage.kt:33:27 'getter for hasConstants: Boolean' is deprecated. This property is unused and it's planning to be removed in a future version of
+        React Native. Please refrain from using it.
+w: file:///C:/Users/dylan/Documents/Docux/Docux_App/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaView.kt:59:23 'getter for uiImplementation: UIImplementation!' is deprecated. Deprecated in Java
+
+> Task :expo-modules-core:compileDebugKotlin
+
+> Task :expo-modules-core:compileDebugKotlin FAILED
+> Task :app:mergeExtDexDebug
+228 actionable tasks: 153 executed, 64 from cache, 11 up-to-date
