@@ -3,6 +3,7 @@
     "name": "Docux_App",
     "slug": "Docux_App",
     "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -33,9 +34,6 @@
       "eas": {
         "projectId": "e185ab09-d0be-4d80-b0fd-0c3987f7b0c0"
       }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/e185ab09-d0be-4d80-b0fd-0c3987f7b0c0"

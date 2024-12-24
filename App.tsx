@@ -1,38 +1,79 @@
-import React from "react";
-import { Button, View, StyleSheet, SafeAreaView } from "react-native";
+import 'react-native-get-random-values';
+import 'react-native-url-polyfill/auto';
+import {Amplify} from 'aws-amplify';
+import awsconfig from './aws-exports'; // Adjust the path as necessary
+Amplify.configure(awsconfig);
 
-import { Amplify } from "aws-amplify";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
 
-import outputs from "./amplify_outputs.json";
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { Auth } from 'aws-amplify';
 
-Amplify.configure(outputs);
+const App = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-const SignOutButton = () => {
-  const { signOut } = useAuthenticator();
+  const handleSignIn = async () => {
+    setLoading(true);
+    try {
+      await Auth.signIn(email, password);
+      Alert.alert('Success', 'You are now logged in!');
+    } catch (error) {
+      Alert.alert('Error', error.message || 'An error occurred.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <View style={styles.signOutButton}>
-      <Button title="Sign Out" onPress={signOut} />
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        autoCapitalize="none"
+      />
+      <Button
+        title={loading ? 'Signing in...' : 'Sign In'}
+        onPress={handleSignIn}
+        disabled={loading}
+      />
     </View>
   );
 };
 
-const App = () => {
-  return (
-    <Authenticator.Provider>
-      <Authenticator>
-        <SafeAreaView>
-          <SignOutButton />
-        </SafeAreaView>
-      </Authenticator>
-    </Authenticator.Provider>
-  );
-};
-
 const styles = StyleSheet.create({
-  signOutButton: {
-    alignSelf: "flex-end",
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor:"#fff"
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 20,
   },
 });
 
