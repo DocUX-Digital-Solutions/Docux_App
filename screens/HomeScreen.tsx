@@ -2,14 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import SideMenu from '../components/HomeScreenComponents/SideMenu';
 import MainBox from '../components/HomeScreenComponents/MainBox';
-import * as ScreenOrientation from 'expo-screen-orientation';
 import { UserContext } from '../data/loadData';
+import { Auth } from 'aws-amplify';
 function HomeScreen({ navigation }) {
   const { jsonData } = useContext(UserContext);
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const [selectedSideMenu, setSelectedSideMenu] = useState(1);
   const [dataItems, setDataItems] = useState(jsonData);
   const [patientsNumber, setPatientsNumber] = useState(0);
+  const [user, setUser] = useState(null);
   
 
   // Animated values for width and opacity
@@ -21,7 +22,21 @@ function HomeScreen({ navigation }) {
     getCurrentData()
 
   }
+ 
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+        console.log(currentUser)
+      } catch (error) {
+        console.log('Not signed in');
+      }
+    };
+
+    fetchUserData();
+  }, []);
   const groupAppointmentsByDate = () => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());

@@ -1,80 +1,54 @@
-import 'react-native-get-random-values';
-import 'react-native-url-polyfill/auto';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { Auth } from 'aws-amplify';
+// Import your screens
+import HomeScreen from './screens/HomeScreen';
+import Login from './screens/Login';
+import VisitPage from './screens/VisitScreen';
+import PostVisitPage from './screens/PostVisitScreen';
+import { UserProvider } from './data/loadData';
+const Stack = createStackNavigator();
 import {Amplify} from 'aws-amplify';
 import awsconfig from './aws-exports'; // Adjust the path as necessary
 Amplify.configure(awsconfig);
+function App() {
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        setUser(currentUser);
+      } catch (error) {
+        //console.log('Not signed in');
+        setUser(null);
+      }
+    };
 
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
-import { Auth } from 'aws-amplify';
-
-const App = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleSignIn = async () => {
-    setLoading(true);
-    try {
-      await Auth.signIn(email, password);
-      Alert.alert('Success', 'You are now logged in!');
-    } catch (error) {
-      Alert.alert('Error', error.message || 'An error occurred.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+    checkAuth();
+  }, []);
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        autoCapitalize="none"
-      />
-      <Button
-        title={loading ? 'Signing in...' : 'Sign In'}
-        onPress={handleSignIn}
-        disabled={loading}
-      />
-    </View>
+    <UserProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName={user ? 'Home' : 'Login'}
+          screenOptions={{
+            headerShown: false,
+            cardStyle: { backgroundColor: '#F5F5F7' }, // Set your desired background color here
+          }}>
+            <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen name="VisitPage" component={VisitPage}/>
+            <Stack.Screen name="PostVisitPage" component={PostVisitPage}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </UserProvider>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor:"#fff"
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  input: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-  },
-});
+}
 
 export default App;
