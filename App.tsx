@@ -13,7 +13,14 @@ import { UserProvider } from './data/loadData';
 const Stack = createStackNavigator();
 import {Amplify} from 'aws-amplify';
 import awsconfig from './aws-exports'; // Adjust the path as necessary
-Amplify.configure(awsconfig);
+Amplify.configure({
+  ...awsconfig,
+  Auth: {
+    ...awsconfig.Auth,
+    // Optional settings for MFA
+    mandatorySignIn: false,
+  },
+});
 function App() {
   const [user, setUser] = useState(null);
 
