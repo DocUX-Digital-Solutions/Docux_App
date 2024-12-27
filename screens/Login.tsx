@@ -1,189 +1,197 @@
-import 'react-native-get-random-values';
-import 'react-native-url-polyfill/auto';
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { Text, ImageBackground, View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing the icon library
 import { Auth } from 'aws-amplify';
-import { CognitoUserSession } from 'amazon-cognito-identity-js';
-type SetupTOTPAuthParameters = {
-  user: string;
-  challengeAnswer: string;
-  mfaType?: 'SMS_MFA' | 'SOFTWARE_TOKEN_MFA';
-};
 
-async function setupTOTPAuth({
-  user,
-  challengeAnswer,
-  mfaType
-}: SetupTOTPAuthParameters) {
-  // To set up TOTP, first you need to get a `authorization code` from Amazon Cognito.
-  // `user` is the current Authenticated user:
-  const secretCode = await Auth.setupTOTP(user);
-
-  // You can directly display the `code` to the user or convert it to a QR code to be scanned.
-  // For example, use following code sample to render a QR code with `qrcode.react` component:
-  //      import QRCodeCanvas from 'qrcode.react';
-  //      const str = "otpauth://totp/AWSCognito:"+ username + "?secret=" + secretCode + "&issuer=" + issuer;
-  //      <QRCodeCanvas value={str}/>
-
-  // ...
-
-  // Then you will have your TOTP account in your TOTP-generating app (like Google Authenticator)
-  // use the generated one-time password to verify the setup.
-  try {
-    const cognitoUserSession: CognitoUserSession = await Auth.verifyTotpToken(
-      user,
-      challengeAnswer
-    );
-    // Don't forget to set TOTP as the preferred MFA method.
-    await Auth.setPreferredMFA(user, 'TOTP');
-  } catch (error) {
-    // Token is not verified
-  }
-
-  // ...
-
-  // Finally, when sign-in with MFA is enabled, use the `confirmSignIn` API
-  // to pass the TOTP code and MFA type.
-  const OTPCode = '123456'; // Code retrieved from authenticator app.
-  await Auth.confirmSignIn(user, OTPCode, mfaType); // Optional, MFA Type e.g. SMS_MFA || SOFTWARE_TOKEN_MFA
-}
-const Login = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [mfaRequired, setMfaRequired] = useState(false);
-  const [user, setUser] = useState(null);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [username, setUsername] = useState('');
+  const [mfaCode, setMfaCode] = useState('');
+  const [step, setStep] = useState('signIn'); // 'signIn' or 'mfa'
+  const [isLoginWrong, setIsLoginWrong] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async () => {
     try {
       const user = await Auth.signIn(email, password);
-      console.log('User signed in:', user);
-  
-      // Check if MFA is required
       if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
-        setMfaRequired(true);
-        setUser(user);
+        setStep('mfa'); // Change step to 'mfa' to prompt for MFA code
       } else {
-        // Confirm session
-        const session = await Auth.currentSession();
-        console.log('Session:', session);
-        navigation.replace('Home');
+        console.log('User signed in:', user);
+        // Navigate to the next screen (e.g., home screen)
       }
     } catch (error) {
-      console.error('Error signing in:', error.message);
+      console.error('Error signing in:', error);
+      if (error.message === 'UserNotFoundException') {
+        setIsLoginWrong(true);
+        setErrorMessage('User not found. Please try again.');
+      } else {
+        setErrorMessage('An error occurred. Please try again.');
+      }
     }
   };
-  
-  const verifyTOTP = async () => {
+
+  const handleMFACode = async () => {
     try {
-      console.log(user);
-      await Auth.verifyTotpToken(user, verificationCode);
-  
-      // Set TOTP as preferred MFA method
-      await Auth.setPreferredMFA(user, 'TOTP');
-      console.log('TOTP setup successful');
-  
-      // Confirm session
-      const session = await Auth.currentSession();
-      console.log('Session after TOTP setup:', session);
-  
-      navigation.replace('Home');
+      const user = await Auth.confirmSignIn(
+        email, // Email or username
+        mfaCode, // The MFA code from user input
+        'SMS_MFA' // Or 'SOFTWARE_TOKEN_MFA' if using TOTP
+      );
+      console.log('MFA successful, user logged in:', user);
+      // Proceed to the next step after MFA is confirmed
     } catch (error) {
-      console.error('Error verifying TOTP code:', error.message);
+      console.error('Error confirming MFA code:', error);
+      setIsLoginWrong(true);
+      setErrorMessage('Invalid MFA code. Please try again.');
     }
   };
-  
-  
-  const handleVerifyCode = async () => {
-    try {
-      console.log(user);
-      const confirmedUser = await Auth.confirmSignIn(user, verificationCode);
-      console.log('MFA Successful:', confirmedUser);
-  
-      // Confirm session
-      const session = await Auth.currentSession();
-      console.log('Session:', session);
-  
-      navigation.replace('Home'); // Navigate to Home screen
-    } catch (error) {
-      console.error('Error verifying code:', error.message);
-    }
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
-  
 
   return (
-    <View style={styles.container}>
-      {!mfaRequired ? (
-        <>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 200 : 0}
+    >
+      <View style={styles.logoContainer}>
+        <ImageBackground
+          style={styles.logoStyle}
+          source={require('../assets/logo.png')}
+          resizeMode="contain"
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.descriptionText}>Username</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#aaa"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+
+        <Text style={styles.descriptionText}>Password</Text>
+        <View style={styles.passwordInputContainer}>
           <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-          />
-          <TextInput
-            placeholder="Password"
+            style={styles.passwordInput}
+            placeholder="Enter your password"
+            placeholderTextColor="#aaa"
             value={password}
             onChangeText={setPassword}
-            secureTextEntry
+            secureTextEntry={!isPasswordVisible}
           />
-          <Button title="Sign In" onPress={handleSignIn} />
-        </>
-      ) : (
-        <>
-          <Text>Enter the verification code sent to your device:</Text>
+          <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconContainer}>
+            <Icon
+              name={isPasswordVisible ? 'eye-off' : 'eye'}
+              size={24}
+              color="#aaa"
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {isLoginWrong && <Text style={styles.text}>{errorMessage}</Text>}
+
+      {/* MFA Step: Display MFA input when required */}
+      {step === 'mfa' && (
+        <View style={styles.inputContainer}>
+          <Text style={styles.descriptionText}>Enter MFA Code</Text>
           <TextInput
-            placeholder="Verification Code"
-            value={verificationCode}
-            onChangeText={setVerificationCode}
+            style={styles.input}
+            placeholder="MFA Code"
+            placeholderTextColor="#aaa"
+            value={mfaCode}
+            onChangeText={setMfaCode}
             keyboardType="numeric"
-            style={styles.textIn}
           />
-          <Button title="Verify Code" onPress={verifyTOTP} />
-        </>
+          <TouchableOpacity style={styles.loginButtonStyle} onPress={handleMFACode}>
+            <Text style={styles.buttonText}>Submit MFA Code</Text>
+          </TouchableOpacity>
+        </View>
       )}
-    </View>
+
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.loginButtonStyle} onPress={handleSignIn}>
+          <Text style={styles.buttonText}>LOGIN</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.SSOButtonStyle}>
+          <Text style={styles.buttonText}>SSO</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity style={styles.buttonForgot}>
+        <Text style={styles.buttonTextForgot}>forgot password?</Text>
+      </TouchableOpacity>
+    </KeyboardAvoidingView>
   );
-}
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    height: "100%",
-
-    alignSelf: 'center',
-    paddingBottom: 60,
-    paddingTop: 10,
-    alignContent:'center',
-
-
-    justifyContent: 'center',
-
+    backgroundColor: '#091827',
   },
-  textIn:{
-    paddingBottom:150
+  logoStyle: {
+    width: 200,
+    height: 100,
   },
-
-  menuItem: {
+  passwordInputContainer: {
     flexDirection: 'row',
+    backgroundColor: 'transparent',
+    height: 50,
+    marginBottom: 15,
+    fontSize: 16,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+  },
+  passwordInput: {
+    flex: 1,
+    fontSize: 16,
+    paddingRight: 10,
+    color: "#fff",
+  },
+  text: {
+    marginTop: 20,
+    fontSize: 18,
+    color: 'red',
+  },
+  logoContainer: {
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingTop: '25%', // Pushes the logo to about 1/4th down the screen
+    paddingBottom: 75,
   },
-  visitInProgressText: {
-    color: '#969696',
+  inputContainer: {
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingBottom: 30,
+    backgroundColor: '#091827',
+  },
+  input: {
+    backgroundColor: 'transparent',
+    height: 50,
+    marginBottom: 30,
+    paddingHorizontal: 0,
     fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 8, // Space between icon and text
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+    color: "#fff",
   },
-  recordingText: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  descriptionText: {
+    color: "#fff",
+    paddingBottom: 3,
   },
-
-  editIcon: {
-    right: "7%"
-  },
-  editButtonStyle: {
-    backgroundColor: '#42526D',
+  loginButtonStyle: {
+    backgroundColor: '#3876BA',
     height: 50,
     borderRadius: 25,
     width: "40%",
@@ -196,8 +204,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1,
   },
-  submitButtonStyle: {
-    backgroundColor: '#346AAC',
+  SSOButtonStyle: {
+    backgroundColor: 'transparent',
     height: 50,
     borderRadius: 25,
     width: "40%",
@@ -208,6 +216,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 1,
+    borderWidth: 1,
+    borderColor: "#fff",
   },
   buttonText: {
     textAlign: 'center',
@@ -215,6 +225,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+  buttonsContainer: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  iconContainer: {
+    alignSelf: 'center',
+  },
+  buttonTextForgot: {
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '700',
+    textDecorationLine: 'underline',
+  },
+  buttonForgot: {
+    marginTop: 100,
+  },
 });
 
-export default Login;
+export default LoginScreen;
