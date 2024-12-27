@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Text, ImageBackground, View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing the icon library
 import { Auth } from 'aws-amplify';
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
+
+
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -12,10 +15,57 @@ const LoginScreen = ({ navigation }) => {
   const [step, setStep] = useState('signIn'); // 'signIn' or 'mfa'
   const [isLoginWrong, setIsLoginWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [userVal,SetUserVal] = useState(null)
+
+  async function setupTOTPAuth() {
+    // To set up TOTP, first you need to get a `authorization code` from Amazon Cognito.
+    // `user` is the current Authenticated user:
+    //const secretCode = await Auth.setupTOTP(userVal);
+    //console.log(secretCode)
+    // You can directly display the `code` to the user or convert it to a QR code to be scanned.
+    // For example, use following code sample to render a QR code with `qrcode.react` component:
+    //      import QRCodeCanvas from 'qrcode.react';
+    //      const str = "otpauth://totp/AWSCognito:"+ username + "?secret=" + secretCode + "&issuer=" + issuer;
+    //      <QRCodeCanvas value={str}/>
+  
+    // ...
+  
+    // Then you will have your TOTP account in your TOTP-generating app (like Google Authenticator)
+    // use the generated one-time password to verify the setup.
+    try {
+      /*
+      const cognitoUserSession: CognitoUserSession = await Auth.verifyTotpToken(
+        userVal,
+        mfaCode
+      );
+      */
+      // Don't forget to set TOTP as the preferred MFA method.
+      
+      await Auth.setPreferredMFA(userVal, 'TOTP');
+      console.log(3000)
+    } catch (error) {
+      // Token is not verified
+    }
+  
+    // ...
+  
+    // Finally, when sign-in with MFA is enabled, use the `confirmSignIn` API
+    // to pass the TOTP code and MFA type.
+    //const OTPCode = '123456'; // Code retrieved from authenticator app.
+     // Optional, MFA Type e.g. SMS_MFA || SOFTWARE_TOKEN_MFA
+     try {
+      await Auth.confirmSignIn(userVal, mfaCode, 'SOFTWARE_TOKEN_MFA');
+      console.log(500); // Logs 500 if the confirmation is successful
+    } catch (error) {
+      console.error('Error confirming MFA:', error); // Logs the error if it fails
+    }
+  }
 
   const handleSignIn = async () => {
     try {
       const user = await Auth.signIn(email, password);
+      console.log(user.getUsername());
+      SetUserVal(user);
       if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
         setStep('mfa'); // Change step to 'mfa' to prompt for MFA code
       } else {
@@ -35,13 +85,8 @@ const LoginScreen = ({ navigation }) => {
 
   const handleMFACode = async () => {
     try {
-      const user = await Auth.confirmSignIn(
-        email, // Email or username
-        mfaCode, // The MFA code from user input
-        'SMS_MFA' // Or 'SOFTWARE_TOKEN_MFA' if using TOTP
-      );
-      console.log('MFA successful, user logged in:', user);
-      // Proceed to the next step after MFA is confirmed
+      //await Auth.confirmSignIn(userVal, OTPCode, mfaType);
+      await setupTOTPAuth();
     } catch (error) {
       console.error('Error confirming MFA code:', error);
       setIsLoginWrong(true);
