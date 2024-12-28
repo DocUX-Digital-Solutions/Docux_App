@@ -15,42 +15,20 @@ const LoginScreen = ({ navigation }) => {
   const [step, setStep] = useState('signIn'); // 'signIn' or 'mfa'
   const [isLoginWrong, setIsLoginWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [userVal,SetUserVal] = useState(null)
+  const [userVal,SetUserVal] = useState(null);
+  const [buttonStateLoading,setButtonStateLoading] = useState(false);
+  const [buttonStateText,setButtonStateText] = useState("LOGIN");
 
+  const clickFunction = () =>{
+    if(step === 'mfa'){
+      handleMFACode()
 
-  const fetchUserData = async () => {
-    try {
-      // Fetch basic user info
-      const userInfo = await Auth.currentUserInfo();
-      console.log('User Info:', userInfo);
-  
-      // Fetch full authenticated user session
-      const user = await Auth.currentAuthenticatedUser();
-      console.log('Authenticated User:', user);
-  
-      // Example: Accessing user attributes
-      const userAttributes = user.attributes;
-      console.log('User Attributes:', userAttributes);
-  
-      // Example: Fetching an ID token (useful for API authentication)
-      const idToken = user.signInUserSession.idToken.jwtToken;
-      console.log('ID Token:', idToken);
-  
-      // Fetch custom backend data (if applicable)
-      // Example: Fetch user-specific data from an API
-      // const response = await fetch('https://your-api-endpoint', {
-      //   method: 'GET',
-      //   headers: {
-      //     Authorization: `Bearer ${idToken}`, // Pass the ID token for authentication
-      //   },
-      // });
-      // const data = await response.json();
-      // console.log('Custom Backend Data:', data);
-  
-    } catch (error) {
-      console.error('Error fetching user data:', error);
+    }else{
+      handleSignIn()
     }
-  };
+  }
+  
+  
   
   // Call this function after the user is logged in
   
@@ -94,7 +72,8 @@ const LoginScreen = ({ navigation }) => {
      try {
       await Auth.confirmSignIn(userVal, mfaCode, 'SOFTWARE_TOKEN_MFA');
       console.log(500); // Logs 500 if the confirmation is successful
-      await fetchUserData();
+      navigation.navigate("Home");
+      //await fetchUserData();
     } catch (error) {
       console.error('Error confirming MFA:', error); // Logs the error if it fails
     }
@@ -102,11 +81,15 @@ const LoginScreen = ({ navigation }) => {
 
   const handleSignIn = async () => {
     try {
+      console.log("hello")
+      setButtonStateLoading(true)
       const user = await Auth.signIn(email, password);
       console.log(user.getUsername());
       SetUserVal(user);
       if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
         setStep('mfa'); // Change step to 'mfa' to prompt for MFA code
+        setButtonStateText("Verify")
+        
       } else {
         console.log('User signed in:', user);
         // Navigate to the next screen (e.g., home screen)
@@ -120,6 +103,7 @@ const LoginScreen = ({ navigation }) => {
         setErrorMessage('An error occurred. Please try again.');
       }
     }
+    setButtonStateLoading(false)
   };
 
   const handleMFACode = async () => {
@@ -197,22 +181,19 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={setMfaCode}
             keyboardType="numeric"
           />
-          <TouchableOpacity style={styles.loginButtonStyle} onPress={handleMFACode}>
-            <Text style={styles.buttonText}>Submit MFA Code</Text>
-          </TouchableOpacity>
         </View>
       )}
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.loginButtonStyle} onPress={handleSignIn}>
-          <Text style={styles.buttonText}>LOGIN</Text>
+        <TouchableOpacity style={styles.loginButtonStyle} onPress={clickFunction}>
+          <Text style={styles.buttonText}>{buttonStateText}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.SSOButtonStyle}>
           <Text style={styles.buttonText}>SSO</Text>
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.buttonForgot}>
+      <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.navigate("ResetPassword")}>
         <Text style={styles.buttonTextForgot}>forgot password?</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>

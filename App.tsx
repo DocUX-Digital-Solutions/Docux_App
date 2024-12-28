@@ -9,6 +9,7 @@ import HomeScreen from './screens/HomeScreen';
 import Login from './screens/Login';
 import VisitPage from './screens/VisitScreen';
 import PostVisitPage from './screens/PostVisitScreen';
+import ResetPassword from './screens/ForgotPassword';
 import { UserProvider } from './data/loadData';
 import { PatchAppointmentRequest } from './src/hooks/useFetchAppointmentData';
 const Stack = createStackNavigator();
@@ -27,6 +28,7 @@ function App() {
             cardStyle: { backgroundColor: '#F5F5F7' }, // Set your desired background color here
           }}>
             <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="ResetPassword" component={ResetPassword}/>
             <Stack.Screen name="Home" component={HomeScreen}/>
             <Stack.Screen name="VisitPage" component={VisitPage}/>
             <Stack.Screen name="PostVisitPage" component={PostVisitPage}/>

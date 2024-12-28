@@ -7,7 +7,7 @@ export const UserProvider = ({ children }) => {
         {
           "appointmentId": 1343,
           "reason": "Right achilles tear",
-          "patientName": "Kori Carter",
+          "patientName": "Kori Carter1",
           "patientType": "new",
           "scheduledAt": "2024-12-15T14:00:00.000Z",
           "appointmentState": {
