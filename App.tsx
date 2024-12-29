@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,11 +13,31 @@ import ResetPassword from './screens/ForgotPassword';
 import { UserProvider } from './data/loadData';
 const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
-import { Amplify,API } from 'aws-amplify';
+import { Amplify,API} from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 Amplify.configure(config)
 API.configure(config)
 function App() {
+  const navigationRef = React.createRef();
+  useEffect(() => {
+    const checkRememberedDevice = async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+        //const isDeviceRemembered = await Auth.deviceRemembered(currentUser);
+        const isDeviceRemembered = await Auth.fetchDevices();
+        console.log(isDeviceRemembered);
+        if (isDeviceRemembered) {
+          console.log('Device is remembered. Redirecting to Home...');
+          navigationRef.current?.navigate('Home');
+        }
+      } catch (error) {
+        console.log('Device is not remembered or no authenticated user:', error);
+      }
+    };
+
+    //checkRememberedDevice();
+  }, []);
   
   return (
     <UserProvider>

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { ActivityIndicator, Text, ImageBackground, View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing the icon library
 import { Auth } from 'aws-amplify';
-import { CognitoUserSession } from 'amazon-cognito-identity-js';
-
 
 
 const LoginScreen = ({ navigation }) => {
@@ -12,7 +10,7 @@ const LoginScreen = ({ navigation }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [username, setUsername] = useState('');
   const [mfaCode, setMfaCode] = useState('');
-  const [step, setStep] = useState('signIn'); // 'signIn' or 'mfa'
+  const [step, setStep] = useState('signIn');
   const [isLoginWrong, setIsLoginWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [userVal,SetUserVal] = useState(null);
@@ -20,67 +18,36 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
 
+  async function rememberDevice() {
+    try {
+      const result = await Auth.rememberDevice();
+      console.log(result);
+    } catch (error) {
+      console.log('Error remembering device', error);
+    }
+  }
   const clickFunction = () =>{
     setLoading(true);
     setRefreshKey((prevKey) => prevKey + 1);
     if(step === 'mfa'){
-      handleMFACode()
-
-    }else{
-      console.log(300)
+      handleMFACode();
       
-      handleSignIn()
+    }else{
+      handleSignIn();
     }
-  }
-  
-  
-  
-  // Call this function after the user is logged in
-  
+  }  
   
   async function setupTOTPAuth() {
-    // To set up TOTP, first you need to get a `authorization code` from Amazon Cognito.
-    // `user` is the current Authenticated user:
-    //const secretCode = await Auth.setupTOTP(userVal);
-    //console.log(secretCode)
-    // You can directly display the `code` to the user or convert it to a QR code to be scanned.
-    // For example, use following code sample to render a QR code with `qrcode.react` component:
-    //      import QRCodeCanvas from 'qrcode.react';
-    //      const str = "otpauth://totp/AWSCognito:"+ username + "?secret=" + secretCode + "&issuer=" + issuer;
-    //      <QRCodeCanvas value={str}/>
-  
-    // ...
-  
-    // Then you will have your TOTP account in your TOTP-generating app (like Google Authenticator)
-    // use the generated one-time password to verify the setup.
     try {
-      /*
-      const cognitoUserSession: CognitoUserSession = await Auth.verifyTotpToken(
-        userVal,
-        mfaCode
-      );
-      */
-      // Don't forget to set TOTP as the preferred MFA method.
-      
       await Auth.setPreferredMFA(userVal, 'TOTP');
-      console.log(3000)
     } catch (error) {
-      // Token is not verified
+      console.error('Error confirming MFA:', error);
     }
-  
-    // ...
-  
-    // Finally, when sign-in with MFA is enabled, use the `confirmSignIn` API
-    // to pass the TOTP code and MFA type.
-    //const OTPCode = '123456'; // Code retrieved from authenticator app.
-     // Optional, MFA Type e.g. SMS_MFA || SOFTWARE_TOKEN_MFA
      try {
       await Auth.confirmSignIn(userVal, mfaCode, 'SOFTWARE_TOKEN_MFA');
-      console.log(500); // Logs 500 if the confirmation is successful
       navigation.navigate("Home");
-      //await fetchUserData();
     } catch (error) {
-      console.error('Error confirming MFA:', error); // Logs the error if it fails
+      console.error('Error confirming MFA:', error);
     }
   }
 
@@ -127,6 +94,7 @@ const LoginScreen = ({ navigation }) => {
     try {
       //await Auth.confirmSignIn(userVal, OTPCode, mfaType);
       await setupTOTPAuth();
+      //await rememberDevice();
     } catch (error) {
       console.error('Error confirming MFA code:', error);
       setIsLoginWrong(true);
