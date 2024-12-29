@@ -67,7 +67,6 @@ export type PatchAppointmentRequest = {
 
 const fetchAppointmentData = async (): Promise<Appointment[]> => {
   const { data } = await apiClient.get<Appointment[]>('appointments')
-  console.log(data)
   return data
 }
 

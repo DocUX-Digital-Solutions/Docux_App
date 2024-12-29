@@ -31,12 +31,9 @@
       "expo-font"
     ],
     "extra": {
-      "eas": {
-        "projectId": "e185ab09-d0be-4d80-b0fd-0c3987f7b0c0"
-      }
     },
     "updates": {
-      "url": "https://u.expo.dev/e185ab09-d0be-4d80-b0fd-0c3987f7b0c0"
+      "enabled": false
     }
   }
 }

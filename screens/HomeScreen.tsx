@@ -3,7 +3,7 @@ import { View, StyleSheet, Animated } from 'react-native';
 import SideMenu from '../components/HomeScreenComponents/SideMenu';
 import MainBox from '../components/HomeScreenComponents/MainBox';
 import { UserContext } from '../data/loadData';
-import { Auth } from 'aws-amplify';
+import { Auth} from 'aws-amplify';
 function HomeScreen({ navigation }) {
   const { jsonData } = useContext(UserContext);
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
@@ -22,7 +22,15 @@ function HomeScreen({ navigation }) {
     getCurrentData()
 
   }
- 
+  const fetchRestData = async () => {
+    try {
+      const response = await API.get('yourApiName', '/path-to-resource');
+      console.log('REST API Response:', response);
+    } catch (error) {
+      console.error('REST API Error:', error);
+    }
+  };
+  
 
   useEffect(() => {
     const fetchUserData = async () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, ImageBackground, View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Text, ImageBackground, View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing the icon library
 import { Auth } from 'aws-amplify';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
@@ -16,14 +16,19 @@ const LoginScreen = ({ navigation }) => {
   const [isLoginWrong, setIsLoginWrong] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [userVal,SetUserVal] = useState(null);
-  const [buttonStateLoading,setButtonStateLoading] = useState(false);
   const [buttonStateText,setButtonStateText] = useState("LOGIN");
+  const [loading, setLoading] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const clickFunction = () =>{
+    setLoading(true);
+    setRefreshKey((prevKey) => prevKey + 1);
     if(step === 'mfa'){
       handleMFACode()
 
     }else{
+      console.log(300)
+      
       handleSignIn()
     }
   }
@@ -80,9 +85,19 @@ const LoginScreen = ({ navigation }) => {
   }
 
   const handleSignIn = async () => {
+    if (!email.length) {
+      setIsLoginWrong(true);
+      setLoading(false);
+      setErrorMessage('Username cannot be empty');
+      return;
+    } else if(!password.length){
+      setIsLoginWrong(true);
+      setLoading(false);
+      setErrorMessage('Password cannot be empty');
+      return;
+    } 
     try {
       console.log("hello")
-      setButtonStateLoading(true)
       const user = await Auth.signIn(email, password);
       console.log(user.getUsername());
       SetUserVal(user);
@@ -95,15 +110,17 @@ const LoginScreen = ({ navigation }) => {
         // Navigate to the next screen (e.g., home screen)
       }
     } catch (error) {
-      console.error('Error signing in:', error);
-      if (error.message === 'UserNotFoundException') {
+      console.error('Error signing in:',  error.message);
+      if (error.message.includes('User does not exist')) {
         setIsLoginWrong(true);
-        setErrorMessage('User not found. Please try again.');
-      } else {
+        setErrorMessage('No user found');
+      }
+      else {
+        setIsLoginWrong(true);
         setErrorMessage('An error occurred. Please try again.');
       }
     }
-    setButtonStateLoading(false)
+    setLoading(false);
   };
 
   const handleMFACode = async () => {
@@ -166,10 +183,9 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-
+      <View style={styles.inputContainer}>
       {isLoginWrong && <Text style={styles.text}>{errorMessage}</Text>}
-
-      {/* MFA Step: Display MFA input when required */}
+      </View>
       {step === 'mfa' && (
         <View style={styles.inputContainer}>
           <Text style={styles.descriptionText}>Enter MFA Code</Text>
@@ -185,9 +201,13 @@ const LoginScreen = ({ navigation }) => {
       )}
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.loginButtonStyle} onPress={clickFunction}>
-          <Text style={styles.buttonText}>{buttonStateText}</Text>
-        </TouchableOpacity>
+      {loading ? (
+    <ActivityIndicator size="large" color="#3876BA" />
+  ) : (
+    <TouchableOpacity style={styles.loginButtonStyle} onPress={clickFunction}>
+      <Text style={styles.buttonText}>{buttonStateText}</Text>
+    </TouchableOpacity>
+  )}
         <TouchableOpacity style={styles.SSOButtonStyle}>
           <Text style={styles.buttonText}>SSO</Text>
         </TouchableOpacity>
@@ -225,20 +245,21 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   text: {
-    marginTop: 20,
-    fontSize: 18,
+    fontSize: 16,
     color: 'red',
+    paddingBottom:10,
+    paddingTop:5
   },
   logoContainer: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: '25%', // Pushes the logo to about 1/4th down the screen
+    paddingTop: '25%',
     paddingBottom: 75,
   },
   inputContainer: {
     width: '100%',
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    
     backgroundColor: '#091827',
   },
   input: {
@@ -291,7 +312,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   buttonsContainer: {
-    marginTop: 10,
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'center',
   },

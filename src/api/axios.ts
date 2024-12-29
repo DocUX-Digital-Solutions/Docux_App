@@ -1,3 +1,34 @@
+
+import axios from "axios";
+
+const API = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_APP_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// intercepting requests
+API.interceptors.request.use(
+  (request) => {
+   // handle request here
+  },
+  (error: AxiosError) => {
+   //handle error here
+  }
+);
+
+//intercepting responses
+API.interceptors.response.use(
+  (response) => {
+   // handle response here
+  },
+  (error: AxiosError) => {
+   //handle error here
+  }
+);
+export {API}
+/*
 import { fetchAuthSession } from 'aws-amplify/auth'
 import axios from 'axios'
 
@@ -28,3 +59,4 @@ apiClient.interceptors.request.use(
 )
 
 export default apiClient
+*/

@@ -11,11 +11,12 @@ import VisitPage from './screens/VisitScreen';
 import PostVisitPage from './screens/PostVisitScreen';
 import ResetPassword from './screens/ForgotPassword';
 import { UserProvider } from './data/loadData';
-import { PatchAppointmentRequest } from './src/hooks/useFetchAppointmentData';
 const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
-import { Amplify } from 'aws-amplify'
+import { Amplify,API } from 'aws-amplify';
+
 Amplify.configure(config)
+API.configure(config)
 function App() {
   
   return (

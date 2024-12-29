@@ -1,405 +1,418 @@
-
-> Docux_App@1.0.0 android
-> expo run:android
-
-env: load .env
-env: export VITE_REACT_APP_USER_POOL_ID VITE_REACT_APP_USER_POOL_CLIENT_ID VITE_REACT_APP_IDENTITY_POOL_ID VITE_REACT_APP_AWS_REGION VITE_TRANSCRIBE_LANGUAGE_CODE VITE_TRANSCRIBE_SAMPLING_RATE VITE_TRANSCRIBE_AUDIO_SOURCE VITE_STREAM_ARN VITE_QUEUE_ARN VITE_STREAM_NAME VITE_TRANSCRIPT_BUCKET VITE_AUDIO_BUCKET VITE_API_URL
-› Building app...
-Configuration on demand is an incubating feature.
-> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors
-> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors
-> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
-> Task :gradle-plugin:shared:compileJava NO-SOURCE
-> Task :gradle-plugin:shared:processResources NO-SOURCE
-> Task :gradle-plugin:shared:classes UP-TO-DATE
-> Task :gradle-plugin:shared:jar UP-TO-DATE
-> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
-> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
-> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
-> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
-> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
-> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
-> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors
-> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
-> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
-> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
-> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
-> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
-> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
-
-> Configure project :app
-WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
-
-This Android Gradle plugin (8.5.0) was tested up to compileSdk = 34.
-
-You are strongly encouraged to update your project to use a newer
-Android Gradle plugin that has been tested with compileSdk = 35.
-
-If you are already using the latest version of the Android Gradle plugin,
-you may need to wait until a newer version with support for compileSdk = 35 is available.
-
-For more information refer to the compatibility table:
-https://d.android.com/r/tools/api-level-support
-
-To suppress this warning, add/update
-    android.suppressUnsupportedCompileSdk=35
-to this project's gradle.properties.
-
-> Configure project :expo-modules-core
-WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-WARNING: [CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-[CXX5202] This app only has 32-bit [armeabi-v7a,x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
-
-> Configure project :expo
-
-Using expo modules
-  - [32mexpo-asset[0m (11.0.1)
-  - [32mexpo-constants[0m (17.0.3)
-  - [32mexpo-file-system[0m (18.0.6)
-  - [32mexpo-font[0m (13.0.2)
-  - [32mexpo-keep-awake[0m (14.0.1)
-  - [32mexpo-modules-core[0m (2.1.2)
-
-WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
-
-This Android Gradle plugin (8.5.0) was tested up to compileSdk = 34.
-
-You are strongly encouraged to update your project to use a newer
-Android Gradle plugin that has been tested with compileSdk = 35.
-
-If you are already using the latest version of the Android Gradle plugin,
-you may need to wait until a newer version with support for compileSdk = 35 is available.
-
-For more information refer to the compatibility table:
-https://d.android.com/r/tools/api-level-support
-
-To suppress this warning, add/update
-    android.suppressUnsupportedCompileSdk=35
-to this project's gradle.properties.
-
-> Task :app:generateAutolinkingNewArchitectureFiles
-> Task :app:generateAutolinkingPackageList
-> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
-> Task :app:generateCodegenArtifactsFromSchema SKIPPED
-> Task :app:preBuild
-> Task :app:preDebugBuild
-> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-> Task :app:checkKotlinGradlePluginConfigurationErrors
-> Task :app:generateDebugBuildConfig
-
-> Task :aws-amplify_react-native:generateCodegenSchemaFromJavaScript
-
-> Task :aws-amplify_react-native:generateCodegenArtifactsFromSchema
-> Task :aws-amplify_react-native:preBuild
-> Task :aws-amplify_react-native:preDebugBuild
-> Task :aws-amplify_react-native:writeDebugAarMetadata
-> Task :expo:generateExpoModulesPackageListTask
-> Task :expo:preBuild
-> Task :expo:preDebugBuild
-> Task :expo-asset:preBuild UP-TO-DATE
-> Task :expo-asset:preDebugBuild UP-TO-DATE
-> Task :expo:writeDebugAarMetadata
-> Task :expo-asset:writeDebugAarMetadata
-> Task :expo-constants:createExpoConfig UP-TO-DATE
-> Task :expo-constants:preBuild UP-TO-DATE
-> Task :expo-constants:preDebugBuild UP-TO-DATE
-> Task :expo-file-system:preBuild UP-TO-DATE
-> Task :expo-file-system:preDebugBuild UP-TO-DATE
-> Task :expo-constants:writeDebugAarMetadata
-> Task :expo-font:preBuild UP-TO-DATE
-> Task :expo-font:preDebugBuild UP-TO-DATE
-> Task :expo-file-system:writeDebugAarMetadata
-> Task :expo-keep-awake:preBuild UP-TO-DATE
-> Task :expo-keep-awake:preDebugBuild UP-TO-DATE
-> Task :expo-font:writeDebugAarMetadata
-> Task :expo-modules-core:preBuild UP-TO-DATE
-> Task :expo-modules-core:preDebugBuild UP-TO-DATE
-> Task :expo-keep-awake:writeDebugAarMetadata
-> Task :expo-modules-core:writeDebugAarMetadata
-> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript
-> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema
-> Task :react-native-async-storage_async-storage:preBuild
-> Task :react-native-async-storage_async-storage:preDebugBuild
-> Task :react-native-community_netinfo:preBuild UP-TO-DATE
-> Task :react-native-community_netinfo:preDebugBuild UP-TO-DATE
-> Task :react-native-async-storage_async-storage:writeDebugAarMetadata
-> Task :react-native-community_netinfo:writeDebugAarMetadata
-> Task :react-native-get-random-values:preBuild UP-TO-DATE
-> Task :react-native-get-random-values:preDebugBuild UP-TO-DATE
-> Task :react-native-get-random-values:writeDebugAarMetadata
-> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript
-> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema
-> Task :react-native-safe-area-context:preBuild
-> Task :react-native-safe-area-context:preDebugBuild
-> Task :react-native-safe-area-context:writeDebugAarMetadata
-> Task :app:generateDebugResValues
-> Task :aws-amplify_react-native:generateDebugResValues
-> Task :app:checkDebugAarMetadata
-> Task :aws-amplify_react-native:generateDebugResources
-> Task :aws-amplify_react-native:packageDebugResources
-> Task :expo:generateDebugResValues FROM-CACHE
-> Task :expo:generateDebugResources FROM-CACHE
-> Task :expo:packageDebugResources
-> Task :expo-asset:generateDebugResValues FROM-CACHE
-> Task :expo-asset:generateDebugResources FROM-CACHE
-> Task :expo-asset:packageDebugResources
-> Task :expo-constants:generateDebugResValues FROM-CACHE
-> Task :expo-constants:generateDebugResources FROM-CACHE
-> Task :expo-constants:packageDebugResources
-> Task :expo-file-system:generateDebugResValues FROM-CACHE
-> Task :expo-file-system:generateDebugResources
-> Task :expo-file-system:packageDebugResources
-> Task :expo-font:generateDebugResValues FROM-CACHE
-> Task :expo-font:generateDebugResources FROM-CACHE
-> Task :expo-font:packageDebugResources
-> Task :expo-keep-awake:generateDebugResValues FROM-CACHE
-> Task :expo-keep-awake:generateDebugResources FROM-CACHE
-> Task :expo-keep-awake:packageDebugResources
-> Task :expo-modules-core:generateDebugResValues FROM-CACHE
-> Task :expo-modules-core:generateDebugResources FROM-CACHE
-> Task :expo-modules-core:packageDebugResources
-> Task :react-native-async-storage_async-storage:generateDebugResValues FROM-CACHE
-> Task :react-native-async-storage_async-storage:generateDebugResources FROM-CACHE
-> Task :react-native-async-storage_async-storage:packageDebugResources
-> Task :react-native-community_netinfo:generateDebugResValues FROM-CACHE
-> Task :react-native-community_netinfo:generateDebugResources FROM-CACHE
-> Task :react-native-community_netinfo:packageDebugResources
-> Task :react-native-get-random-values:generateDebugResValues FROM-CACHE
-> Task :react-native-get-random-values:generateDebugResources FROM-CACHE
-> Task :react-native-get-random-values:packageDebugResources
-> Task :react-native-safe-area-context:generateDebugResValues FROM-CACHE
-> Task :react-native-safe-area-context:generateDebugResources FROM-CACHE
-> Task :react-native-safe-area-context:packageDebugResources
-> Task :app:mapDebugSourceSetPaths
-> Task :app:generateDebugResources
-> Task :app:packageDebugResources
-> Task :app:createDebugCompatibleScreenManifests
-> Task :app:extractDeepLinksDebug
-> Task :aws-amplify_react-native:extractDeepLinksDebug FROM-CACHE
-> Task :expo:extractDeepLinksDebug FROM-CACHE
-> Task :expo-asset:extractDeepLinksDebug FROM-CACHE
-> Task :expo-constants:extractDeepLinksDebug FROM-CACHE
-> Task :expo-file-system:extractDeepLinksDebug FROM-CACHE
-> Task :expo-font:extractDeepLinksDebug FROM-CACHE
-> Task :app:parseDebugLocalResources
-> Task :expo-keep-awake:extractDeepLinksDebug FROM-CACHE
-> Task :expo-constants:processDebugManifest
-> Task :expo-font:processDebugManifest
-> Task :aws-amplify_react-native:processDebugManifest
-> Task :expo-modules-core:extractDeepLinksDebug FROM-CACHE
-> Task :expo:processDebugManifest
-> Task :app:mergeDebugResources
-
-> Task :expo-file-system:processDebugManifest
-C:\Users\dylan\Documents\Docux\Docux_App\node_modules\expo-file-system\android\src\main\AndroidManifest.xml:6:9-8:20 Warning:
-	provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:6 to replace other declarations but no other declaration present
-
-> Task :expo-asset:processDebugManifest
-> Task :expo-keep-awake:processDebugManifest
-> Task :react-native-async-storage_async-storage:extractDeepLinksDebug FROM-CACHE
-
-> Task :expo-modules-core:processDebugManifest
-C:\Users\dylan\Documents\Docux\Docux_App\node_modules\expo-modules-core\android\src\main\AndroidManifest.xml:8:9-11:45 Warning:
-	meta-data#com.facebook.soloader.enabled@android:value was tagged at AndroidManifest.xml:8 to replace other declarations but no other declaration present
-
-> Task :react-native-community_netinfo:extractDeepLinksDebug FROM-CACHE
-
-> Task :react-native-async-storage_async-storage:processDebugManifest
-package="com.reactnativecommunity.asyncstorage" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-async-storage\async-storage\android\src\main\AndroidManifest.xml.
-Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
-Recommendation: remove package="com.reactnativecommunity.asyncstorage" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-async-storage\async-storage\android\src\main\AndroidManifest.xml.
-
-> Task :react-native-get-random-values:extractDeepLinksDebug FROM-CACHE
-
-> Task :react-native-community_netinfo:processDebugManifest
-package="com.reactnativecommunity.netinfo" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-community\netinfo\android\src\main\AndroidManifest.xml.
-Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
-Recommendation: remove package="com.reactnativecommunity.netinfo" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\@react-native-community\netinfo\android\src\main\AndroidManifest.xml.
-
-> Task :react-native-safe-area-context:extractDeepLinksDebug FROM-CACHE
-
-> Task :react-native-get-random-values:processDebugManifest
-package="org.linusu" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-get-random-values\android\src\main\AndroidManifest.xml.
-Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
-Recommendation: remove package="org.linusu" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-get-random-values\android\src\main\AndroidManifest.xml.
-
-> Task :react-native-safe-area-context:processDebugManifest
-package="com.th3rdwave.safeareacontext" found in source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-safe-area-context\android\src\main\AndroidManifest.xml.
-Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
-Recommendation: remove package="com.th3rdwave.safeareacontext" from the source AndroidManifest.xml: C:\Users\dylan\Documents\Docux\Docux_App\node_modules\react-native-safe-area-context\android\src\main\AndroidManifest.xml.
-
-> Task :aws-amplify_react-native:compileDebugLibraryResources
-
-> Task :app:processDebugMainManifest
-C:\Users\dylan\Documents\Docux\Docux_App\android\app\src\debug\AndroidManifest.xml:6:5-162 Warning:
-	application@android:usesCleartextTraffic was tagged at AndroidManifest.xml:6 to replace other declarations but no other declaration present
-C:\Users\dylan\Documents\Docux\Docux_App\android\app\src\debug\AndroidManifest.xml Warning:
-	provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
-
-> Task :app:processDebugManifest
-> Task :expo:compileDebugLibraryResources FROM-CACHE
-> Task :expo-asset:compileDebugLibraryResources FROM-CACHE
-> Task :aws-amplify_react-native:parseDebugLocalResources
-> Task :expo-asset:parseDebugLocalResources FROM-CACHE
-> Task :expo:parseDebugLocalResources
-> Task :expo-constants:compileDebugLibraryResources FROM-CACHE
-> Task :expo-constants:parseDebugLocalResources FROM-CACHE
-> Task :app:processDebugManifestForPackage
-> Task :expo-asset:generateDebugRFile
-> Task :expo:generateDebugRFile
-> Task :expo-file-system:compileDebugLibraryResources
-> Task :aws-amplify_react-native:generateDebugRFile
-> Task :expo-constants:generateDebugRFile
-> Task :expo-font:compileDebugLibraryResources FROM-CACHE
-> Task :expo-font:parseDebugLocalResources FROM-CACHE
-> Task :expo-file-system:parseDebugLocalResources
-> Task :expo-keep-awake:compileDebugLibraryResources FROM-CACHE
-> Task :expo-font:generateDebugRFile
-> Task :expo-keep-awake:parseDebugLocalResources FROM-CACHE
-> Task :expo-file-system:generateDebugRFile
-> Task :expo-modules-core:compileDebugLibraryResources FROM-CACHE
-> Task :expo-modules-core:parseDebugLocalResources FROM-CACHE
-> Task :expo-keep-awake:generateDebugRFile
-> Task :react-native-async-storage_async-storage:compileDebugLibraryResources FROM-CACHE
-> Task :react-native-async-storage_async-storage:parseDebugLocalResources FROM-CACHE
-> Task :expo-modules-core:generateDebugRFile
-> Task :react-native-community_netinfo:compileDebugLibraryResources FROM-CACHE
-> Task :react-native-community_netinfo:parseDebugLocalResources FROM-CACHE
-> Task :react-native-async-storage_async-storage:generateDebugRFile
-> Task :react-native-get-random-values:compileDebugLibraryResources FROM-CACHE
-> Task :react-native-get-random-values:parseDebugLocalResources FROM-CACHE
-> Task :react-native-community_netinfo:generateDebugRFile
-> Task :react-native-safe-area-context:compileDebugLibraryResources FROM-CACHE
-> Task :react-native-safe-area-context:parseDebugLocalResources FROM-CACHE
-> Task :react-native-get-random-values:generateDebugRFile
-> Task :aws-amplify_react-native:checkKotlinGradlePluginConfigurationErrors
-> Task :react-native-safe-area-context:generateDebugRFile
-> Task :aws-amplify_react-native:generateDebugBuildConfig
-> Task :app:processDebugResources
-> Task :expo:checkKotlinGradlePluginConfigurationErrors
-> Task :aws-amplify_react-native:javaPreCompileDebug
-> Task :expo:generateDebugBuildConfig
-> Task :expo-asset:checkKotlinGradlePluginConfigurationErrors
-> Task :expo-asset:generateDebugBuildConfig
-> Task :expo-modules-core:checkKotlinGradlePluginConfigurationErrors
-> Task :expo-modules-core:generateDebugBuildConfig
-> Task :expo-modules-core:javaPreCompileDebug FROM-CACHE
-> Task :expo-asset:javaPreCompileDebug FROM-CACHE
-> Task :expo-constants:checkKotlinGradlePluginConfigurationErrors
-> Task :expo-constants:generateDebugBuildConfig
-> Task :expo-constants:javaPreCompileDebug FROM-CACHE
-> Task :expo-file-system:checkKotlinGradlePluginConfigurationErrors
-> Task :expo-file-system:generateDebugBuildConfig
-> Task :expo-file-system:javaPreCompileDebug FROM-CACHE
-> Task :expo-font:checkKotlinGradlePluginConfigurationErrors
-> Task :expo-font:generateDebugBuildConfig
-> Task :expo-font:javaPreCompileDebug FROM-CACHE
-> Task :expo-keep-awake:checkKotlinGradlePluginConfigurationErrors
-> Task :expo-keep-awake:generateDebugBuildConfig
-> Task :expo-keep-awake:javaPreCompileDebug FROM-CACHE
-> Task :expo:javaPreCompileDebug FROM-CACHE
-> Task :react-native-async-storage_async-storage:generateDebugBuildConfig
-> Task :react-native-async-storage_async-storage:javaPreCompileDebug FROM-CACHE
-> Task :aws-amplify_react-native:compileDebugKotlin
-
-> Task :react-native-async-storage_async-storage:compileDebugJavaWithJavac
-
-> Task :aws-amplify_react-native:compileDebugJavaWithJavac
-> Task :aws-amplify_react-native:bundleLibCompileToJarDebug
-> Task :react-native-community_netinfo:generateDebugBuildConfig
-> Task :react-native-async-storage_async-storage:bundleLibCompileToJarDebug
-> Task :react-native-community_netinfo:javaPreCompileDebug FROM-CACHE
-
-> Task :react-native-community_netinfo:compileDebugJavaWithJavac
-
-> Task :react-native-community_netinfo:bundleLibCompileToJarDebug
-> Task :react-native-get-random-values:generateDebugBuildConfig
-> Task :react-native-get-random-values:javaPreCompileDebug FROM-CACHE
-> Task :react-native-get-random-values:compileDebugJavaWithJavac
-> Task :react-native-safe-area-context:checkKotlinGradlePluginConfigurationErrors
-> Task :react-native-get-random-values:bundleLibCompileToJarDebug
-> Task :react-native-safe-area-context:generateDebugBuildConfig
-> Task :react-native-safe-area-context:javaPreCompileDebug FROM-CACHE
-> Task :app:javaPreCompileDebug FROM-CACHE
-> Task :app:mergeDebugShaders
-> Task :app:compileDebugShaders NO-SOURCE
-> Task :app:generateDebugAssets UP-TO-DATE
-> Task :aws-amplify_react-native:mergeDebugShaders
-> Task :aws-amplify_react-native:compileDebugShaders NO-SOURCE
-> Task :aws-amplify_react-native:generateDebugAssets UP-TO-DATE
-> Task :aws-amplify_react-native:packageDebugAssets
-> Task :expo:mergeDebugShaders
-> Task :expo:compileDebugShaders NO-SOURCE
-> Task :expo:generateDebugAssets UP-TO-DATE
-> Task :expo:packageDebugAssets
-> Task :expo-asset:mergeDebugShaders
-> Task :expo-asset:compileDebugShaders NO-SOURCE
-> Task :expo-asset:generateDebugAssets UP-TO-DATE
-> Task :expo-asset:packageDebugAssets
-> Task :expo-constants:mergeDebugShaders
-> Task :expo-constants:compileDebugShaders NO-SOURCE
-> Task :expo-constants:generateDebugAssets UP-TO-DATE
-> Task :expo-constants:packageDebugAssets
-> Task :expo-file-system:mergeDebugShaders
-> Task :expo-file-system:compileDebugShaders NO-SOURCE
-> Task :expo-file-system:generateDebugAssets UP-TO-DATE
-> Task :expo-file-system:packageDebugAssets
-> Task :expo-font:mergeDebugShaders
-> Task :expo-font:compileDebugShaders NO-SOURCE
-> Task :expo-font:generateDebugAssets UP-TO-DATE
-> Task :expo-font:packageDebugAssets
-> Task :expo-keep-awake:mergeDebugShaders
-> Task :expo-keep-awake:compileDebugShaders NO-SOURCE
-> Task :expo-keep-awake:generateDebugAssets UP-TO-DATE
-> Task :expo-keep-awake:packageDebugAssets
-> Task :expo-modules-core:mergeDebugShaders
-> Task :expo-modules-core:compileDebugShaders NO-SOURCE
-> Task :expo-modules-core:generateDebugAssets UP-TO-DATE
-> Task :expo-modules-core:packageDebugAssets
-> Task :react-native-async-storage_async-storage:mergeDebugShaders
-> Task :react-native-async-storage_async-storage:compileDebugShaders NO-SOURCE
-> Task :react-native-async-storage_async-storage:generateDebugAssets UP-TO-DATE
-> Task :react-native-async-storage_async-storage:packageDebugAssets
-> Task :react-native-community_netinfo:mergeDebugShaders
-> Task :react-native-community_netinfo:compileDebugShaders NO-SOURCE
-> Task :react-native-community_netinfo:generateDebugAssets UP-TO-DATE
-> Task :react-native-community_netinfo:packageDebugAssets
-> Task :react-native-get-random-values:mergeDebugShaders
-> Task :react-native-get-random-values:compileDebugShaders NO-SOURCE
-> Task :react-native-get-random-values:generateDebugAssets UP-TO-DATE
-> Task :react-native-get-random-values:packageDebugAssets
-> Task :react-native-safe-area-context:mergeDebugShaders
-> Task :react-native-safe-area-context:compileDebugShaders NO-SOURCE
-> Task :react-native-safe-area-context:generateDebugAssets UP-TO-DATE
-> Task :react-native-safe-area-context:packageDebugAssets
-> Task :app:mergeDebugAssets
-> Task :aws-amplify_react-native:bundleLibRuntimeToJarDebug
-> Task :app:compressDebugAssets
-> Task :react-native-async-storage_async-storage:bundleLibRuntimeToJarDebug
-> Task :react-native-community_netinfo:bundleLibRuntimeToJarDebug
-> Task :react-native-get-random-values:bundleLibRuntimeToJarDebug
-> Task :app:desugarDebugFileDependencies
-> Task :aws-amplify_react-native:processDebugJavaRes
-> Task :react-native-async-storage_async-storage:processDebugJavaRes NO-SOURCE
-> Task :react-native-community_netinfo:processDebugJavaRes NO-SOURCE
-> Task :react-native-get-random-values:processDebugJavaRes NO-SOURCE
-> Task :app:mergeDebugStartupProfile
-> Task :app:checkDebugDuplicateClasses
-> Task :aws-amplify_react-native:bundleLibRuntimeToDirDebug
-
-> Task :react-native-safe-area-context:compileDebugKotlin
-w: file:///C:/Users/dylan/Documents/Docux/Docux_App/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaContextPackage.kt:27:11 'constructor ReactModuleInfo(String, String, Boolean, Boolean, Boolean, Boolean, Boolean)' is deprecated. use ReactModuleInfo(String, String, boolean, boolean, boolean, boolean)]
-w: file:///C:/Users/dylan/Documents/Docux/Docux_App/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaContextPackage.kt:33:27 'getter for hasConstants: Boolean' is deprecated. This property is unused and it's planning to be removed in a future version of
-        React Native. Please refrain from using it.
-w: file:///C:/Users/dylan/Documents/Docux/Docux_App/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaView.kt:59:23 'getter for uiImplementation: UIImplementation!' is deprecated. Deprecated in Java
-
-> Task :expo-modules-core:compileDebugKotlin
-
-> Task :expo-modules-core:compileDebugKotlin FAILED
-> Task :app:mergeExtDexDebug
-228 actionable tasks: 153 executed, 64 from cache, 11 up-to-date
+App.tsx(5,8): error TS2307: Cannot find module '@env' or its corresponding type declarations.
+App.tsx(19,41): error TS2307: Cannot find module './src/hooks/useFetchAppointmentData' or its corresponding type declarations.
+App.tsx(30,12): error TS2741: Property 'id' is missing in type '{ children: Element[]; initialRouteName: string; screenOptions: { headerShown: false; cardStyle: { backgroundColor: string; }; }; }' but required in type '{ id: undefined; }'.
+Auth.tsx(10,8): error TS2307: Cannot find module 'aws-amplify/auth' or its corresponding type declarations.
+components/common/Card.tsx(1,27): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/common/LoadingSpinner.tsx(2,20): error TS2307: Cannot find module '@emotion/styled' or its corresponding type declarations.
+components/common/LoadingSpinner.tsx(3,27): error TS2307: Cannot find module '@emotion/react' or its corresponding type declarations.
+components/common/LoadingSpinner.tsx(4,28): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+components/common/SidePanel.tsx(1,34): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/common/SidePanel.tsx(5,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/common/SidePanel.tsx(15,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/common/SidePanel.tsx(16,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/common/Toast.tsx(1,43): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/forms/LoginForm.tsx(2,52): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+components/forms/LoginForm.tsx(6,25): error TS2307: Cannot find module '../../src/hooks/useAuth' or its corresponding type declarations.
+components/forms/LoginForm.tsx(38,29): error TS2769: No overload matches this call.
+  Argument of type '[string]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(options: never): void', gave the following error.
+    Argument of type '"Home"' is not assignable to parameter of type 'never'.
+components/forms/LoginForm.tsx(53,27): error TS2769: No overload matches this call.
+  Argument of type '[string]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(options: never): void', gave the following error.
+    Argument of type '"Home"' is not assignable to parameter of type 'never'.
+components/forms/LoginForm.tsx(68,27): error TS2769: No overload matches this call.
+  Argument of type '[string]' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(options: never): void', gave the following error.
+    Argument of type '"Home"' is not assignable to parameter of type 'never'.
+components/HomeScreenComponents/SideMenu.tsx(89,5): error TS2322: Type '""' is not assignable to type 'FlexAlignType'.
+components/HomeScreenComponents/SideMenu.tsx(122,3): error TS1117: An object literal cannot have multiple properties with the same name.
+components/HomeScreenComponents/SideMenu.tsx(132,3): error TS1117: An object literal cannot have multiple properties with the same name.
+components/HomeScreenComponents/TopMenuBar.tsx(81,68): error TS2322: Type 'void' is not assignable to type '(event: GestureResponderEvent) => void'.
+components/HomeScreenComponents/TopMenuBar.tsx(89,68): error TS2322: Type 'void' is not assignable to type '(event: GestureResponderEvent) => void'.
+components/HomeScreenComponents/TopMenuBar.tsx(92,68): error TS2322: Type 'void' is not assignable to type '(event: GestureResponderEvent) => void'.
+components/HomeScreenComponents/TopMenuBar.tsx(103,25): error TS2322: Type '(searchValue: any) => void' is not assignable to type '((text: string) => void) & ((text: string) => void) & (() => any) & (() => any) & (() => any)'.
+  Type '(searchValue: any) => void' is not assignable to type '() => any'.
+    Target signature provides too few arguments. Expected 1 or more, but got 0.
+components/HomeScreenComponents/TopMenuBar.tsx(109,25): error TS2322: Type '{ size: number; color: string; }' is not assignable to type 'IconNode & { name: string; }'.
+  Type '{ size: number; color: string; }' is not assignable to type 'Partial<IconProps> & { name: string; }'.
+    Property 'name' is missing in type '{ size: number; color: string; }' but required in type '{ name: string; }'.
+components/login/TOTPSetupModal.tsx(3,19): error TS2307: Cannot find module 'react-native-modal' or its corresponding type declarations.
+components/login/TOTPSetupModal.tsx(4,23): error TS2307: Cannot find module 'react-native-qrcode-svg' or its corresponding type declarations.
+components/login/TOTPSetupModal.tsx(5,25): error TS2307: Cannot find module '../../src/hooks/useAuth' or its corresponding type declarations.
+components/PatientSummaryComponents/BillingCodes.tsx(124,29): error TS2322: Type '(value: any) => void' is not assignable to type '((text: string) => void) & ((text: string) => void) & (() => any) & (() => any) & (() => any)'.
+  Type '(value: any) => void' is not assignable to type '() => any'.
+    Target signature provides too few arguments. Expected 1 or more, but got 0.
+components/PatientSummaryComponents/BillingCodes.tsx(128,29): error TS2322: Type '{ size: number; color: string; }' is not assignable to type 'IconNode & { name: string; }'.
+  Type '{ size: number; color: string; }' is not assignable to type 'Partial<IconProps> & { name: string; }'.
+    Property 'name' is missing in type '{ size: number; color: string; }' but required in type '{ name: string; }'.
+components/PatientSummaryComponents/DiagnosticCodeBox.tsx(125,29): error TS2322: Type '(value: any) => void' is not assignable to type '((text: string) => void) & ((text: string) => void) & (() => any) & (() => any) & (() => any)'.
+  Type '(value: any) => void' is not assignable to type '() => any'.
+    Target signature provides too few arguments. Expected 1 or more, but got 0.
+components/PatientSummaryComponents/DiagnosticCodeBox.tsx(129,29): error TS2322: Type '{ size: number; color: string; }' is not assignable to type 'IconNode & { name: string; }'.
+  Type '{ size: number; color: string; }' is not assignable to type 'Partial<IconProps> & { name: string; }'.
+    Property 'name' is missing in type '{ size: number; color: string; }' but required in type '{ name: string; }'.
+components/PatientSummaryComponents/MainPostVisitComponentsBox.tsx(36,31): error TS2322: Type '{ numCodes: number; }' is not assignable to type 'IntrinsicAttributes'.
+  Property 'numCodes' does not exist on type 'IntrinsicAttributes'.
+components/PatientSummaryComponents/SOAPBox.tsx(3,28): error TS2307: Cannot find module 'react-native-gesture-handler' or its corresponding type declarations.
+components/PatientSummaryComponents/SOAPBox.tsx(22,53): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: TextProps): Text', gave the following error.
+    Type 'unknown' is not assignable to type 'ReactNode'.
+  Overload 2 of 2, '(props: TextProps, context: any): Text', gave the following error.
+    Type 'unknown' is not assignable to type 'ReactNode'.
+components/PatientSummaryComponents/TranscriptBox.tsx(30,24): error TS2339: Property 'input' does not exist on type '{ container: { paddingBottom: number; justifyContent: "center"; alignItems: "center"; width: "100%"; }; innerBox: { backgroundColor: string; borderRadius: number; width: "90%"; padding: number; shadowColor: string; shadowOffset: { ...; }; shadowOpacity: number; shadowRadius: number; }; ... 5 more ...; dropdownItem: ...'.
+components/PatientSummaryComponents/TranscriptBox.tsx(30,51): error TS2339: Property 'editable' does not exist on type '{ container: { paddingBottom: number; justifyContent: "center"; alignItems: "center"; width: "100%"; }; innerBox: { backgroundColor: string; borderRadius: number; width: "90%"; padding: number; shadowColor: string; shadowOffset: { ...; }; shadowOpacity: number; shadowRadius: number; }; ... 5 more ...; dropdownItem: ...'.
+components/PatientSummaryComponents/TranscriptBox.tsx(30,69): error TS2339: Property 'readOnly' does not exist on type '{ container: { paddingBottom: number; justifyContent: "center"; alignItems: "center"; width: "100%"; }; innerBox: { backgroundColor: string; borderRadius: number; width: "90%"; padding: number; shadowColor: string; shadowOffset: { ...; }; shadowOpacity: number; shadowRadius: number; }; ... 5 more ...; dropdownItem: ...'.
+components/recording/LiveTranscriptions.tsx(7,8): error TS2307: Cannot find module '@aws-sdk/client-transcribe-streaming' or its corresponding type declarations.
+components/recording/LiveTranscriptions.tsx(8,32): error TS2307: Cannot find module 'p-event' or its corresponding type declarations.
+components/recording/LiveTranscriptions.tsx(9,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+components/recording/LiveTranscriptions.tsx(15,8): error TS2307: Cannot find module '../../types' or its corresponding type declarations.
+components/recording/LiveTranscriptions.tsx(16,36): error TS2307: Cannot find module '../../shared/AWSAudioAggregator' or its corresponding type declarations.
+components/recording/LiveTranscriptions.tsx(18,20): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/recording/LiveTranscriptions.tsx(18,32): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/recording/LiveTranscriptions.tsx(19,18): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/recording/LiveTranscriptions.tsx(19,30): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/recording/LiveTranscriptions.tsx(20,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/recording/LiveTranscriptions.tsx(20,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/recording/LiveTranscriptions.tsx(108,13): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/recording/LiveTranscriptions.tsx(108,25): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/recording/LiveTranscriptions.tsx(111,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/recording/LiveTranscriptions.tsx(111,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/recording/LiveTranscriptions.tsx(113,23): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/recording/LiveTranscriptions.tsx(113,35): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/recording/LiveTranscriptions.tsx(141,15): error TS2578: Unused '@ts-expect-error' directive.
+components/recording/LiveTranscriptions.tsx(267,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/PatientCard.tsx(1,22): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/recording/PatientCard.tsx(4,28): error TS2307: Cannot find module '../../utils/Utils' or its corresponding type declarations.
+components/recording/RecordingHeader.tsx(16,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/recording/RecordingHeader.tsx(21,8): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+components/recording/RecordingHeader.tsx(22,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+components/recording/RecordingHeader.tsx(50,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(51,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(52,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(53,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(55,20): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(60,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(63,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(64,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(76,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(81,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(83,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(96,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(99,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(100,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(101,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(102,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(105,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(106,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(111,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(112,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/RecordingHeader.tsx(115,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+components/recording/TranscriptCard.tsx(1,27): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/SharedComponents/SideMenu.tsx(83,5): error TS2322: Type '""' is not assignable to type 'FlexAlignType'.
+components/SharedComponents/SideMenu.tsx(116,3): error TS1117: An object literal cannot have multiple properties with the same name.
+components/SharedComponents/SideMenu.tsx(126,3): error TS1117: An object literal cannot have multiple properties with the same name.
+components/SharedComponents/TopMenuPatient.tsx(81,68): error TS2322: Type 'void' is not assignable to type '(event: GestureResponderEvent) => void'.
+components/SharedComponents/TopMenuPatient.tsx(89,68): error TS2322: Type 'void' is not assignable to type '(event: GestureResponderEvent) => void'.
+components/SharedComponents/TopMenuPatient.tsx(92,68): error TS2322: Type 'void' is not assignable to type '(event: GestureResponderEvent) => void'.
+components/SharedComponents/TopMenuPatient.tsx(103,25): error TS2322: Type '(searchValue: any) => void' is not assignable to type '((text: string) => void) & ((text: string) => void) & (() => any) & (() => any) & (() => any)'.
+  Type '(searchValue: any) => void' is not assignable to type '() => any'.
+    Target signature provides too few arguments. Expected 1 or more, but got 0.
+components/SharedComponents/TopMenuPatient.tsx(109,25): error TS2322: Type '{ size: number; color: string; }' is not assignable to type 'IconNode & { name: string; }'.
+  Type '{ size: number; color: string; }' is not assignable to type 'Partial<IconProps> & { name: string; }'.
+    Property 'name' is missing in type '{ size: number; color: string; }' but required in type '{ name: string; }'.
+components/summary/BillingCodesCard.tsx(1,40): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/summary/DiagnosticCodesCard.tsx(1,57): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/summary/DiagnosticCodesCard.tsx(6,8): error TS2307: Cannot find module '../../hooks/useFetchDiagnosticCodes' or its corresponding type declarations.
+components/summary/DiagnosticCodesCard.tsx(7,32): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+components/summary/DiagnosticCodesCard.tsx(8,41): error TS2307: Cannot find module '../../hooks/useFetchAppointmentData' or its corresponding type declarations.
+components/summary/SoapCard.tsx(2,44): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+components/summary/SoapCard.tsx(11,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/summary/SoapCard.tsx(12,20): error TS2307: Cannot find module '@emotion/styled' or its corresponding type declarations.
+components/summary/SoapCard.tsx(15,8): error TS2307: Cannot find module 'react-textarea-autosize' or its corresponding type declarations.
+components/summary/SummaryHeader.tsx(2,59): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/summary/SummaryHeader.tsx(3,43): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+components/summary/SummaryHeader.tsx(4,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+components/summary/TranscriptCard.tsx(1,59): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/summary/TranscriptCard.tsx(3,42): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+components/summary/TranscriptCard.tsx(4,44): error TS2307: Cannot find module '@aws-sdk/client-s3' or its corresponding type declarations.
+components/summary/TranscriptCard.tsx(5,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+components/summary/TranscriptCard.tsx(6,33): error TS2307: Cannot find module 'react-icons/vsc' or its corresponding type declarations.
+components/summary/TranscriptCard.tsx(56,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptCard.tsx(56,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptCard.tsx(59,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptCard.tsx(59,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptCard.tsx(61,27): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptCard.tsx(61,39): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptCard.tsx(70,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptCard.tsx(70,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptCard.tsx(76,7): error TS2578: Unused '@ts-expect-error' directive.
+components/summary/TranscriptHeader.tsx(1,35): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+components/summary/TranscriptHeader.tsx(3,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+components/summary/TranscriptHeader.tsx(4,44): error TS2307: Cannot find module '@aws-sdk/client-s3' or its corresponding type declarations.
+components/summary/TranscriptHeader.tsx(5,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+components/summary/TranscriptHeader.tsx(21,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptHeader.tsx(21,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptHeader.tsx(24,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptHeader.tsx(24,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptHeader.tsx(26,27): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptHeader.tsx(26,39): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptHeader.tsx(35,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+components/summary/TranscriptHeader.tsx(35,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+components/summary/TranscriptHeader.tsx(40,7): error TS2578: Unused '@ts-expect-error' directive.
+components/VisitPageComponents/ConfirmEndPopUp.tsx(8,9): error TS2304: Cannot find name 'setIsOver'.
+components/VisitPageComponents/MenuSideButtonsClipBoards.tsx(54,5): error TS1117: An object literal cannot have multiple properties with the same name.
+components/VisitPageComponents/MenuSideButtonsClipBoards.tsx(56,5): error TS1117: An object literal cannot have multiple properties with the same name.
+components/VisitPageComponents/MenuSideButtonsClipBoards.tsx(57,5): error TS1117: An object literal cannot have multiple properties with the same name.
+components/VisitPageComponents/MenuSideButtonsClipBoards.tsx(58,5): error TS1117: An object literal cannot have multiple properties with the same name.
+components/VisitPageComponents/Oscilloscope.tsx(26,15): error TS2339: Property 'RECORDING_OPTIONS_PRESET_HIGH_QUALITY' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/expo-av/build/Audio")'.
+components/VisitPageComponents/Oscilloscope.tsx(116,15): error TS2322: Type '{ key: any; x: number; y: number; width: number; height: number; rx: number; ry: number; fill: string; style: { width: number; height: number; backgroundColor: string; borderRadius: number; }; }' is not assignable to type 'IntrinsicAttributes & IntrinsicClassAttributes<Rect> & Pick<Readonly<RectProps>, "pointerEvents" | ... 62 more ... | "ry"> & InexactPartial<...> & InexactPartial<...>'.
+  Property 'style' does not exist on type 'IntrinsicAttributes & IntrinsicClassAttributes<Rect> & Pick<Readonly<RectProps>, "pointerEvents" | ... 62 more ... | "ry"> & InexactPartial<...> & InexactPartial<...>'.
+components/VisitPageComponents/Oscilloscope.tsx(159,26): error TS2365: Operator '<' cannot be applied to types 'string' and 'number'.
+components/VisitPageComponents/PatientInfoBox.tsx(16,56): error TS2304: Cannot find name 'fontColor'.
+components/VisitPageComponents/PatientInfoBox.tsx(90,9): error TS2322: Type 'string' is not assignable to type 'number'.
+components/VisitPageComponents/PatientTranscript.tsx(3,28): error TS2307: Cannot find module 'react-native-gesture-handler' or its corresponding type declarations.
+components/VisitPageComponents/RecordingButtons.tsx(37,14): error TS2304: Cannot find name 'useExpand'.
+components/VisitPageComponents/RecordingButtons.tsx(39,9): error TS2304: Cannot find name 'setIsFocused'.
+components/VisitPageComponents/RecordingButtons.tsx(63,23): error TS2339: Property 'RECORDING_OPTIONS_PRESET_HIGH_QUALITY' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/expo-av/build/Audio")'.
+components/VisitPageComponents/SideMenuPatient.tsx(66,5): error TS2322: Type '""' is not assignable to type 'FlexAlignType'.
+data/loadData.tsx(3,28): error TS2554: Expected 1 arguments, but got 0.
+screens/HomeScreen.tsx(8,11): error TS2339: Property 'jsonData' does not exist on type '{}'.
+screens/VisitScreen.tsx(14,10): error TS2741: Property 'setPatientValue' is missing in type '{ setSideMenuVisible: Dispatch<SetStateAction<boolean>>; isSideMenuVisible: boolean; }' but required in type '{ setSideMenuVisible: any; isSideMenuVisible: any; setPatientValue: any; }'.
+screens/VisitScreen.tsx(30,5): error TS2353: Object literal may only specify known properties, and 'transition' does not exist in type 'ViewStyle | TextStyle | ImageStyle'.
+screens/VisitScreen.tsx(34,5): error TS2353: Object literal may only specify known properties, and 'transition' does not exist in type 'ViewStyle | TextStyle | ImageStyle'.
+src/api/axios.ts(1,34): error TS2307: Cannot find module 'aws-amplify/auth' or its corresponding type declarations.
+src/api/axios.ts(5,12): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/api/axios.ts(5,24): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/api/axios.ts(15,13): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/api/axios.ts(15,25): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/App.tsx(4,23): error TS2307: Cannot find module './routes/AppRoutes' or its corresponding type declarations.
+src/App.tsx(10,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/App.tsx(11,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/common/Card.tsx(1,27): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/common/LoadingSpinner.tsx(2,20): error TS2307: Cannot find module '@emotion/styled' or its corresponding type declarations.
+src/components/common/LoadingSpinner.tsx(3,27): error TS2307: Cannot find module '@emotion/react' or its corresponding type declarations.
+src/components/common/LoadingSpinner.tsx(4,28): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+src/components/common/SidePanel.tsx(1,34): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/common/SidePanel.tsx(5,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/common/SidePanel.tsx(15,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/common/SidePanel.tsx(16,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/common/Toast.tsx(1,43): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/forms/LoginForm.tsx(2,40): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+src/components/forms/LoginForm.tsx(3,30): error TS2307: Cannot find module 'aws-amplify/auth' or its corresponding type declarations.
+src/components/forms/LoginForm.tsx(18,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/forms/LoginForm.tsx(19,37): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+src/components/forms/LoginForm.tsx(20,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/forms/LoginForm.tsx(22,25): error TS2307: Cannot find module '../../hooks/useAuth' or its corresponding type declarations.
+src/components/home/Header.tsx(15,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/home/Header.tsx(16,54): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+src/components/home/Header.tsx(17,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/home/Header.tsx(19,25): error TS2307: Cannot find module '../../hooks/useAuth' or its corresponding type declarations.
+src/components/home/HomeSidePanel.tsx(11,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/home/HomeSidePanel.tsx(20,8): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+src/components/home/HomeSidePanel.tsx(48,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(59,9): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(60,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(61,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(64,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(67,9): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(68,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(69,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(89,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(100,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(101,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(111,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(113,31): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(113,53): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(122,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(123,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(124,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(125,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(132,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(139,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/home/HomeSidePanel.tsx(146,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/login/TOTPSetupModal.tsx(15,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/login/TOTPSetupModal.tsx(16,20): error TS2307: Cannot find module 'qrcode.react' or its corresponding type declarations.
+src/components/login/TOTPSetupModal.tsx(17,25): error TS2307: Cannot find module '../../hooks/useAuth' or its corresponding type declarations.
+src/components/recording/LiveTranscriptions.tsx(7,8): error TS2307: Cannot find module '@aws-sdk/client-transcribe-streaming' or its corresponding type declarations.
+src/components/recording/LiveTranscriptions.tsx(8,32): error TS2307: Cannot find module 'p-event' or its corresponding type declarations.
+src/components/recording/LiveTranscriptions.tsx(9,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+src/components/recording/LiveTranscriptions.tsx(18,20): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/recording/LiveTranscriptions.tsx(18,32): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/recording/LiveTranscriptions.tsx(19,18): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/recording/LiveTranscriptions.tsx(19,30): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/recording/LiveTranscriptions.tsx(20,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/recording/LiveTranscriptions.tsx(20,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/recording/LiveTranscriptions.tsx(108,13): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/recording/LiveTranscriptions.tsx(108,25): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/recording/LiveTranscriptions.tsx(111,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/recording/LiveTranscriptions.tsx(111,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/recording/LiveTranscriptions.tsx(113,23): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/recording/LiveTranscriptions.tsx(113,35): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/recording/LiveTranscriptions.tsx(141,15): error TS2578: Unused '@ts-expect-error' directive.
+src/components/recording/LiveTranscriptions.tsx(267,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/PatientCard.tsx(1,22): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/recording/PatientCard.tsx(4,28): error TS2307: Cannot find module '../../utils/Utils' or its corresponding type declarations.
+src/components/recording/RecordingHeader.tsx(16,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/recording/RecordingHeader.tsx(21,8): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+src/components/recording/RecordingHeader.tsx(22,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/recording/RecordingHeader.tsx(50,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(51,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(52,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(53,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(55,20): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(60,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(63,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(64,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(76,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(81,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(83,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(96,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(99,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(100,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(101,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(102,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(105,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(106,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(111,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(112,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/RecordingHeader.tsx(115,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/recording/TranscriptCard.tsx(1,27): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/routes/RouteHandler.tsx(1,47): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/routes/RouteHandler.tsx(2,25): error TS2307: Cannot find module '../../hooks/useAuth' or its corresponding type declarations.
+src/components/routes/RouteHandler.tsx(10,13): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/routes/RouteHandler.tsx(14,13): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/routes/RouteHandler.tsx(18,13): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/routes/RouteHandler.tsx(21,11): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/components/summary/BillingCodesCard.tsx(1,40): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/summary/DiagnosticCodesCard.tsx(1,57): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/summary/DiagnosticCodesCard.tsx(6,8): error TS2307: Cannot find module '../../hooks/useFetchDiagnosticCodes' or its corresponding type declarations.
+src/components/summary/DiagnosticCodesCard.tsx(7,32): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+src/components/summary/DiagnosticCodesCard.tsx(8,41): error TS2307: Cannot find module '../../hooks/useFetchAppointmentData' or its corresponding type declarations.
+src/components/summary/SoapCard.tsx(2,44): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+src/components/summary/SoapCard.tsx(11,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/summary/SoapCard.tsx(12,20): error TS2307: Cannot find module '@emotion/styled' or its corresponding type declarations.
+src/components/summary/SoapCard.tsx(15,8): error TS2307: Cannot find module 'react-textarea-autosize' or its corresponding type declarations.
+src/components/summary/SummaryHeader.tsx(2,59): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/summary/SummaryHeader.tsx(3,43): error TS2307: Cannot find module '@tabler/icons-react' or its corresponding type declarations.
+src/components/summary/SummaryHeader.tsx(4,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/summary/TranscriptCard.tsx(1,59): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/summary/TranscriptCard.tsx(3,42): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/summary/TranscriptCard.tsx(4,44): error TS2307: Cannot find module '@aws-sdk/client-s3' or its corresponding type declarations.
+src/components/summary/TranscriptCard.tsx(5,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+src/components/summary/TranscriptCard.tsx(6,33): error TS2307: Cannot find module 'react-icons/vsc' or its corresponding type declarations.
+src/components/summary/TranscriptCard.tsx(56,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptCard.tsx(56,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptCard.tsx(59,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptCard.tsx(59,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptCard.tsx(61,27): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptCard.tsx(61,39): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptCard.tsx(70,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptCard.tsx(70,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptCard.tsx(76,7): error TS2578: Unused '@ts-expect-error' directive.
+src/components/summary/TranscriptHeader.tsx(1,35): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/components/summary/TranscriptHeader.tsx(3,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/components/summary/TranscriptHeader.tsx(4,44): error TS2307: Cannot find module '@aws-sdk/client-s3' or its corresponding type declarations.
+src/components/summary/TranscriptHeader.tsx(5,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+src/components/summary/TranscriptHeader.tsx(21,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptHeader.tsx(21,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptHeader.tsx(24,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptHeader.tsx(24,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptHeader.tsx(26,27): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptHeader.tsx(26,39): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptHeader.tsx(35,17): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/components/summary/TranscriptHeader.tsx(35,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/components/summary/TranscriptHeader.tsx(40,7): error TS2578: Unused '@ts-expect-error' directive.
+src/contexts/AuthProvider.tsx(10,24): error TS2307: Cannot find module 'aws-amplify/auth' or its corresponding type declarations.
+src/contexts/AuthProvider.tsx(42,38): error TS2339: Property 'currentAuthenticatedUser' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(61,40): error TS2339: Property 'currentAuthenticatedUser' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(73,18): error TS2339: Property 'signOut' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(86,37): error TS2339: Property 'completeNewPassword' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(92,22): error TS2339: Property 'confirmSignIn' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(110,38): error TS2339: Property 'currentAuthenticatedUser' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(120,33): error TS2339: Property 'confirmSignIn' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(124,40): error TS2339: Property 'currentAuthenticatedUser' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/contexts/AuthProvider.tsx(135,43): error TS2339: Property 'setupTOTP' does not exist on type 'typeof import("C:/Users/dylan/Documents/Docux/Docux_App/node_modules/aws-amplify/lib-esm/index")'.
+src/main.tsx(2,22): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/main.tsx(4,31): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/main.tsx(5,45): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/main.tsx(6,50): error TS2307: Cannot find module '@tanstack/react-query' or its corresponding type declarations.
+src/main.tsx(7,17): error TS5097: An import path can only end with a '.tsx' extension when 'allowImportingTsExtensions' is enabled.
+src/pages/CaseSubmitted.tsx(15,8): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/pages/CaseSubmitted.tsx(16,42): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/pages/Home.tsx(2,57): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/pages/Home.tsx(7,29): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/pages/Home.tsx(8,34): error TS2307: Cannot find module 'aws-amplify/auth' or its corresponding type declarations.
+src/pages/Home.tsx(12,8): error TS2307: Cannot find module '../hooks/useFetchAppointmentData' or its corresponding type declarations.
+src/pages/Home.tsx(13,10): error TS2614: Module '"@aws-amplify/core"' has no exported member 'JWT'. Did you mean to use 'import JWT from "@aws-amplify/core"' instead?
+src/pages/Home.tsx(14,49): error TS2307: Cannot find module '../utils/Utils' or its corresponding type declarations.
+src/pages/Home.tsx(65,26): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(66,22): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(143,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(144,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(145,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(146,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(147,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(148,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(155,16): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(156,18): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(158,21): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(159,24): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(162,24): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(175,20): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(178,20): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Home.tsx(181,20): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Login.tsx(1,57): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/pages/Login.tsx(8,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Login.tsx(13,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Login.tsx(18,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Login.tsx(19,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Login.tsx(24,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(5,42): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/pages/Recording.tsx(7,27): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/pages/Recording.tsx(9,28): error TS5097: An import path can only end with a '.ts' extension when 'allowImportingTsExtensions' is enabled.
+src/pages/Recording.tsx(10,32): error TS5097: An import path can only end with a '.tsx' extension when 'allowImportingTsExtensions' is enabled.
+src/pages/Recording.tsx(11,43): error TS2307: Cannot find module '@aws-sdk/client-transcribe-streaming' or its corresponding type declarations.
+src/pages/Recording.tsx(16,8): error TS2307: Cannot find module '../hooks/useFetchAppointmentData.ts' or its corresponding type declarations.
+src/pages/Recording.tsx(17,27): error TS5097: An import path can only end with a '.tsx' extension when 'allowImportingTsExtensions' is enabled.
+src/pages/Recording.tsx(38,21): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/pages/Recording.tsx(38,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/pages/Recording.tsx(39,22): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/pages/Recording.tsx(39,34): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/pages/Recording.tsx(40,20): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/pages/Recording.tsx(40,32): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/pages/Recording.tsx(41,18): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/pages/Recording.tsx(41,30): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/pages/Recording.tsx(262,6): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(263,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(264,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(265,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(271,10): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(272,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(273,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(280,12): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(281,14): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(282,16): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(285,22): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(286,24): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(287,24): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(294,24): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(295,26): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(296,26): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Recording.tsx(305,8): error TS2686: 'React' refers to a UMD global, but the current file is a module. Consider adding an import instead.
+src/pages/Summary.tsx(2,42): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+src/pages/Summary.tsx(3,27): error TS2307: Cannot find module '@chakra-ui/react' or its corresponding type declarations.
+src/pages/Summary.tsx(4,39): error TS2307: Cannot find module 'react-hook-form' or its corresponding type declarations.
+src/pages/Summary.tsx(17,8): error TS2307: Cannot find module '../hooks/useFetchAppointmentData' or its corresponding type declarations.
+src/shared/AWSAudioAggregator.tsx(2,47): error TS2307: Cannot find module '@aws-sdk/client-sqs' or its corresponding type declarations.
+src/shared/AWSAudioAggregator.tsx(3,41): error TS2307: Cannot find module '@aws-sdk/credential-providers' or its corresponding type declarations.
+src/shared/AWSAudioAggregator.tsx(30,15): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/shared/AWSAudioAggregator.tsx(30,27): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/shared/AWSAudioAggregator.tsx(33,19): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/shared/AWSAudioAggregator.tsx(33,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/shared/AWSAudioAggregator.tsx(35,25): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/shared/AWSAudioAggregator.tsx(35,37): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/shared/AWSAudioAggregator.tsx(91,27): error TS1343: The 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+src/shared/AWSAudioAggregator.tsx(91,39): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/types.ts(1,43): error TS2307: Cannot find module '@aws-sdk/client-transcribe-streaming' or its corresponding type declarations.
+src/types.ts(2,36): error TS5097: An import path can only end with a '.tsx' extension when 'allowImportingTsExtensions' is enabled.
