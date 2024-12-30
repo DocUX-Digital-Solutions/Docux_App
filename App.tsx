@@ -13,8 +13,16 @@ import ResetPassword from './screens/ForgotPassword';
 import { UserProvider } from './data/loadData';
 const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
-import { Amplify,API} from 'aws-amplify';
-import { Auth } from 'aws-amplify';
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Auth} from 'aws-amplify';
+import { createBlog, updateBlog, deleteBlog } from './src/graphql/mutations';
+import { GraphQLQuery } from '@aws-amplify/api';
+import {
+  CreateTodoInput,
+  CreateTodoMutation,
+  UpdateTodoMutation,
+  DeleteTodoMutation
+} from './API';
 
 Amplify.configure(config)
 API.configure(config)
@@ -26,7 +34,6 @@ function App() {
         const currentUser = await Auth.currentAuthenticatedUser();
         //const isDeviceRemembered = await Auth.deviceRemembered(currentUser);
         const isDeviceRemembered = await Auth.fetchDevices();
-        console.log(isDeviceRemembered);
         if (isDeviceRemembered) {
           console.log('Device is remembered. Redirecting to Home...');
           navigationRef.current?.navigate('Home');

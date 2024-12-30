@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
   async function rememberDevice() {
     try {
       const result = await Auth.rememberDevice();
-      console.log(result);
+      //console.log(result);
     } catch (error) {
       console.log('Error remembering device', error);
     }
@@ -41,7 +41,7 @@ const LoginScreen = ({ navigation }) => {
     try {
       await Auth.setPreferredMFA(userVal, 'TOTP');
     } catch (error) {
-      console.error('Error confirming MFA:', error);
+      console.error('Error confirming MFA1:', error);
     }
      try {
       await Auth.confirmSignIn(userVal, mfaCode, 'SOFTWARE_TOKEN_MFA');
@@ -64,16 +64,16 @@ const LoginScreen = ({ navigation }) => {
       return;
     } 
     try {
-      console.log("hello")
+      //console.log("hello")
       const user = await Auth.signIn(email, password);
-      console.log(user.getUsername());
+      //console.log(user.getUsername());
       SetUserVal(user);
       if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
         setStep('mfa'); // Change step to 'mfa' to prompt for MFA code
         setButtonStateText("Verify")
         
       } else {
-        console.log('User signed in:', user);
+        //console.log('User signed in:', user);
         // Navigate to the next screen (e.g., home screen)
       }
     } catch (error) {
@@ -164,6 +164,7 @@ const LoginScreen = ({ navigation }) => {
             value={mfaCode}
             onChangeText={setMfaCode}
             keyboardType="numeric"
+            returnKeyType="done"
           />
         </View>
       )}

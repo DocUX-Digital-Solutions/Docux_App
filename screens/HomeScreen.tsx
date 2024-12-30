@@ -4,14 +4,37 @@ import SideMenu from '../components/HomeScreenComponents/SideMenu';
 import MainBox from '../components/HomeScreenComponents/MainBox';
 import { UserContext } from '../data/loadData';
 import { Auth} from 'aws-amplify';
+import { API } from 'aws-amplify';
+import Config from 'react-native-config';
+import apiClient from '../src/api/axios';
+import { PatchAppointmentRequest } from '../src/hooks/useFetchAppointmentData'
 function HomeScreen({ navigation }) {
+  const poolId = Config.VITE_REACT_APP_USER_POOL_ID;
+  const apiUrl = Config.VITE_API_URL;
   const { jsonData } = useContext(UserContext);
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const [selectedSideMenu, setSelectedSideMenu] = useState(1);
   const [dataItems, setDataItems] = useState(jsonData);
   const [patientsNumber, setPatientsNumber] = useState(0);
   const [user, setUser] = useState(null);
-  
+  const [message,setMessage] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userVal = await Auth.currentAuthenticatedUser()
+        const apiData = await API.get('DataApi', '/data', {
+          headers: { Authorization: `Bearer ${userVal.signInUserSession.idToken.jwtToken}` }, // Include the JWT token for auth
+        });
+        //setData(apiData);
+        console.log('Fetched data:', apiData);
+      } catch (error) {
+        console.log('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   // Animated values for width and opacity
   const sideMenuWidth = useState(new Animated.Value(0))[0];
@@ -22,54 +45,18 @@ function HomeScreen({ navigation }) {
     getCurrentData()
 
   }
+  
   const fetchRestData = async () => {
     try {
-      const response = await API.get('yourApiName', '/path-to-resource');
+      const response = await API.get('yourApiName', '/path', {
+        headers: { /* optional headers */ }
+      });
       console.log('REST API Response:', response);
     } catch (error) {
       console.error('REST API Error:', error);
     }
   };
   
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-        try {
-          // Fetch basic user info
-          const userInfo = await Auth.currentUserInfo();
-          console.log('User Info:', userInfo);
-      
-          // Fetch full authenticated user session
-          const user = await Auth.currentAuthenticatedUser();
-          console.log('Authenticated User:', user);
-      
-          // Example: Accessing user attributes
-          const userAttributes = user.attributes;
-          console.log(JSON.stringify(userAttributes, null, 2));
-          //console.log('User Attributes:', userAttributes);
-      
-          // Example: Fetching an ID token (useful for API authentication)
-          const idToken = user.signInUserSession.idToken.jwtToken;
-          console.log('ID Token:', idToken);
-      
-          // Fetch custom backend data (if applicable)
-          // Example: Fetch user-specific data from an API
-          // const response = await fetch('https://your-api-endpoint', {
-          //   method: 'GET',
-          //   headers: {
-          //     Authorization: `Bearer ${idToken}`, // Pass the ID token for authentication
-          //   },
-          // });
-          // const data = await response.json();
-          // console.log('Custom Backend Data:', data);
-      
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      };
-
-    fetchUserData();
-  }, []);
   const groupAppointmentsByDate = () => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -99,7 +86,7 @@ function HomeScreen({ navigation }) {
       }
 
       if(appointment.appointmentState.appointmentStateName =="In Progress"){
-        console.log(appointment)
+        //console.log(appointment)
       }
       if (!categorizedAppointments[appointment.appointmentState.appointmentStateName]) {
         categorizedAppointments[appointment.appointmentState.appointmentStateName] =[]

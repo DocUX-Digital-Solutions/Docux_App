@@ -1,0 +1,119 @@
+{
+  "api": {
+    "api61e3c367": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "docuxapp0f087da5"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "apie94ba65f": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "docuxapp3fe4cac2"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "docuxapp": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "docuxappf78fe9df": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "function": {
+    "docuxapp0f087da5": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "docuxapp3fe4cac2": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_docuxappf78fe9df_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "docuxappf78fe9df"
+        }
+      ]
+    },
+    "AMPLIFY_auth_docuxappf78fe9df_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "docuxappf78fe9df"
+        }
+      ]
+    },
+    "AMPLIFY_auth_docuxappf78fe9df_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "docuxappf78fe9df"
+        }
+      ]
+    },
+    "AMPLIFY_auth_docuxappf78fe9df_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "docuxappf78fe9df"
+        }
+      ]
+    },
+    "AMPLIFY_function_docuxapp0f087da5_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "docuxapp0f087da5"
+        }
+      ]
+    },
+    "AMPLIFY_function_docuxapp0f087da5_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "docuxapp0f087da5"
+        }
+      ]
+    }
+  }
+}

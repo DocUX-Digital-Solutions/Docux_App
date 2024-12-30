@@ -1,0 +1,35 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-docuxapp-dev-12027-authRole",
+      "UnauthRoleArn": "arn:aws:iam::890641672052:role/amplify-docuxapp-dev-12027-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::890641672052:role/amplify-docuxapp-dev-12027-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-docuxapp-dev-12027-deployment",
+      "UnauthRoleName": "amplify-docuxapp-dev-12027-unauthRole",
+      "StackName": "amplify-docuxapp-dev-12027",
+      "StackId": "arn:aws:cloudformation:us-east-1:890641672052:stack/amplify-docuxapp-dev-12027/7dbd7540-c6c5-11ef-88b3-0ec2c1338955",
+      "AmplifyAppId": "d3ez1dfekhqo7i"
+    },
+    "categories": {
+      "auth": {
+        "docuxappf78fe9df": {
+          "userPoolId": "us-east-1_ZRXeRemoP",
+          "userPoolName": "docux-user-pool",
+          "webClientId": "6mdqb729utkllpknemi61cuur6",
+          "nativeClientId": "6mdqb729utkllpknemi61cuur6"
+        }
+      },
+      "function": {
+        "docuxapp0f087da5": {
+          "deploymentBucketName": "amplify-docuxapp-dev-12027-deployment",
+          "s3Key": "amplify-builds/docuxapp0f087da5-2b5a4a5a6e4a7a54694c-build.zip"
+        },
+        "docuxapp3fe4cac2": {}
+      },
+      "api": {
+        "api61e3c367": {}
+      }
+    }
+  }
+}

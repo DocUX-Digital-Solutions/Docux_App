@@ -19,10 +19,6 @@ const ResetPassword = () => {
 
         }
     }
-    const handleForgotPassword = () => {
-        console.log('Email entered:', email);
-        // Add your forgot password logic here (e.g., send a reset email)
-    };
 
     async function forgotPassword() {
         try {
