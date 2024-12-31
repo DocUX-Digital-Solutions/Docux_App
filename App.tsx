@@ -15,15 +15,6 @@ const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import { Auth} from 'aws-amplify';
-import { createBlog, updateBlog, deleteBlog } from './src/graphql/mutations';
-import { GraphQLQuery } from '@aws-amplify/api';
-import {
-  CreateTodoInput,
-  CreateTodoMutation,
-  UpdateTodoMutation,
-  DeleteTodoMutation
-} from './API';
-
 Amplify.configure(config)
 API.configure(config)
 function App() {
