@@ -3,10 +3,11 @@ import { View, StyleSheet, Animated } from 'react-native';
 import SideMenu from '../components/HomeScreenComponents/SideMenu';
 import MainBox from '../components/HomeScreenComponents/MainBox';
 import { UserContext } from '../data/loadData';
-import { Auth} from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
 import Config from 'react-native-config';
-import apiClient from '../src/api/axios';
+import axios from 'axios';
+
 import { PatchAppointmentRequest } from '../src/hooks/useFetchAppointmentData'
 function HomeScreen({ navigation }) {
   const poolId = Config.VITE_REACT_APP_USER_POOL_ID;
@@ -17,12 +18,23 @@ function HomeScreen({ navigation }) {
   const [dataItems, setDataItems] = useState(jsonData);
   const [patientsNumber, setPatientsNumber] = useState(0);
   const [user, setUser] = useState(null);
-  const [message,setMessage] = useState(null);
+  const [message, setMessage] = useState(null);
+  const apiClient = axios.create({
+    baseURL: Config.VITE_API_URL,
+    headers: {
+      'Access-Control-Allow-Headers':
+        'Content-Type, Authorization, X-Requested-With',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://*',
+      'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+    },
+  })
+  console.log(apiClient)
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userVal = await Auth.currentAuthenticatedUser()
-        const apiData = await API.get('DataApi', '/data', {
+        const apiData = await API.get('DataApi', '/', {
           headers: { Authorization: `Bearer ${userVal.signInUserSession.idToken.jwtToken}` }, // Include the JWT token for auth
         });
         //setData(apiData);
@@ -35,6 +47,51 @@ function HomeScreen({ navigation }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(500505050)
+      const apiName = 'DataApi';
+      const path = '/items';
+      const myInit = {
+        headers: {}, // OPTIONAL
+        response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+ 
+      };
+
+      API.get(apiName, path, myInit)
+        .then((response) => {
+          // Add your code here
+          console.log('fetching data:',response)
+          console.log(JSON.stringify(response, null, 2));
+        })
+        .catch((error) => {
+          console.log('not fetching data:',error);
+        });
+    }
+    
+    fetchData();
+    function head() {
+      const apiName = 'DataApi';
+      const path = '/docux.v1.medical.HealthService';
+      const myInit = {
+        headers: {} // OPTIONAL
+      };
+    
+      return API.head(apiName, path, myInit);
+    }
+
+    (async function () {
+
+      try{
+        const responser = await head();
+        console.log(3)
+      console.log(responser)
+      }catch(error){
+        console.log(error)
+      }
+    })();
+  }, []);
+
 
   // Animated values for width and opacity
   const sideMenuWidth = useState(new Animated.Value(0))[0];
@@ -45,7 +102,7 @@ function HomeScreen({ navigation }) {
     getCurrentData()
 
   }
-  
+
   const fetchRestData = async () => {
     try {
       const response = await API.get('yourApiName', '/path', {
@@ -56,13 +113,13 @@ function HomeScreen({ navigation }) {
       console.error('REST API Error:', error);
     }
   };
-  
+
   const groupAppointmentsByDate = () => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
-  
+
     const categorizedAppointments = {
       today: [],
       tomorrow: [],
@@ -70,11 +127,11 @@ function HomeScreen({ navigation }) {
       past: [],
 
     };
-  
+
     jsonData.forEach(appointment => {
       const appointmentDate = new Date(appointment.scheduledAt);
       const appointmentDateOnly = new Date(appointmentDate.getFullYear(), appointmentDate.getMonth(), appointmentDate.getDate());
-  
+
       if (appointmentDateOnly.getTime() === today.getTime()) {
         categorizedAppointments.today.push(appointment);
       } else if (appointmentDateOnly.getTime() === tomorrow.getTime()) {
@@ -85,19 +142,19 @@ function HomeScreen({ navigation }) {
         categorizedAppointments.past.push(appointment);
       }
 
-      if(appointment.appointmentState.appointmentStateName =="In Progress"){
+      if (appointment.appointmentState.appointmentStateName == "In Progress") {
         //console.log(appointment)
       }
       if (!categorizedAppointments[appointment.appointmentState.appointmentStateName]) {
-        categorizedAppointments[appointment.appointmentState.appointmentStateName] =[]
+        categorizedAppointments[appointment.appointmentState.appointmentStateName] = []
       }
       categorizedAppointments[appointment.appointmentState.appointmentStateName].push(appointment)
-    }); 
-  
+    });
+
     return categorizedAppointments;
   };
   const categorizedAppointments = groupAppointmentsByDate();
-  
+
   const getCurrentData = () => {
     // Today Value
     if (selectedSideMenu == 1) {
@@ -106,11 +163,11 @@ function HomeScreen({ navigation }) {
     } else if (selectedSideMenu == 2) {
       setDataItems(categorizedAppointments.tomorrow);
     }
-    else{
+    else {
       setDataItems([])
     }
-   
-    
+
+
   };
 
   useEffect(() => {
@@ -177,7 +234,7 @@ function HomeScreen({ navigation }) {
           navigation={navigation}
           setSideMenuVisible={setSideMenuVisible}
           jsonData={dataItems}
-          patientsNumber = {dataItems.length}
+          patientsNumber={dataItems.length}
         />
       </Animated.View>
     </View>

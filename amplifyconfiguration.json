@@ -37,7 +37,7 @@
   "aws_cloud_logic_custom": [
     {
       "name": "DataApi",
-      "endpoint": "https://demo.mydocux.com/api/",
+      "endpoint": "https://53zqcu9txl.execute-api.us-east-1.amazonaws.com/dev",
       "region": "us-east-1"
     }
   ]
