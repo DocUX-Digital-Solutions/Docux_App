@@ -53,16 +53,18 @@ function HomeScreen({ navigation }) {
       const apiName = 'DataApi';
       const path = '/items';
       const myInit = {
-        headers: {}, // OPTIONAL
-        response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
- 
+        headers: {
+          Authorization: `Bearer ${(await Auth.currentSession())
+            .getIdToken()
+            .getJwtToken()}`
+        }
       };
 
       API.get(apiName, path, myInit)
         .then((response) => {
           // Add your code here
-          console.log('fetching data:',response)
-          console.log(JSON.stringify(response, null, 2));
+          console.log('fetchidng data:',response)
+          //console.log(JSON.stringify(response, null, 2));
         })
         .catch((error) => {
           console.log('not fetching data:',error);
