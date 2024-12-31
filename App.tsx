@@ -15,11 +15,21 @@ const Stack = createStackNavigator();
 import config from './amplifyconfiguration.json'
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import { Auth} from 'aws-amplify';
+import apiClient from './axios';
 Amplify.configure(config)
 API.configure(config)
 function App() {
+  const fetchData = async () => {
+    try {
+      const response = await apiClient.get('/endpoint');
+      console.log(response.data);
+    } catch (error) {
+      console.error('API Error:', error);
+    }
+  };
   const navigationRef = React.createRef();
   useEffect(() => {
+    fetchData()
     const checkRememberedDevice = async () => {
       try {
         const currentUser = await Auth.currentAuthenticatedUser();
