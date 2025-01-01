@@ -13,6 +13,7 @@ function HomeScreen({ navigation }) {
   const poolId = Config.VITE_REACT_APP_USER_POOL_ID;
   const apiUrl = Config.VITE_API_URL;
   const { jsonData } = useContext(UserContext);
+  
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const [selectedSideMenu, setSelectedSideMenu] = useState(1);
   const [dataItems, setDataItems] = useState(jsonData);
@@ -51,19 +52,18 @@ function HomeScreen({ navigation }) {
     const fetchData = async () => {
       console.log(500505050)
       const apiName = 'DataApi';
-      const path = '/items';
+      const path = '/appointments';
+      const sessionData = await Auth.currentAuthenticatedUser()
       const myInit = {
         headers: {
-          Authorization: `Bearer ${(await Auth.currentSession())
-            .getIdToken()
-            .getJwtToken()}`
+          Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
         }
       };
-
+    
       API.get(apiName, path, myInit)
         .then((response) => {
           // Add your code here
-          console.log('fetchidng data:',response)
+          console.log('fetchi ng data:',response)
           //console.log(JSON.stringify(response, null, 2));
         })
         .catch((error) => {
