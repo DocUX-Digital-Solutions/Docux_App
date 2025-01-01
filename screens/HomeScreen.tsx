@@ -13,10 +13,10 @@ function HomeScreen({ navigation }) {
   const poolId = Config.VITE_REACT_APP_USER_POOL_ID;
   const apiUrl = Config.VITE_API_URL;
   const { jsonData } = useContext(UserContext);
-  
+  console.log(jsonData)
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const [selectedSideMenu, setSelectedSideMenu] = useState(1);
-  const [dataItems, setDataItems] = useState(jsonData);
+  const [dataItems, setDataItems] = useState([]);
   const [patientsNumber, setPatientsNumber] = useState(0);
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
@@ -63,7 +63,7 @@ function HomeScreen({ navigation }) {
       API.get(apiName, path, myInit)
         .then((response) => {
           // Add your code here
-          console.log('fetchi ng data:',response)
+          setDataItems(response)
           //console.log(JSON.stringify(response, null, 2));
         })
         .catch((error) => {
