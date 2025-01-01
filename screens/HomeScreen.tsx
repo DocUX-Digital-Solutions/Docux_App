@@ -12,14 +12,14 @@ import { PatchAppointmentRequest } from '../src/hooks/useFetchAppointmentData'
 function HomeScreen({ navigation }) {
   const poolId = Config.VITE_REACT_APP_USER_POOL_ID;
   const apiUrl = Config.VITE_API_URL;
-  const { jsonData } = useContext(UserContext);
-  console.log(jsonData)
+  const [unsortedData, setUnsortedData] = useState([]);
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const [selectedSideMenu, setSelectedSideMenu] = useState(1);
   const [dataItems, setDataItems] = useState([]);
-  const [patientsNumber, setPatientsNumber] = useState(0);
+  const [reloadKey, setReloadKey] = useState(0);
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
+  const [categorizedAppointmentsSide,setCategorizedAppointmentsSide] = useState(null)
   const apiClient = axios.create({
     baseURL: Config.VITE_API_URL,
     headers: {
@@ -30,72 +30,50 @@ function HomeScreen({ navigation }) {
       'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
     },
   })
-  console.log(apiClient)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userVal = await Auth.currentAuthenticatedUser()
-        const apiData = await API.get('DataApi', '/', {
-          headers: { Authorization: `Bearer ${userVal.signInUserSession.idToken.jwtToken}` }, // Include the JWT token for auth
-        });
-        //setData(apiData);
-        console.log('Fetched data:', apiData);
-      } catch (error) {
-        console.log('Error fetching data:', error);
+  const fetchData = async () => {
+    const apiName = 'DataApi';
+    const path = '/appointments';
+    const sessionData = await Auth.currentAuthenticatedUser()
+    const myInit = {
+      headers: {
+        Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
       }
     };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log(500505050)
-      const apiName = 'DataApi';
-      const path = '/appointments';
-      const sessionData = await Auth.currentAuthenticatedUser()
-      const myInit = {
-        headers: {
-          Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
-        }
-      };
-    
-      API.get(apiName, path, myInit)
-        .then((response) => {
-          // Add your code here
-          setDataItems(response)
-          //console.log(JSON.stringify(response, null, 2));
-        })
-        .catch((error) => {
-          console.log('not fetching data:',error);
-        });
-    }
-    
-    fetchData();
-    function head() {
-      const apiName = 'DataApi';
-      const path = '/docux.v1.medical.HealthService';
-      const myInit = {
-        headers: {} // OPTIONAL
-      };
-    
-      return API.head(apiName, path, myInit);
-    }
-
-    (async function () {
-
-      try{
-        const responser = await head();
-        console.log(3)
-      console.log(responser)
-      }catch(error){
+  
+    API.get(apiName, path, myInit)
+      .then((response) => {
+        // Add your code here
+        setUnsortedData(response)
+        groupAppointmentsByDate(response);
+      })
+      .catch((error) => {
         console.log(error)
+      });
+  }
+  useEffect(() => {
+    if (unsortedData.length > 0) {
+      console.log(3000)
+      //groupAppointmentsByDate(); // Run when unsortedData is updated
+    }
+    getCurrentData();
+    setReloadKey((prev) => prev + 1);
+  }, [unsortedData]); // Run this useEffect when unsortedData is updated
+  
+  useEffect(() => {
+    const fetchAndGroupAppointments = async () => {
+      try {
+        await fetchData(); // Wait for fetchData to complete
+      } catch (error) {
+        console.error("Error fetching and grouping appointments:", error);
       }
-    })();
+    }; 
+  
+    fetchAndGroupAppointments();
+    setReloadKey((prev) => prev + 1); 
   }, []);
+  
 
 
-  // Animated values for width and opacity
   const sideMenuWidth = useState(new Animated.Value(0))[0];
   const mainBoxOpacity = useState(new Animated.Value(1))[0];
 
@@ -105,23 +83,17 @@ function HomeScreen({ navigation }) {
 
   }
 
-  const fetchRestData = async () => {
-    try {
-      const response = await API.get('yourApiName', '/path', {
-        headers: { /* optional headers */ }
-      });
-      console.log('REST API Response:', response);
-    } catch (error) {
-      console.error('REST API Error:', error);
-    }
-  };
 
-  const groupAppointmentsByDate = () => {
+  const groupAppointmentsByDate = async  (dataLoop) => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
-
+    console.log(tomorrow)
+    const yearToday = today.getFullYear();
+    const monthToday = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const dayToday = String(today.getDate()).padStart(2, '0');
+    const formattedDateToday = `${yearToday}-${monthToday}-${dayToday}`;
     const categorizedAppointments = {
       today: [],
       tomorrow: [],
@@ -130,13 +102,13 @@ function HomeScreen({ navigation }) {
 
     };
 
-    jsonData.forEach(appointment => {
+    dataLoop.forEach(appointment => {
       const appointmentDate = new Date(appointment.scheduledAt);
       const appointmentDateOnly = new Date(appointmentDate.getFullYear(), appointmentDate.getMonth(), appointmentDate.getDate());
-
-      if (appointmentDateOnly.getTime() === today.getTime()) {
+      const appointmentDateString = appointmentDate.toISOString().split('T')[0]
+      if (appointmentDateString === today.toISOString().split('T')[0]) {
         categorizedAppointments.today.push(appointment);
-      } else if (appointmentDateOnly.getTime() === tomorrow.getTime()) {
+      } else if (appointmentDateString === tomorrow.toISOString().split('T')[0]) {
         categorizedAppointments.tomorrow.push(appointment);
       } else if (appointmentDateOnly > tomorrow) {
         categorizedAppointments.future.push(appointment);
@@ -153,24 +125,34 @@ function HomeScreen({ navigation }) {
       categorizedAppointments[appointment.appointmentState.appointmentStateName].push(appointment)
     });
 
-    return categorizedAppointments;
+    setCategorizedAppointmentsSide(categorizedAppointments);
+    
   };
-  const categorizedAppointments = groupAppointmentsByDate();
+  
 
   const getCurrentData = () => {
     // Today Value
+    try{
     if (selectedSideMenu == 1) {
-      setDataItems(categorizedAppointments.today);
+      setDataItems(categorizedAppointmentsSide.today);
 
     } else if (selectedSideMenu == 2) {
-      setDataItems(categorizedAppointments.tomorrow);
+      setDataItems(categorizedAppointmentsSide.tomorrow);
     }
     else {
       setDataItems([])
     }
+  }catch(error){
+    setDataItems([])
+  }
 
 
   };
+  useEffect(() => {
+  //setReloadKey((prev) => prev + 1);
+  //groupAppointmentsByDate()
+  //groupAppointmentsByDate();
+}, []);
 
   useEffect(() => {
     getCurrentData();
@@ -220,9 +202,9 @@ function HomeScreen({ navigation }) {
           isSideMenuVisible={isSideMenuVisible}
           selectedSideMenu={selectedSideMenu}
           setSelectedSideMenu={setSelectedSideMenuFunction}
-          lengthToday={categorizedAppointments.today.length}
-          lengthTomorrow={categorizedAppointments.tomorrow.length}
-          lengthInReview={categorizedAppointments["In Review"] ? categorizedAppointments["In Review"].length : 0}
+          lengthToday={categorizedAppointmentsSide?.today?.length || 0}
+          lengthTomorrow={categorizedAppointmentsSide?.tomorrow?.length|| 0}
+          lengthInReview={categorizedAppointmentsSide?.["In Review"]?.length || 0}
 
         />
       </Animated.View>
@@ -237,6 +219,7 @@ function HomeScreen({ navigation }) {
           setSideMenuVisible={setSideMenuVisible}
           jsonData={dataItems}
           patientsNumber={dataItems.length}
+          key={reloadKey}
         />
       </Animated.View>
     </View>
