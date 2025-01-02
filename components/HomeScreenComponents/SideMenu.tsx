@@ -3,8 +3,8 @@ import { Text,View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MenuSideButtons from './MenuSideButtons';
 
-const SideMenu = ({ setSideMenuVisible, isSideMenuVisible, selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInReview }) => {
-  console.log(lengthInReview)
+const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInReview }) => {
+  //console.log(lengthInReview)
   const toggleMenu = () => {
     setSideMenuVisible(prevState => !prevState);
   };
@@ -34,7 +34,7 @@ const SideMenu = ({ setSideMenuVisible, isSideMenuVisible, selectedSideMenu,setS
           lengthTomorrow={lengthTomorrow}
           lengthInReview={lengthInReview}
         />
-        <TouchableOpacity style={styles.doctorNameTextBox}>
+        <TouchableOpacity style={styles.doctorNameTextBox} onPress={() => navigation.replace("Login")}>
         <Icon
               name="calendar-edit"
               size={30}

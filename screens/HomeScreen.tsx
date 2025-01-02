@@ -47,12 +47,10 @@ function HomeScreen({ navigation }) {
         groupAppointmentsByDate(response);
       })
       .catch((error) => {
-        console.log(error)
       });
   }
   useEffect(() => {
     if (unsortedData.length > 0) {
-      console.log(3000)
       //groupAppointmentsByDate(); // Run when unsortedData is updated
     }
     getCurrentData();
@@ -89,7 +87,6 @@ function HomeScreen({ navigation }) {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
-    console.log(tomorrow)
     const yearToday = today.getFullYear();
     const monthToday = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
     const dayToday = String(today.getDate()).padStart(2, '0');
@@ -117,7 +114,6 @@ function HomeScreen({ navigation }) {
       }
 
       if (appointment.appointmentState.appointmentStateName == "In Progress") {
-        //console.log(appointment)
       }
       if (!categorizedAppointments[appointment.appointmentState.appointmentStateName]) {
         categorizedAppointments[appointment.appointmentState.appointmentStateName] = []
@@ -198,6 +194,7 @@ function HomeScreen({ navigation }) {
         ]}
       >
         <SideMenu
+        navigation={navigation}
           setSideMenuVisible={setSideMenuVisible}
           isSideMenuVisible={isSideMenuVisible}
           selectedSideMenu={selectedSideMenu}

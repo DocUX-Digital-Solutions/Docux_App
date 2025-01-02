@@ -41,11 +41,11 @@ const LoginScreen = ({ navigation }) => {
     try {
       await Auth.setPreferredMFA(userVal, 'TOTP');
     } catch (error) {
-      console.error('Error confirming MFA1:', error);
+      
     }
      try {
       await Auth.confirmSignIn(userVal, mfaCode, 'SOFTWARE_TOKEN_MFA');
-      navigation.navigate("Home");
+      navigation.replace("Home");
     } catch (error) {
       console.error('Error confirming MFA:', error);
     }
@@ -64,9 +64,7 @@ const LoginScreen = ({ navigation }) => {
       return;
     } 
     try {
-      //console.log("hello")
       const user = await Auth.signIn(email, password);
-      //console.log(user.getUsername());
       SetUserVal(user);
       if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
         setStep('mfa'); // Change step to 'mfa' to prompt for MFA code

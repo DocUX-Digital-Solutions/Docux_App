@@ -52,7 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (username: string, password: string): Promise<any> => {
     try {
-      console.log(200)
+      //console.log(200)
       const result = await signIn({ username, password });
       
       setSignInOutput(result);

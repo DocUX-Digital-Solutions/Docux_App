@@ -220,7 +220,7 @@ const LiveTranscriptions = (props: LiveTranscriptionProps) => {
     })
     setMediaRecorder(mediaRecorder)
     setTranscriptionClient(transcriptionClient)
-    console.log(data)
+    //console.log(data)
   }
 
   const startRecording = async () => {

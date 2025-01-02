@@ -64,7 +64,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     password: string,
   ): Promise<SignInOutput> => {
     const result = await signIn({ username, password })
-    console.log(result)
     setSignInOutput(result)
     if (result.isSignedIn) {
       setIsAuthenticated(true)

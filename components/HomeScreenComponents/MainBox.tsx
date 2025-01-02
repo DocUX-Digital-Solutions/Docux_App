@@ -1,16 +1,31 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Animated, Text } from 'react-native';
 import PatientCard from './PatientCard';
 import TopMenu from './TopMenuBar';
 
 
-const MainBox = ({ navigation, setSideMenuVisible,jsonData,patientsNumber }) => {
-    
-    const scrollY = useRef(new Animated.Value(0)).current;
-    const [listHeight, setListHeight] = useState(0);
-    const [contentHeight, setContentHeight] = useState(1);
+const MainBox = ({ navigation, setSideMenuVisible, jsonData, patientsNumber }) => {
+
     const [searchValue, setSearchValue] = useState(null);
-    
+    const [content, setContent] = useState(jsonData);
+
+    useEffect(() => {
+        const itemsSearch = [];
+
+        try {
+            for (const item of jsonData) {
+                if (item.patientName.toLowerCase().includes(searchValue.toLowerCase()) || item.reason.toLowerCase().includes(searchValue.toLowerCase())) {
+                    itemsSearch.push(item);
+                }
+            }
+            setContent(itemsSearch);
+        } catch (error) {
+            setContent(jsonData);
+        }
+
+    }, [searchValue]);
+
+
     const renderItem = ({ item }) => (
         <View style={styles.cardsContainer}>
             <View style={styles.cardWrapper}>
@@ -27,14 +42,14 @@ const MainBox = ({ navigation, setSideMenuVisible,jsonData,patientsNumber }) => 
             <View style={styles.topBar}>
                 <TopMenu appointmentsNumber={patientsNumber} useExpand={true} setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
             </View>
-            {jsonData.length === 0 ? (
+            {content.length === 0 ? (
                 <View style={styles.noPatientsContainer}>
                     <Text style={styles.noPatientsText}>No patients found</Text>
                 </View>
             ) : (
                 <FlatList
-                    data={jsonData}
-                    keyExtractor={(item) => item.id}
+                    data={content}
+                    keyExtractor={(item) => item.appointmentId}
                     renderItem={renderItem}
                     style={styles.flatListContent}
                     showsVerticalScrollIndicator={false}

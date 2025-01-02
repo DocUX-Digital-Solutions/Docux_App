@@ -26,13 +26,10 @@ const ResetPassword = ({navigation}) => {
     async function forgotPassword() {
         try {
             const data = await Auth.forgotPassword(email);
-            console.log(data);
             setStep("mfa");
             setErrorText("");
-            console.log(step)
         } catch (err) {
             setErrorText("User Not Found");
-            console.log(err);
         }
     }
 
@@ -43,8 +40,7 @@ const ResetPassword = ({navigation}) => {
         }
         try {
             const data = await Auth.forgotPasswordSubmit(email, mfaCode, password);
-            console.log(data);
-            navigation.navigate("Home")
+            navigation.replace("Home");
         } catch (err) {
             setErrorText("Reset Failed");
         }

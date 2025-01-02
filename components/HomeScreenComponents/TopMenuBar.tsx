@@ -78,7 +78,7 @@ const TopMenu = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterV
                 </View>
                 <View style={styles.menuContainerRight}>
 
-                    <TouchableOpacity style={styles.iconContainer} onPress={console.log(2)}>
+                    <TouchableOpacity style={styles.iconContainer} onPress={() =>console.log(3)}>
                         <Icon name="microphone" size={25} color="#000" />
                     </TouchableOpacity>
 
@@ -86,10 +86,10 @@ const TopMenu = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterV
                         <Icon name={magnifyIcon} size={25} color="#000" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.iconContainer} onPress={console.log(2)}>
+                    <TouchableOpacity style={styles.iconContainer} onPress={() =>console.log(3)}>
                         <Icon name="bell-outline" size={25} color="#000" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.iconContainer} onPress={console.log(2)}>
+                    <TouchableOpacity style={styles.iconContainer} onPress={() =>console.log(3)}>
                         <Icon name="account-circle-outline" size={25} color="#000" />
                     </TouchableOpacity>
 
