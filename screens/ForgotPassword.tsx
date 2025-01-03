@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import { ScrollView, KeyboardAvoidingView, Platform,View, ActivityIndicator, ImageBackground, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, ActivityIndicator, ImageBackground, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Auth } from 'aws-amplify';
-
-const ResetPassword = ({navigation}) => {
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+const ResetPassword = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordSecond, setPasswordSecond] = useState('');
     const [errorText, setErrorText] = useState('');
-    const [step, setStep] = useState('mfa'); // 'signIn' or 'mfa'
+    const [step, setStep] = useState(''); // 'signIn' or 'mfa'
     const [mfaCode, setMfaCode] = useState("");
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [scrollEnabled, setScrollEnabled] = useState(false);
-  const handleFocus = () => {
-    setScrollEnabled(true);
-  };
-  const handleForget = () => {
-    setScrollEnabled(false);
-  };
 
 
     const clickFunction = () => {
@@ -56,15 +50,15 @@ const ResetPassword = ({navigation}) => {
 
 
     return (
-            <KeyboardAvoidingView
-              style={styles.container}
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-              keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
-            >
-                <ScrollView 
-                contentContainerStyle={{ flexGrow: 1 }}
-                scrollEnabled={scrollEnabled}
-                >
+        <KeyboardAwareScrollView
+            style={styles.container}
+            //contentContainerStyle={styles.contentContainer}
+            enableOnAndroid
+            extraScrollHeight={20} // Adjusts extra space when input is focused
+            keyboardShouldPersistTaps="handled"
+            scrollEnabled={scrollEnabled} // Disable user scrolling
+
+        >
             <View style={styles.logoContainer}>
                 <ImageBackground
                     style={styles.logoStyle}
@@ -83,46 +77,52 @@ const ResetPassword = ({navigation}) => {
                     value={email}
                     onChangeText={setEmail}
                     returnKeyType="done"
-                    onFocus={handleFocus} 
-                    onBlur={handleForget}
+                    onFocus={() => setScrollEnabled(true)} // Enable scrolling when input is focused
+                    onBlur={() => setScrollEnabled(false)} // Disable scrolling when input loses focus
                 />
                 <View>
-                {step == "mfa" ? (
-  <View>
-    <Text style={styles.descriptionText}>Enter Password</Text>
-    <TextInput
-      style={styles.input}
-      placeholder="Enter your password"
-      placeholderTextColor="#aaa"
-      value={password}
-      onChangeText={setPassword}
-      secureTextEntry={true}
-      returnKeyType="done"
-    />
+                    {step == "mfa" ? (
+                        <View>
+                            <Text style={styles.descriptionText}>Enter Password</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Enter your password"
+                                placeholderTextColor="#aaa"
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry={true}
+                                returnKeyType="done"
+                                onFocus={() => setScrollEnabled(true)} // Enable scrolling when input is focused
+                                onBlur={() => setScrollEnabled(false)} // Disable scrolling when input loses focus
+                            />
 
-    <Text style={styles.descriptionText}>Re-Enter Password</Text>
-    <TextInput
-      style={styles.input}
-      placeholder="Re-Enter your password"
-      placeholderTextColor="#aaa"
-      value={passwordSecond}
-      onChangeText={setPasswordSecond}
-      secureTextEntry={true}
-      returnKeyType="done"
-    />
+                            <Text style={styles.descriptionText}>Re-Enter Password</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Re-Enter your password"
+                                placeholderTextColor="#aaa"
+                                value={passwordSecond}
+                                onChangeText={setPasswordSecond}
+                                secureTextEntry={true}
+                                returnKeyType="done"
+                                onFocus={() => setScrollEnabled(true)} // Enable scrolling when input is focused
+                                onBlur={() => setScrollEnabled(false)} // Disable scrolling when input loses focus
+                            />
 
-    <Text style={styles.descriptionText}>Enter Recovery Code</Text>
-    <TextInput
-      style={styles.input}
-      placeholder="MFA Code"
-      placeholderTextColor="#aaa"
-      value={mfaCode}
-      onChangeText={setMfaCode}
-      keyboardType="numeric"
-      returnKeyType="done"
-    />
-  </View>
-) : null}
+                            <Text style={styles.descriptionText}>Enter Recovery Code</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="MFA Code"
+                                placeholderTextColor="#aaa"
+                                value={mfaCode}
+                                onChangeText={setMfaCode}
+                                keyboardType="numeric"
+                                returnKeyType="done"
+                                onFocus={() => setScrollEnabled(true)} // Enable scrolling when input is focused
+                                onBlur={() => setScrollEnabled(false)} // Disable scrolling when input loses focus
+                            />
+                        </View>
+                    ) : null}
                 </View>
                 {errorText && <Text style={styles.text}>{errorText}</Text>}
                 <View style={styles.buttonsContainer}>
@@ -133,11 +133,13 @@ const ResetPassword = ({navigation}) => {
                             <Text style={styles.buttonText}>Reset Password</Text>
                         </TouchableOpacity>
                     )}
-                    
+
                 </View>
             </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                  <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.navigate("ResetPassword")}>
+                    <Text style={styles.buttonReturnSignIn}>Return To Sign In</Text>
+                  </TouchableOpacity>
+        </KeyboardAwareScrollView>
     );
 };
 
@@ -176,6 +178,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: '25%',
         paddingBottom: 75,
+    },
+    contentContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 20,
     },
     inputContainer: {
         width: '100%',
@@ -240,10 +247,10 @@ const styles = StyleSheet.create({
     iconContainer: {
         alignSelf: 'center',
     },
-    buttonTextForgot: {
+    buttonReturnSignIn: {
         textAlign: 'center',
         color: '#fff',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: '700',
         textDecorationLine: 'underline',
     },
