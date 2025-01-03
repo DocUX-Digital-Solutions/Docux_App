@@ -19,7 +19,7 @@ function HomeScreen({ navigation }) {
   const [reloadKey, setReloadKey] = useState(0);
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
-  const [categorizedAppointmentsSide,setCategorizedAppointmentsSide] = useState(null)
+  const [categorizedAppointmentsSide, setCategorizedAppointmentsSide] = useState(null)
   const apiClient = axios.create({
     baseURL: Config.VITE_API_URL,
     headers: {
@@ -39,12 +39,21 @@ function HomeScreen({ navigation }) {
         Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
       }
     };
-  
+
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
+        console.log(response);
         setUnsortedData(response)
         groupAppointmentsByDate(response);
+      })
+      .catch((error) => {
+      });
+
+      API.get(apiName, '/appointments/1410', myInit)
+      .then((response) => {
+        // Add your code here
+        console.log(response)
       })
       .catch((error) => {
       });
@@ -56,20 +65,20 @@ function HomeScreen({ navigation }) {
     getCurrentData();
     setReloadKey((prev) => prev + 1);
   }, [unsortedData]); // Run this useEffect when unsortedData is updated
-  
+
   useEffect(() => {
     const fetchAndGroupAppointments = async () => {
       try {
-        await fetchData(); // Wait for fetchData to complete
+        await fetchData();
       } catch (error) {
         console.error("Error fetching and grouping appointments:", error);
       }
-    }; 
-  
+    };
+
     fetchAndGroupAppointments();
-    setReloadKey((prev) => prev + 1); 
+    setReloadKey((prev) => prev + 1);
   }, []);
-  
+
 
 
   const sideMenuWidth = useState(new Animated.Value(0))[0];
@@ -82,7 +91,7 @@ function HomeScreen({ navigation }) {
   }
 
 
-  const groupAppointmentsByDate = async  (dataLoop) => {
+  const groupAppointmentsByDate = async (dataLoop) => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const tomorrow = new Date(today);
@@ -96,6 +105,8 @@ function HomeScreen({ navigation }) {
       tomorrow: [],
       future: [],
       past: [],
+      inProgress: [],
+      inReview:[]
 
     };
 
@@ -103,18 +114,27 @@ function HomeScreen({ navigation }) {
       const appointmentDate = new Date(appointment.scheduledAt);
       const appointmentDateOnly = new Date(appointmentDate.getFullYear(), appointmentDate.getMonth(), appointmentDate.getDate());
       const appointmentDateString = appointmentDate.toISOString().split('T')[0]
-      if (appointmentDateString === today.toISOString().split('T')[0]) {
+      if (appointment.appointmentState.appointmentStateName == "In Progress") {
+        categorizedAppointments.inProgress.push(appointment);
+      }
+      else if (appointment.appointmentState.appointmentStateName == "In Review") {
+          categorizedAppointments.inReview.push(appointment);
+        
+      }
+      else if (appointmentDateString === today.toISOString().split('T')[0]) {
         categorizedAppointments.today.push(appointment);
-      } else if (appointmentDateString === tomorrow.toISOString().split('T')[0]) {
+      }
+      else if (appointmentDateString === tomorrow.toISOString().split('T')[0]) {
         categorizedAppointments.tomorrow.push(appointment);
-      } else if (appointmentDateOnly > tomorrow) {
+      }
+      else if (appointmentDateOnly > tomorrow) {
         categorizedAppointments.future.push(appointment);
-      } else if (appointmentDateOnly < today) {
+      }
+      else if (appointmentDateOnly < today) {
         categorizedAppointments.past.push(appointment);
       }
 
-      if (appointment.appointmentState.appointmentStateName == "In Progress") {
-      }
+
       if (!categorizedAppointments[appointment.appointmentState.appointmentStateName]) {
         categorizedAppointments[appointment.appointmentState.appointmentStateName] = []
       }
@@ -122,33 +142,35 @@ function HomeScreen({ navigation }) {
     });
 
     setCategorizedAppointmentsSide(categorizedAppointments);
-    
+
   };
-  
+
 
   const getCurrentData = () => {
     // Today Value
-    try{
-    if (selectedSideMenu == 1) {
-      setDataItems(categorizedAppointmentsSide.today);
+    console.log(selectedSideMenu)
+    try {
+      if (selectedSideMenu == 1) {
+        setDataItems(categorizedAppointmentsSide.today);
 
-    } else if (selectedSideMenu == 2) {
-      setDataItems(categorizedAppointmentsSide.tomorrow);
-    }
-    else {
+      } else if (selectedSideMenu == 2) {
+        setDataItems(categorizedAppointmentsSide.tomorrow);
+      } else if (selectedSideMenu == 3) {
+        setDataItems(categorizedAppointmentsSide.inProgress);
+      }
+      else if (selectedSideMenu == 4) {
+        setDataItems(categorizedAppointmentsSide.inReview);
+      }
+      else {
+        setDataItems([])
+      }
+    } catch (error) {
       setDataItems([])
     }
-  }catch(error){
-    setDataItems([])
-  }
+    setReloadKey((prev) => prev+1)
 
 
   };
-  useEffect(() => {
-  //setReloadKey((prev) => prev + 1);
-  //groupAppointmentsByDate()
-  //groupAppointmentsByDate();
-}, []);
 
   useEffect(() => {
     getCurrentData();
@@ -194,14 +216,15 @@ function HomeScreen({ navigation }) {
         ]}
       >
         <SideMenu
-        navigation={navigation}
+          navigation={navigation}
           setSideMenuVisible={setSideMenuVisible}
           isSideMenuVisible={isSideMenuVisible}
           selectedSideMenu={selectedSideMenu}
           setSelectedSideMenu={setSelectedSideMenuFunction}
           lengthToday={categorizedAppointmentsSide?.today?.length || 0}
-          lengthTomorrow={categorizedAppointmentsSide?.tomorrow?.length|| 0}
-          lengthInReview={categorizedAppointmentsSide?.["In Review"]?.length || 0}
+          lengthTomorrow={categorizedAppointmentsSide?.tomorrow?.length || 0}
+          lengthInProgress={categorizedAppointmentsSide?.inProgress?.length || 0}
+          lengthInReview={categorizedAppointmentsSide?.inReview?.length || 0}
 
         />
       </Animated.View>

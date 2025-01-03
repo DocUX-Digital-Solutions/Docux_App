@@ -122,7 +122,7 @@ const TopMenu = ({ appointmentsNumber, useExpand, setSideMenuVisible, setFilterV
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        marginTop: 40,
+        marginTop: 60,
     },
     menuContainerRight: {
         flexDirection: 'row',

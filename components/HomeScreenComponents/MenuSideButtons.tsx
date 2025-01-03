@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MenuSideButtons = ({selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInReview}) => {
+const MenuSideButtons = ({ selectedSideMenu, setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInProgress,lengthInReview }) => {
 
   return (
     <View style={styles.container}>
@@ -62,6 +62,26 @@ const MenuSideButtons = ({selectedSideMenu,setSelectedSideMenu, lengthToday, len
               color="#fff"
 
             />
+            <Text style={styles.textLeft}>In Progress</Text>
+          </View>
+          <Text style={styles.textRight}>{lengthInProgress}</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          selectedSideMenu === 4 ? styles.selectedSideMenu : styles.notSelected,
+        ]}
+        onPress={() => setSelectedSideMenu(4)}
+      >
+        <View style={styles.buttonContent}>
+          <View style={styles.calenderBox}>
+            <Icon
+              name="calendar-edit"
+              size={30}
+              color="#fff"
+
+            />
             <Text style={styles.textLeft}>In Review</Text>
           </View>
           <Text style={styles.textRight}>{lengthInReview}</Text>
@@ -87,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginBottom:10
+    marginBottom: 10
   },
   selectedSideMenu: {
     backgroundColor: '#1b324d',
@@ -121,7 +141,7 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   divider: {
-    marginTop:10,
+    marginTop: 10,
     height: 1,
     backgroundColor: '#fff'
   }

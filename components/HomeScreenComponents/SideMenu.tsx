@@ -3,7 +3,7 @@ import { Text,View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MenuSideButtons from './MenuSideButtons';
 
-const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInReview }) => {
+const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInProgress,lengthInReview }) => {
   //console.log(lengthInReview)
   const toggleMenu = () => {
     setSideMenuVisible(prevState => !prevState);
@@ -14,7 +14,7 @@ const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedS
       {/* If the menu is open, show all elements. If closed, set opacity to 0 */}
       <View style={[styles.logoMenu, { opacity: isSideMenuVisible ? 1 : 0 }]}>
        
-        <TouchableOpacity style={styles.arrowIcon} onPress={toggleMenu} >
+        <TouchableOpacity style={styles.closeIcon} onPress={toggleMenu} >
           <Icon
             name="close"
             size={25}
@@ -32,6 +32,7 @@ const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedS
           setSelectedSideMenu={setSelectedSideMenu}
           lengthToday={lengthToday}
           lengthTomorrow={lengthTomorrow}
+          lengthInProgress={lengthInProgress}
           lengthInReview={lengthInReview}
         />
         <TouchableOpacity style={styles.doctorNameTextBox} onPress={() => navigation.replace("Login")}>
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   buttonBox: {
     alignContent: 'flex-start',
     height: '100%',
-    marginTop: 150,
+    marginTop: 170,
     justifyContent: 'flex-start',
     
   },
@@ -83,14 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',  // Centers the icon within the button
     alignItems: 'flex-end', // Centers the icon horizontally
   },
-  rankBackground: {
-    width: "80%",
-    height: "100%", // Adjust height to fit within the parent view
-    alignItems: '', // Centers horizontally
-    justifyContent: 'center', // Centers vertically
-    left:10
-  },
-  arrowIcon: {
+  closeIcon: {
     //backgroundColor:'#000',
     
   },

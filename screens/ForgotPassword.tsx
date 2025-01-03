@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ActivityIndicator, ImageBackground, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, KeyboardAvoidingView, Platform,View, ActivityIndicator, ImageBackground, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Auth } from 'aws-amplify';
 
 const ResetPassword = ({navigation}) => {
@@ -7,9 +7,16 @@ const ResetPassword = ({navigation}) => {
     const [password, setPassword] = useState('');
     const [passwordSecond, setPasswordSecond] = useState('');
     const [errorText, setErrorText] = useState('');
-    const [step, setStep] = useState(''); // 'signIn' or 'mfa'
+    const [step, setStep] = useState('mfa'); // 'signIn' or 'mfa'
     const [mfaCode, setMfaCode] = useState("");
     const [loading, setLoading] = useState(false)
+    const [scrollEnabled, setScrollEnabled] = useState(false);
+  const handleFocus = () => {
+    setScrollEnabled(true);
+  };
+  const handleForget = () => {
+    setScrollEnabled(false);
+  };
 
 
     const clickFunction = () => {
@@ -49,7 +56,15 @@ const ResetPassword = ({navigation}) => {
 
 
     return (
-        <View style={styles.container}>
+            <KeyboardAvoidingView
+              style={styles.container}
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+            >
+                <ScrollView 
+                contentContainerStyle={{ flexGrow: 1 }}
+                scrollEnabled={scrollEnabled}
+                >
             <View style={styles.logoContainer}>
                 <ImageBackground
                     style={styles.logoStyle}
@@ -68,6 +83,8 @@ const ResetPassword = ({navigation}) => {
                     value={email}
                     onChangeText={setEmail}
                     returnKeyType="done"
+                    onFocus={handleFocus} 
+                    onBlur={handleForget}
                 />
                 <View>
                 {step == "mfa" ? (
@@ -107,10 +124,7 @@ const ResetPassword = ({navigation}) => {
   </View>
 ) : null}
                 </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={forgotPasswordSubmit} />
-                </View>
-                <Text style={styles.text}>{errorText}</Text>
+                {errorText && <Text style={styles.text}>{errorText}</Text>}
                 <View style={styles.buttonsContainer}>
                     {loading ? (
                         <ActivityIndicator size="large" color="#3876BA" />
@@ -119,12 +133,11 @@ const ResetPassword = ({navigation}) => {
                             <Text style={styles.buttonText}>Reset Password</Text>
                         </TouchableOpacity>
                     )}
-                    <TouchableOpacity style={styles.SSOButtonStyle}>
-                        <Text style={styles.buttonText}>SSO</Text>
-                    </TouchableOpacity>
+                    
                 </View>
             </View>
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 };
 

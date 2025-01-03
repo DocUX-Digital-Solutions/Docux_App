@@ -14,7 +14,7 @@ const SideMenu = ({ setSideMenuVisible, isSideMenuVisible, setPatientValue }) =>
       {/* If the menu is open, show all elements. If closed, set opacity to 0 */}
       <View style={[styles.logoMenu, { opacity: isSideMenuVisible ? 1 : 0 }]}>
        
-        <TouchableOpacity style={styles.arrowIcon} onPress={toggleMenu} >
+        <TouchableOpacity style={styles.closeIcon} onPress={toggleMenu} >
           <Icon
             name="close"
             size={25}
@@ -77,14 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',  // Centers the icon within the button
     alignItems: 'flex-end', // Centers the icon horizontally
   },
-  rankBackground: {
-    width: "80%",
-    height: "100%", // Adjust height to fit within the parent view
-    alignItems: '', // Centers horizontally
-    justifyContent: 'center', // Centers vertically
-    left:10
-  },
-  arrowIcon: {
+  closeIcon: {
     //backgroundColor:'#000',
     
   },
