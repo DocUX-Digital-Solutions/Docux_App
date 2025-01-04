@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@aws-amplify/react-native": "^1.1.6",
+    "@aws-sdk/client-transcribe-streaming": "^3.721.0",
+    "@aws-sdk/credential-provider-http": "^3.716.0",
+    "@aws-sdk/credential-providers": "^3.721.0",
     "@babel/plugin-transform-react-jsx-self": "^7.25.9",
     "@babel/plugin-transform-react-jsx-source": "^7.25.9",
     "@babel/runtime": "^7.26.0",
@@ -28,6 +31,7 @@
     "expo-av": "^15.0.1",
     "expo-dev-client": "~5.0.7",
     "expo-modules-core": "^2.1.2",
+    "expo-permissions": "^14.4.0",
     "expo-updates": "~0.26.10",
     "metro-react-native-babel-preset": "^0.77.0",
     "opncvpack": "file:../../../../..",

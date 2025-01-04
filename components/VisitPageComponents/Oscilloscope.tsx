@@ -3,7 +3,10 @@ import { View, Button, StyleSheet, Text, Alert } from 'react-native';
 import { Audio } from 'expo-av';
 import { Svg, Rect } from 'react-native-svg';
 import { Dimensions } from 'react-native';
-
+import {
+  Predictions,
+} from '@aws-amplify/predictions';
+import * as Permissions from 'expo-permissions';
 const windowWidth = Dimensions.get('window').width;
 const Oscilloscope = ({ recordingval }) => {
   const [recording, setRecording] = useState(null);
@@ -14,16 +17,17 @@ const Oscilloscope = ({ recordingval }) => {
   const [duration, setDuration] = useState('00:00:00');
   const [volume, setVolume] = useState(0);
   const [waveformData, setWaveformData] = useState([1, 40.042036056518555, 35.07398986816406, 52.26547622680664, 51.89678764343262, 33.73213005065918, 52.454607009887695, 36.53604698181152, 48.97019004821777, 62.24841499328613, 44.37959289550781, 30.079124450683594, 47.778602600097656, 32.13315010070801, 34.44539451599121, 57.36661720275879, 41.63846397399902, 38.360504150390625, 34.755197525024414, 34.66284370422363, 53.03128623962402, 58.94186210632324, 45.26422691345215, 36.56785583496094, 69.64474296569824, 50.77722358703613, 33.51218605041504, 73.18951606750488, 54.1182746887207, 35.80257225036621, 33.75017738342285, 49.66782760620117, 39.82294464111328, 32.06803894042969, 38.243459701538086, 34.01443290710449, 57.78250694274902, 40.723886489868164]);
-
+  
   const startRecording = async () => {
     try {
+      const { status } = await Audio.requestPermissionsAsync();
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
       });
 
-      const { recording } = await Audio.Recording.createAsync(
-        Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+      const { recording: recording} = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
       );
       setRecording(recording);
       await recording.startAsync();
@@ -43,22 +47,51 @@ const Oscilloscope = ({ recordingval }) => {
             }
             return newData;
           });
+          //const audioBytes = await recording.getDataAsync();
+
+        // Convert and send audio to AWS Predictions service for transcription
+          //convertSpeechToText(audioBytes.uri);  // Use the URI for audio file
         } else {
           clearInterval(intervalId); // Stop the interval if recording is not active
         }
       }, 150); // Check every 300 milliseconds
     } catch (err) {
+      console.log("dhdhd")
+      console.log(err)
     }
   };
-
+  const convertSpeechToText = async (audioBytes) => {
+    try {
+      const result = await Predictions.convert({
+        transcription: {
+          source: {
+            bytes: audioBytes
+          },
+          // You can specify the language if needed, e.g., "en-US"
+          // language: "en-US",
+        }
+      });
+  
+      const { transcription: { fullText } } = result;
+      console.log({ fullText });
+    } catch (err) {
+      console.error({ err });
+    }
+  };
   const stopRecording = async () => {
+    console.log(39393)
     if (recording) {
       try {
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI();
+        console.log(uri)
+        //const audioBytes = await recording.getDataAsync();
+        convertSpeechToText(uri);
         setRecordingUri(uri);
         setRecording(null);
       } catch (error) {
+        console.log("?>?>?")
+        console.log(error)
       }
     }
   };

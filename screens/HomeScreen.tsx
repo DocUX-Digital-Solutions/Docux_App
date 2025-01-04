@@ -30,10 +30,12 @@ function HomeScreen({ navigation }) {
         Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
       }
     };
+    console.log(sessionData.signInUserSession.accessToken.jwtToken)
 
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
+        console.log(response)
         setUnsortedData(response)
         groupAppointmentsByDate(response);
       })

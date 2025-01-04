@@ -40,5 +40,21 @@
       "endpoint": "https://demo.mydocux.com/api",
       "region": "us-east-1"
     }
-  ]
+  ],
+  "predictions": {
+    "aws_predictions_speech_to_text": {
+      "region": "us-east-1",
+      "proxy": false,
+      "defaults": {
+        "language": "en-US"
+      }
+    },
+    "aws_predictions_translate": {
+      "region": "us-east-1",
+      "defaults": {
+        "sourceLanguage": "en",
+        "targetLanguage": "es"
+      }
+    }
+  }
 }

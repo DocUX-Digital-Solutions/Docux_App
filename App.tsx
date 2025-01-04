@@ -13,7 +13,12 @@ import ResetPassword from './screens/ForgotPassword';
 import { UserProvider } from './data/loadData';
 import config from './amplifyconfiguration.json';
 import { Amplify, Auth } from 'aws-amplify';
+import {
+  Predictions,
+  AmazonAIPredictionsProvider
+} from '@aws-amplify/predictions';
 
+Predictions.addPluggable(new AmazonAIPredictionsProvider());
 const Stack = createStackNavigator();
 Amplify.configure(config);
 
