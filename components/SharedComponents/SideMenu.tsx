@@ -27,7 +27,7 @@ const SideMenu = ({ setSideMenuVisible, isSideMenuVisible, setPatientValue }) =>
       {/* Centered icon when the menu is closed */}
       
       <View style={[styles.buttonBox, { opacity: isSideMenuVisible ? 1 : 0 }]}>
-        <MenuSideButtons setPatientValue={setPatientValue}/>
+        <MenuSideButtons setPatientValue={setPatientValue} toggleMenu={toggleMenu}/>
         <TouchableOpacity style={styles.doctorNameTextBox}>
         <Icon
               name="calendar-edit"

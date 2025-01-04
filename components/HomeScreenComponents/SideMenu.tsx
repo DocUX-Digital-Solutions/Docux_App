@@ -2,11 +2,23 @@ import React, {useContext} from 'react';
 import { Text,View, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MenuSideButtons from './MenuSideButtons';
+import { Auth } from 'aws-amplify';
 
 const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedSideMenu,setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInProgress,lengthInReview }) => {
-  //console.log(lengthInReview)
   const toggleMenu = () => {
     setSideMenuVisible(prevState => !prevState);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await Auth.signOut();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   return (
@@ -34,8 +46,9 @@ const SideMenu = ({ navigation, setSideMenuVisible, isSideMenuVisible, selectedS
           lengthTomorrow={lengthTomorrow}
           lengthInProgress={lengthInProgress}
           lengthInReview={lengthInReview}
+          toggleMenu={toggleMenu}
         />
-        <TouchableOpacity style={styles.doctorNameTextBox} onPress={() => navigation.replace("Login")}>
+        <TouchableOpacity style={styles.doctorNameTextBox} onPress={handleLogout}>
         <Icon
               name="calendar-edit"
               size={30}

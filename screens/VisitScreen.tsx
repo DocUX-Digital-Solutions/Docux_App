@@ -8,7 +8,6 @@ import { API } from 'aws-amplify';
 const VisitPage = ({ route }) => {
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const { patientItem, navigation } = route.params;
-  console.log(patientItem)
   const fetchData = async () => {
     const apiName = 'DataApi';
     const path = `/appointments/${patientItem.appointmentId}`;

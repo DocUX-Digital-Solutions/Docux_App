@@ -136,7 +136,7 @@ const ResetPassword = ({ navigation }) => {
 
                 </View>
             </View>
-                  <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.navigate("ResetPassword")}>
+                  <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.replace("Login")}>
                     <Text style={styles.buttonReturnSignIn}>Return To Sign In</Text>
                   </TouchableOpacity>
         </KeyboardAwareScrollView>

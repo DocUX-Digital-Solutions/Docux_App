@@ -17,7 +17,13 @@ const LoginScreen = ({ navigation }) => {
   const [buttonStateText,setButtonStateText] = useState("LOGIN");
   const [loading, setLoading] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
-
+  const fetchData = async () => {
+    const apiName = 'DataApi';
+    const path = '/appointments';
+    const sessionData = await Auth.currentAuthenticatedUser()
+    console.log(sessionData)
+  }
+  fetchData()
   async function rememberDevice() {
     try {
       const result = await Auth.rememberDevice();
@@ -180,7 +186,7 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.navigate("ResetPassword")}>
+      <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.replace("Home")}>
         <Text style={styles.buttonTextForgot}>forgot password?</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>

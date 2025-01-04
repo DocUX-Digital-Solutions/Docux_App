@@ -20,16 +20,7 @@ function HomeScreen({ navigation }) {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   const [categorizedAppointmentsSide, setCategorizedAppointmentsSide] = useState(null)
-  const apiClient = axios.create({
-    baseURL: Config.VITE_API_URL,
-    headers: {
-      'Access-Control-Allow-Headers':
-        'Content-Type, Authorization, X-Requested-With',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://*',
-      'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-    },
-  })
+
   const fetchData = async () => {
     const apiName = 'DataApi';
     const path = '/appointments';
@@ -43,17 +34,8 @@ function HomeScreen({ navigation }) {
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
-        console.log(response);
         setUnsortedData(response)
         groupAppointmentsByDate(response);
-      })
-      .catch((error) => {
-      });
-
-      API.get(apiName, '/appointments/1410', myInit)
-      .then((response) => {
-        // Add your code here
-        console.log(response)
       })
       .catch((error) => {
       });
@@ -148,7 +130,6 @@ function HomeScreen({ navigation }) {
 
   const getCurrentData = () => {
     // Today Value
-    console.log(selectedSideMenu)
     try {
       if (selectedSideMenu == 1) {
         setDataItems(categorizedAppointmentsSide.today);

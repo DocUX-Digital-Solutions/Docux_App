@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MenuSideButtons = ({ selectedSideMenu, setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInProgress,lengthInReview }) => {
+const MenuSideButtons = ({ toggleMenu,selectedSideMenu, setSelectedSideMenu, lengthToday, lengthTomorrow, lengthInProgress,lengthInReview }) => {
 
+  const setValueType = (value) =>{
+    setSelectedSideMenu(value)
+    toggleMenu()
+  }
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -11,7 +15,7 @@ const MenuSideButtons = ({ selectedSideMenu, setSelectedSideMenu, lengthToday, l
           styles.button,
           selectedSideMenu === 1 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelectedSideMenu(1)}
+        onPress={() => {setValueType(1)}}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
@@ -32,7 +36,7 @@ const MenuSideButtons = ({ selectedSideMenu, setSelectedSideMenu, lengthToday, l
           styles.button,
           selectedSideMenu === 2 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelectedSideMenu(2)}
+        onPress={() => setValueType(2)}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
@@ -52,7 +56,7 @@ const MenuSideButtons = ({ selectedSideMenu, setSelectedSideMenu, lengthToday, l
           styles.button,
           selectedSideMenu === 3 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelectedSideMenu(3)}
+        onPress={() => setValueType(3)}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
@@ -72,7 +76,7 @@ const MenuSideButtons = ({ selectedSideMenu, setSelectedSideMenu, lengthToday, l
           styles.button,
           selectedSideMenu === 4 ? styles.selectedSideMenu : styles.notSelected,
         ]}
-        onPress={() => setSelectedSideMenu(4)}
+        onPress={() => setValueType(4)}
       >
         <View style={styles.buttonContent}>
           <View style={styles.calenderBox}>
