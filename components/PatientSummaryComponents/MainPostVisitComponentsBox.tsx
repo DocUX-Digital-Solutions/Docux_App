@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import TopMenuPatient from '../SharedComponents/TopMenuPatient';
 import PatientCard from './PatientCard';
@@ -8,11 +8,38 @@ import OperativeNotes from './OperativeNotes';
 import BillingCodes from './BillingCodes';
 import BottomButtons from './BottomButtons';
 import DiagnosticCodeBox from './DiagnosticCodeBox';
+import { Auth, API, Storage } from 'aws-amplify';
 
 const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigation }) => {
     const [searchValue, setSearchValue] = useState(null);
     const [isEditable, setIsEditable] = useState(false);
+    const [dataValues, setDataValues] = useState(null);
 
+     useEffect(() => {
+        const getDataBox = async () =>{
+            const apiName = 'DataApi';
+                const path = `/appointments/${patientItem.appointmentId}`;
+                const sessionData = await Auth.currentAuthenticatedUser()
+                const myInit = {
+                  headers: {
+                    Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
+                  }
+                };
+            
+                API.get(apiName, path, myInit)
+                  .then((response) => {
+                    // Add your code here
+                    setDataValues(response);
+                    console.log(response?.encounters?.billingCodes)
+                    console.log(JSON.stringify(response, null, 2));
+                  })
+                  .catch((error) => {
+                  });
+        }
+      
+            getDataBox();
+          //setReloadKey((prev) => prev + 1);
+        }, []);
 
     function navGoHome() {
         navigation.navigate("Home");
@@ -20,6 +47,8 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
     const toggleEditMode = () => {
         setIsEditable(!isEditable);
     };
+
+
 
     return (
         <View style={styles.container}>
@@ -32,8 +61,17 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                 <SOAPBox patientItem={patientItem} />
                 <TranscriptBox isEditable={isEditable} />
                 <OperativeNotes />
-                <DiagnosticCodeBox />
-                <BillingCodes numCodes={30} />
+                <DiagnosticCodeBox 
+                diagnosticCodes={dataValues?.encounters?.diagnosticCodes}
+                suggestedDiagnosticCodes={dataValues?.encounters?.suggestedDiagnosticCodes}
+                />
+                <BillingCodes 
+                numCodes={30} 
+                billingCodes={dataValues?.encounters?.billingCodes}
+                suggestedBillingCodes={dataValues?.encounters?.suggestedBillingCodes}
+                
+                
+                />
             </ScrollView>
             <View style={styles.bottomButtons}>
                 <BottomButtons navGoHome={navGoHome} toggleEditMode={toggleEditMode} />

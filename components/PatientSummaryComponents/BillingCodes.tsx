@@ -1,27 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Svg, { Path } from 'react-native-svg';
 import BillingCodeSuggested from './BillingCodeSuggested';
 import BillingCodeIncluded from './BillingCodeIncluded';
-const BillingCodes = () => {
+const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
     const [searchValue, setSearchValue] = useState("");
     const searchBarRef = useRef(null);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");
+
     const [allCodes, setAllCodes] = useState([
         { codeNumber: 'ICD-10 Code: S43.401A1', description: 'chronic shoulder pain' },
         { codeNumber: 'ICD-10 Code: S43.401A2', description: 'acute shoulder pain' },
         { codeNumber: 'ICD-10 Code: S43.401A3', description: 'mild shoulder pain' },
         { codeNumber: 'ICD-10 Code: S43.401A4', description: 'severe shoulder pain' },
     ]);
+
     const [suggestedCodes, setSuggestedCodes] = useState([
         { codeNumber: 'ICD-10 Code: S43.401A1', description: 'chronic shoulder pain' },
         { codeNumber: 'ICD-10 Code: S43.401A4', description: 'severe shoulder pain' },
     ]);
+
     const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([
     ]);
+
     const [codesIncluded, setCodesIncluded] = useState([
         { codeNumber: 'ICD-10 Code: S43.401A2', description: 'acute shoulder pain' },
         { codeNumber: 'ICD-10 Code: S43.401A3', description: 'mild shoulder pain' },
@@ -36,6 +40,43 @@ const BillingCodes = () => {
         setSuggestedCodes((prevCodes) => prevCodes.filter((code) => code !== newCode));
         setSearchValue(""); // Clear the search input
     };
+
+    useEffect(() => {
+    const proccessCodes = () =>{
+        const totalItems = [];
+        const selectedCodes = [];
+        const sugestedItems = [];
+
+        for (let i = 0; i < billingCodes.length; i++) {
+            try{
+                var codesKeyList = billingCodes[i].split("-");
+                var splitDict = {codeNumber:codesKeyList[0].replace(/\s+/g, ''), description: codesKeyList[0].replace(/\s+/g, '')};
+                totalItems.push(splitDict);
+                selectedCodes.push(splitDict);
+            }catch(error){
+
+            }
+
+        }
+
+        for (let i = 0; i < suggestedBillingCodes.length; i++) {
+            try{
+                var codesKeyList = suggestedBillingCodes[i].split("-");
+                var splitDict = {codeNumber:codesKeyList[0].replace(/\s+/g, ''), description: codesKeyList[0].replace(/\s+/g, '')};
+                totalItems.push(splitDict);
+                sugestedItems.push(splitDict);
+            }catch(error){
+                
+            }
+
+        }
+
+        set
+
+    }
+    proccessCodes();
+    
+}, []);
 
     const updateSearch = (value) => {
         setSearchValue(value);

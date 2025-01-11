@@ -4,7 +4,7 @@ import PatientCard from './PatientCard';
 import TopMenu from './TopMenuBar';
 
 
-const MainBox = ({ navigation, setSideMenuVisible, jsonData, patientsNumber }) => {
+const MainBox = ({ stateItems, navigation, setSideMenuVisible, jsonData, patientsNumber }) => {
 
     const [searchValue, setSearchValue] = useState(null);
     const [content, setContent] = useState(jsonData);
@@ -32,6 +32,7 @@ const MainBox = ({ navigation, setSideMenuVisible, jsonData, patientsNumber }) =
                 <PatientCard
                     item={item}
                     navigation={navigation}
+                    stateItems={stateItems}
                 />
             </View>
         </View>

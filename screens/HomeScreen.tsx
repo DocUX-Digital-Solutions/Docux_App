@@ -223,6 +223,7 @@ function HomeScreen({ navigation }) {
           jsonData={dataItems}
           patientsNumber={dataItems.length}
           key={reloadKey}
+          stateItems={selectedSideMenu == 4}
         />
       </Animated.View>
     </View>

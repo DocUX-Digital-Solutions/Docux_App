@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const PatientCard = ({item,navigation}) => {
+const PatientCard = ({stateItems,item,navigation}) => {
     const [lateOnTimeTextColor, setLateOnTimeTextColor] = useState("#646464");
     const [opacityValue, setOpacityValue] = useState(1);
     const [appointmentTime, setAppointmentTime] = useState(null)
     const [statusPatent,setStatusPatent] = useState(item.status)
-
+    const [navigateScreen,setNavigateScreen] = useState( stateItems ? "PostVisitPage" : "VisitPage")
+    console.log(navigateScreen)
 
     function formatTime(timeAppointment){
         const date = new Date(timeAppointment);
@@ -60,7 +61,7 @@ const PatientCard = ({item,navigation}) => {
             <View style={styles.buttonContainer}>
             <TouchableOpacity
     style={styles.startButton}
-    onPress={() => navigation.navigate('VisitPage', { patientItem:item, navigation:navigation})}
+    onPress={() => navigation.navigate(navigateScreen, { patientItem:item, navigation:navigation})}
 >
                     <Text style={styles.startButtonText}>Start</Text>
                 </TouchableOpacity>
