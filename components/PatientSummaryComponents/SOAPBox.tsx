@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const SOAPBox = ({ patientItem }) => {
+const SOAPBox = ({ patientItem, soapNotes }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");
+    const [dataDict, setDataDict] = useState(null);
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
@@ -13,12 +14,40 @@ const SOAPBox = ({ patientItem }) => {
         setFontColor((prev) => (prev === "#000" ? "#346AAC" : "#000"));
         
     };
+    useEffect(() => {
+
+    const proccessNotes = () =>{
+        console.log(soapNotes)
+
+
+    }
+    proccessNotes()
+
+},[]);
+
+const formatString = (input) =>{
+    // Remove 'diagnosticTestingText' from the string
+    const cleanedInput = input.replace('Text', '');
+  
+    // Split by camel case using a regular expression
+    const words = cleanedInput.split(/(?=[A-Z])/);
+  
+    // Capitalize the first letter of each word
+    const capitalizedWords = words.map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    );
+  
+    // Join the words back into a single string
+    const formattedString = capitalizedWords.join(' ');
+  
+    return formattedString;
+  }
 
     const renderSoapNotes = () => {
         try {
-            return Object.entries(patientItem.soapNotes).map(([key, value]) => (
+            return Object.entries(soapNotes).map(([key, value]) => (
                 <View key={key} style={styles.noteContainer}>
-                    <Text style={styles.boldText}>{key}:</Text>
+                    <Text style={styles.boldText}>{formatString(key)}:</Text>
                     <Text style={styles.normalText}>{value}</Text>
                 </View>
             ));
@@ -107,7 +136,7 @@ const styles = StyleSheet.create({
     boldText: {
         fontWeight: 'bold',
         fontSize: 18,
-        marginBottom: 4,
+        marginBottom: 5,
     },
     normalText: {
         fontSize: 16,

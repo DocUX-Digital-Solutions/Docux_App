@@ -8,12 +8,14 @@ import OperativeNotes from './OperativeNotes';
 import BillingCodes from './BillingCodes';
 import BottomButtons from './BottomButtons';
 import DiagnosticCodeBox from './DiagnosticCodeBox';
+import VeraHealthBox from './VeraHealthBox';
 import { Auth, API, Storage } from 'aws-amplify';
 
 const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigation }) => {
     const [searchValue, setSearchValue] = useState(null);
     const [isEditable, setIsEditable] = useState(false);
     const [dataValues, setDataValues] = useState(null);
+    const [reloadKey,setReloadKey] = useState(0);
 
      useEffect(() => {
         const getDataBox = async () =>{
@@ -32,6 +34,7 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                     setDataValues(response);
                     console.log(response?.encounters?.billingCodes)
                     console.log(JSON.stringify(response, null, 2));
+                    setReloadKey((prev) => prev + 1);
                   })
                   .catch((error) => {
                   });
@@ -58,17 +61,24 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                 showsVerticalScrollIndicator={true}
             >
                 <PatientCard />
-                <SOAPBox patientItem={patientItem} />
+                <SOAPBox 
+                    patientItem={patientItem} 
+                    soapNotes={dataValues?.encounters?.soapNotes}
+                    key ={reloadKey}
+                />
                 <TranscriptBox isEditable={isEditable} />
+                <VeraHealthBox/>
                 <OperativeNotes />
                 <DiagnosticCodeBox 
                 diagnosticCodes={dataValues?.encounters?.diagnosticCodes}
                 suggestedDiagnosticCodes={dataValues?.encounters?.suggestedDiagnosticCodes}
+                key ={reloadKey}
                 />
                 <BillingCodes 
                 numCodes={30} 
                 billingCodes={dataValues?.encounters?.billingCodes}
                 suggestedBillingCodes={dataValues?.encounters?.suggestedBillingCodes}
+                key ={reloadKey}
                 
                 
                 />

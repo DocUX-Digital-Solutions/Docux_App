@@ -5,31 +5,17 @@ import Svg, { Path } from 'react-native-svg';
 import BillingCodeSuggested from './BillingCodeSuggested';
 import BillingCodeIncluded from './BillingCodeIncluded';
 const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
+    console.log({billingCodes, suggestedBillingCodes})
     const [searchValue, setSearchValue] = useState("");
     const searchBarRef = useRef(null);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");
 
-    const [allCodes, setAllCodes] = useState([
-        { codeNumber: 'ICD-10 Code: S43.401A1', description: 'chronic shoulder pain' },
-        { codeNumber: 'ICD-10 Code: S43.401A2', description: 'acute shoulder pain' },
-        { codeNumber: 'ICD-10 Code: S43.401A3', description: 'mild shoulder pain' },
-        { codeNumber: 'ICD-10 Code: S43.401A4', description: 'severe shoulder pain' },
-    ]);
-
-    const [suggestedCodes, setSuggestedCodes] = useState([
-        { codeNumber: 'ICD-10 Code: S43.401A1', description: 'chronic shoulder pain' },
-        { codeNumber: 'ICD-10 Code: S43.401A4', description: 'severe shoulder pain' },
-    ]);
-
-    const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([
-    ]);
-
-    const [codesIncluded, setCodesIncluded] = useState([
-        { codeNumber: 'ICD-10 Code: S43.401A2', description: 'acute shoulder pain' },
-        { codeNumber: 'ICD-10 Code: S43.401A3', description: 'mild shoulder pain' },
-    ]);
+    const [allCodes, setAllCodes] = useState([]);
+    const [suggestedCodes, setSuggestedCodes] = useState([]);
+    const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([]);
+    const [codesIncluded, setCodesIncluded] = useState([]);
 
     const removeCode = (codeNumberToRemove) => {
         setCodesIncluded((prevCodes) => prevCodes.filter((code) => code.codeNumber !== codeNumberToRemove));
@@ -46,13 +32,15 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
         const totalItems = [];
         const selectedCodes = [];
         const sugestedItems = [];
-
+        try{
         for (let i = 0; i < billingCodes.length; i++) {
             try{
                 var codesKeyList = billingCodes[i].split("-");
-                var splitDict = {codeNumber:codesKeyList[0].replace(/\s+/g, ''), description: codesKeyList[0].replace(/\s+/g, '')};
+                var splitDict = {codeNumber:codesKeyList[0].trim(), description: codesKeyList[1].trim()};
+                if (typeof splitDict === 'object' && splitDict !== null) {
                 totalItems.push(splitDict);
                 selectedCodes.push(splitDict);
+                }
             }catch(error){
 
             }
@@ -62,16 +50,24 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
         for (let i = 0; i < suggestedBillingCodes.length; i++) {
             try{
                 var codesKeyList = suggestedBillingCodes[i].split("-");
-                var splitDict = {codeNumber:codesKeyList[0].replace(/\s+/g, ''), description: codesKeyList[0].replace(/\s+/g, '')};
+                var splitDict = {codeNumber:codesKeyList[0].trim(), description: codesKeyList[1].trim()};
+                if (typeof splitDict === 'object' && splitDict !== null) {
                 totalItems.push(splitDict);
                 sugestedItems.push(splitDict);
+                }
             }catch(error){
                 
             }
 
         }
 
-        set
+        setAllCodes(totalItems);
+        setCodesIncluded(selectedCodes);
+        setSuggestedCodes(sugestedItems);
+        }catch(error){
+            console.log(error)
+        }
+
 
     }
     proccessCodes();
@@ -101,13 +97,16 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
     };
 
     const renderCodesIncluded = () => {
-        return codesIncluded.map((code) => (
+        return codesIncluded.length > 0 ? (
+        codesIncluded.map((code) => (
             <BillingCodeIncluded
                 key={code.codeNumber}
                 codeInfo={code}
                 onRemove={() => removeCode(code.codeNumber)} // Pass the removal function
             />
-        ));
+        ))) : (
+            <Text>No codes found</Text>
+        );
     };
 
     const renderCodesSuggested = () => {
@@ -171,6 +170,7 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
                         {searchValue.length === 0 ? (
                             <>
                                 <View style={styles.includedBox}>
+                                <Text style={styles.suggestedText}>SELECTED BILLING CODES</Text>
                                     {renderCodesIncluded()}
                                 </View>
                                 <Svg height="1" width="100%">
