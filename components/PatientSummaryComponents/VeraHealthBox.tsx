@@ -1,5 +1,5 @@
-import React, { useState, useRef,useEffect } from 'react';
-import { TouchableOpacity, Text, StyleSheet, View, Animated, ImageBackground } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { FlatList, TouchableOpacity, Text, StyleSheet, View, Animated, ImageBackground, TextInput } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Svg, { Path } from 'react-native-svg';
 import BillingCodeSuggested from './BillingCodeSuggested';
@@ -15,7 +15,11 @@ const VeraHealthBox = () => {
     const [suggestedCodes, setSuggestedCodes] = useState([]);
     const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([]);
     const [codesIncluded, setCodesIncluded] = useState([]);
-
+    const DATA = [
+        { id: '1', title: 'Short' },
+        { id: '2', title: 'Medium Length' },
+        { id: '3', title: 'A much longer button title to test resizing' },
+    ];
     const removeCode = (codeNumberToRemove) => {
         setCodesIncluded((prevCodes) => prevCodes.filter((code) => code.codeNumber !== codeNumberToRemove));
     };
@@ -38,7 +42,7 @@ const VeraHealthBox = () => {
                         code.description.toLowerCase().includes(value.toLowerCase())
                 )
                 .filter((code) => !codesIncluded.some((included) => included.codeNumber === code.codeNumber)); // Exclude already included codes
-                setSuggestedCodeSearch(filteredCodes);
+            setSuggestedCodeSearch(filteredCodes);
         } else {
             setSuggestedCodeSearch([]);
         }
@@ -52,13 +56,13 @@ const VeraHealthBox = () => {
 
     const renderCodesIncluded = () => {
         return codesIncluded.length > 0 ? (
-        codesIncluded.map((code) => (
-            <BillingCodeIncluded
-                key={code.codeNumber}
-                codeInfo={code}
-                onRemove={() => removeCode(code.codeNumber)} // Pass the removal function
-            />
-        ))) : (
+            codesIncluded.map((code) => (
+                <BillingCodeIncluded
+                    key={code.codeNumber}
+                    codeInfo={code}
+                    onRemove={() => removeCode(code.codeNumber)} // Pass the removal function
+                />
+            ))) : (
             <Text>No codes found</Text>
         );
     };
@@ -76,6 +80,12 @@ const VeraHealthBox = () => {
             <Text>No codes found</Text>
         );
     };
+    const renderItemSuggested = ({ item }) => (
+        <TouchableOpacity style={styles.buttonSuggested}>
+            <Text style={styles.buttonSuggestedText}>{item.title}</Text>
+        </TouchableOpacity>
+    );
+
     const renderCodesSuggestedSearch = () => {
         return suggestedCodeSearch.length > 0 ? (
             suggestedCodeSearch.map((code) => (
@@ -89,7 +99,7 @@ const VeraHealthBox = () => {
             <Text>No codes found</Text>
         );
     };
-    
+
 
     return (
         <View style={styles.container}>
@@ -97,17 +107,17 @@ const VeraHealthBox = () => {
                 style={[
                     styles.innerBox,
                     isDropdownVisible && {
-                       
-                        paddingBottom: 0,
+
+                        paddingBottom: 10,
                     },
                 ]}
             >
                 <View style={styles.header}>
                     <ImageBackground
-                              style={styles.logoStyle}
-                              source={require('../../assets/veraHealth.png')}
-                              resizeMode="contain"
-                            />
+                        style={styles.logoStyle}
+                        source={require('../../assets/veraHealth.png')}
+                        resizeMode="contain"
+                    />
 
                     <TouchableOpacity style={styles.viewButton} onPress={toggleDropdown}>
                         <Text style={styles.viewButtonText}>{textButton}</Text>
@@ -115,18 +125,21 @@ const VeraHealthBox = () => {
                 </View>
                 {isDropdownVisible && (
                     <Animated.View>
-                        <SearchBar
-                            ref={searchBarRef}
-                            placeholder="Add Codes"
-                            onChangeText={updateSearch}
+                        <FlatList
+                data={DATA}
+                renderItem={renderItemSuggested}
+                keyExtractor={item => item.id}
+                style={styles.buttonSuggestionList}
+            />
+                        <TextInput
+                            style={styles.searchContainer}
+                            placeholder="Ask a question..."
                             value={searchValue}
-                            containerStyle={styles.searchBar}
-                            inputContainerStyle={styles.searchContainer}
-                            searchIcon={{ size: 18, color: '#000' }}
+                            onChangeText={(text) => updateSearch(text)}
                         />
                         {searchValue.length === 0 ? (
                             <>
-                               
+
                             </>
                         ) : (
                             <></>
@@ -175,18 +188,22 @@ const styles = StyleSheet.create({
     },
     searchBar: {
         backgroundColor: 'transparent',
-        borderBottomColor: '#f0f',
-        borderTopColor: 'transparent',
-        width: '95%',
-        marginBottom:10
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
+
     },
     searchContainer: {
-        borderRadius: 20,
-        width: '100%',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        borderColor:'#000',
-        borderWidth:1,
-      
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderWidth: 1,
+        height:50,
+        paddingLeft:20,
+        fontSize:16,
+        width:"95%",
+        alignSelf:'center',
+        borderColor: 'rgba(0, 0, 0, 0.2)',
+        
+
     },
     includedBox: {
         padding: 10,
@@ -200,7 +217,30 @@ const styles = StyleSheet.create({
     logoStyle: {
         width: 100,
         height: 40,
-      },
+    },
+    buttonSuggested: {
+        backgroundColor: '#E3E4E6',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        marginVertical: 5,
+        borderRadius: 10,
+        alignItems: 'flex-start', // Align items to the start (left) of the button
+        maxWidth: '96%',
+        alignSelf: 'flex-start',
+        paddingLeft: 10,
+        justifyContent: 'center', // Center content vertically
+    },
+    buttonSuggestedText: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: '500',
+        textAlign: 'left', // Align text to the left
+        width: '100%', // Ensure text takes the full width of the container
+    },
+    buttonSuggestionList:{
+        paddingLeft:10,
+        paddingBottom:10
+    }
 
 
 
