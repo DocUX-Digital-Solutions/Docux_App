@@ -67,6 +67,12 @@ const VeraHealthBox = () => {
         );
     };
 
+    const handleSuggestedClicked = (text) =>{
+        console.log(text);
+        setSearchValue(text);
+
+    }
+
     const renderCodesSuggested = () => {
         return suggestedCodes.length > 0 ? (
             suggestedCodes.map((code) => (
@@ -81,7 +87,7 @@ const VeraHealthBox = () => {
         );
     };
     const renderItemSuggested = ({ item }) => (
-        <TouchableOpacity style={styles.buttonSuggested}>
+        <TouchableOpacity style={styles.buttonSuggested} onPress={()=>handleSuggestedClicked(item.title)}>
             <Text style={styles.buttonSuggestedText}>{item.title}</Text>
         </TouchableOpacity>
     );
@@ -130,6 +136,7 @@ const VeraHealthBox = () => {
                 renderItem={renderItemSuggested}
                 keyExtractor={item => item.id}
                 style={styles.buttonSuggestionList}
+                scrollEnabled={false}
             />
                         <TextInput
                             style={styles.searchContainer}
@@ -233,7 +240,7 @@ const styles = StyleSheet.create({
     buttonSuggestedText: {
         color: 'black',
         fontSize: 16,
-        fontWeight: '500',
+        fontWeight: '600',
         textAlign: 'left', // Align text to the left
         width: '100%', // Ensure text takes the full width of the container
     },
