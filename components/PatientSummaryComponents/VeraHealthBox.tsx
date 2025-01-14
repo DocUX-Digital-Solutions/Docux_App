@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FlatList, TouchableOpacity, Text, StyleSheet, View, Animated, ImageBackground, TextInput } from 'react-native';
+import { Keyboard, FlatList, TouchableOpacity, Text, StyleSheet, View, Animated, ImageBackground, TextInput } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Svg, { Path } from 'react-native-svg';
 import BillingCodeSuggested from './BillingCodeSuggested';
@@ -15,11 +15,7 @@ const VeraHealthBox = () => {
     const [suggestedCodes, setSuggestedCodes] = useState([]);
     const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([]);
     const [codesIncluded, setCodesIncluded] = useState([]);
-    const DATA = [
-        { id: '1', title: 'Short' },
-        { id: '2', title: 'Medium Length' },
-        { id: '3', title: 'A much longer button title to test resizing' },
-    ];
+    const [suggestedQuestion, setSuggestedQuestion ] = useState(['Short' ,'Medium Length','A much longer button title to test resizing']);
     const removeCode = (codeNumberToRemove) => {
         setCodesIncluded((prevCodes) => prevCodes.filter((code) => code.codeNumber !== codeNumberToRemove));
     };
@@ -67,11 +63,16 @@ const VeraHealthBox = () => {
         );
     };
 
-    const handleSuggestedClicked = (text) =>{
-        console.log(text);
-        setSearchValue(text);
+    const handleSuggestedClicked = (question) =>{
+        console.log(question);
+        setSearchValue(question);
+        setSuggestedQuestion((prevQuestions) => prevQuestions.filter(q => q !== question));
+        
 
     }
+    const handleDone = () => {
+        Keyboard.dismiss(); // Dismiss the keyboard
+    };
 
     const renderCodesSuggested = () => {
         return suggestedCodes.length > 0 ? (
@@ -86,9 +87,9 @@ const VeraHealthBox = () => {
             <Text>No codes found</Text>
         );
     };
-    const renderItemSuggested = ({ item }) => (
-        <TouchableOpacity style={styles.buttonSuggested} onPress={()=>handleSuggestedClicked(item.title)}>
-            <Text style={styles.buttonSuggestedText}>{item.title}</Text>
+    const renderItemSuggested = ({item}) => (
+        <TouchableOpacity style={styles.buttonSuggested} onPress={()=>handleSuggestedClicked(item)}>
+            <Text style={styles.buttonSuggestedText}>{item}</Text>
         </TouchableOpacity>
     );
 
@@ -132,7 +133,7 @@ const VeraHealthBox = () => {
                 {isDropdownVisible && (
                     <Animated.View>
                         <FlatList
-                data={DATA}
+                data={suggestedQuestion}
                 renderItem={renderItemSuggested}
                 keyExtractor={item => item.id}
                 style={styles.buttonSuggestionList}
@@ -143,6 +144,9 @@ const VeraHealthBox = () => {
                             placeholder="Ask a question..."
                             value={searchValue}
                             onChangeText={(text) => updateSearch(text)}
+                            returnKeyType="done"
+                            onSubmitEditing={handleDone}
+
                         />
                         {searchValue.length === 0 ? (
                             <>
