@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Keyboard, TextInput,TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const SOAPBox = ({ patientItem, soapNotesInput }) => {
+const SOAPBox = ({soapNotesInput }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");

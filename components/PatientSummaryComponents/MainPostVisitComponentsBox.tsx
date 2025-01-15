@@ -94,7 +94,6 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                 scheduledAt={dataValues?.scheduledAt}
                 />
                 <SOAPBox 
-                    patientItem={patientItem} 
                     soapNotesInput={dataValues?.encounters?.soapNotes}
                     key ={reloadKey}
                 />
