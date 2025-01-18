@@ -57,7 +57,7 @@ const fetchData1 = async () => {
       identityPoolId: VITE_REACT_APP_IDENTITY_POOL_ID,
       logins: {
         "cognito-idp.us-east-1.amazonaws.com/us-east-1_ZRXeRemoP": sessionData.signInUserSession.accessToken.jwtToken, // Use the real token here
-      },
+      }, 
     }),
   });
   const jsonFileKey = 'Elbow1/clinical_transcript.json';
@@ -171,7 +171,7 @@ async function getFileData() {
   
       const jsonFileKey = 'Elbow1/clinical_transcript.json';
       fetchJSONFile(jsonFileKey, { identityId: 'us-east-1:8ea5e5a7-33b8-40a2-908e-97791ed5d401' });
-      return
+      
       // Replace 'Elbow1/clinical_transcript.json' with the path from the response
       //const jsonFileKey = 'Elbow1/clinical_transcript.json';
       const sessionData = await Auth.currentAuthenticatedUser()

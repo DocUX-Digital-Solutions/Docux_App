@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@aws-amplify/react-native": "^1.1.6",
-    "@aws-sdk/client-s3": "^3.726.1",
+    "@aws-sdk/client-s3": "^3.731.1",
     "@aws-sdk/client-transcribe-streaming": "^3.721.0",
     "@aws-sdk/credential-provider-cognito-identity": "^3.726.1",
     "@aws-sdk/credential-provider-http": "^3.716.0",

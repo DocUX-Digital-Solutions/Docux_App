@@ -12,6 +12,8 @@ import DiagnosticCodeBox from './DiagnosticCodeBox';
 import VeraHealthBox from './VeraHealthBox';
 import { Auth, API, Storage } from 'aws-amplify';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import 'react-native-get-random-values';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 
 const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigation }) => {
     const [searchValue, setSearchValue] = useState(null);
@@ -40,6 +42,8 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                 API.get(apiName, path, myInit)
                   .then((response) => {
                     // Add your code here
+                    console.log(JSON.stringify(response, null, 2));
+                    console.log(response?.encounters.transcriptionReference)
                     setDataValues(response);
                     setReloadKey((prev) => prev + 1);
                     setReloadKeyOne((prev) => prev + 1);
@@ -50,11 +54,13 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
         }
       
             getDataBox();
+        
         }, []);
 
     function navGoHome() {
         navigation.navigate("Home");
     }
+
     const toggleEditMode = () => {
         setIsEditable(!isEditable);
         setEditText(!editText);
