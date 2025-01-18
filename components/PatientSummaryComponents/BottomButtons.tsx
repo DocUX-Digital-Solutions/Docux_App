@@ -7,15 +7,29 @@ import * as FileSystem from 'expo-file-system';
 const screenWidth = Dimensions.get('window').width;
 
 const BottomButtons = ({ navGoHome, toggleEditMode }) => {
-
+    const [editText, setEditText] = useState(true);
     return (
         <View style={styles.container}>
        
-            <TouchableOpacity style={styles.editButtonStyle} onPress={() => toggleEditMode()}>
-                <View style={styles.editIcon}>
+            <TouchableOpacity style={styles.editButtonStyle} onPress={() => {toggleEditMode();setEditText(!editText) }}>
+                
+                {editText ? (
+                    <View style={styles.editInnerButtonStyle}>
+                    <View style={styles.editIcon}>
                     <Icon name='note-edit-outline' size={30} color="#fff" />
                 </View>
                 <Text style={styles.buttonText}>EDIT</Text>
+                </View>
+                
+                    ):(
+                        <View style={styles.editInnerButtonStyle}>
+                    <View style={styles.editIcon}>
+                    <Icon name='note-edit-outline' size={30} color="#fff" />
+                </View>
+                <Text style={styles.buttonText}>CANCEL EDIT</Text>
+                </View>
+                          )}
+                          
             </TouchableOpacity>
             <TouchableOpacity style={styles.submitButtonStyle} onPress={() => navGoHome()}>
                 <Text style={styles.buttonText}>SUBMIT</Text>
@@ -60,6 +74,20 @@ const styles = StyleSheet.create({
     },
     editButtonStyle: {
         backgroundColor: '#42526D',
+        height: 50,
+        borderRadius: 25,
+        width: "40%",
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: "3%",
+        flexDirection: 'row',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+    },
+    editInnerButtonStyle:{
+        backgroundColor: 'transperent',
         height: 50,
         borderRadius: 25,
         width: "40%",

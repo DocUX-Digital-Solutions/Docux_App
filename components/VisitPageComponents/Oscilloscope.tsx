@@ -56,8 +56,7 @@ const Oscilloscope = ({ recordingval }) => {
         }
       }, 150); // Check every 300 milliseconds
     } catch (err) {
-      console.log("dhdhd")
-      console.log(err)
+
     }
   };
   const convertSpeechToText = async (audioBytes) => {

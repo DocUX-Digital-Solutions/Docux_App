@@ -18,8 +18,13 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
     const [isEditable, setIsEditable] = useState(false);
     const [dataValues, setDataValues] = useState(null);
     const [reloadKey,setReloadKey] = useState(0);
+    const [reloadKeyOne,setReloadKeyOne] = useState(5);
+    const [reloadKeyTwo,setReloadKeyTwo] = useState(10);
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [editText, setEditText] = useState(false);
+    const min = 1; // Minimum value
+    const max = 100; // Maximum value
 
      useEffect(() => {
         const getDataBox = async () =>{
@@ -36,16 +41,15 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                   .then((response) => {
                     // Add your code here
                     setDataValues(response);
-                    console.log(response?.encounters?.billingCodes)
-                    console.log(JSON.stringify(response, null, 2));
                     setReloadKey((prev) => prev + 1);
+                    setReloadKeyOne((prev) => prev + 1);
+                    setReloadKeyTwo((prev) => prev + 1);
                   })
                   .catch((error) => {
                   });
         }
       
             getDataBox();
-          //setReloadKey((prev) => prev + 1);
         }, []);
 
     function navGoHome() {
@@ -53,6 +57,7 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
     }
     const toggleEditMode = () => {
         setIsEditable(!isEditable);
+        setEditText(!editText);
     };
 
     useEffect(() => {
@@ -74,7 +79,6 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
       }, []);
 
       const handleFloatingButtonPress = () => {
-        console.log('Floating button pressed!');
         setIsKeyboardVisible(false);
         Keyboard.dismiss()
         // Add custom functionality for the floating button here
@@ -96,20 +100,24 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
                 <SOAPBox 
                     soapNotesInput={dataValues?.encounters?.soapNotes}
                     key ={reloadKey}
+                    editText={editText}
+
                 />
                 <TranscriptBox isEditable={isEditable} />
                 <VeraHealthBox/>
                 <OperativeNotes />
+                
                 <DiagnosticCodeBox 
                 diagnosticCodes={dataValues?.encounters?.diagnosticCodes}
                 suggestedDiagnosticCodes={dataValues?.encounters?.suggestedDiagnosticCodes}
-                key ={reloadKey}
+                key ={reloadKeyOne}
                 />
+                
                 <BillingCodes 
                 numCodes={30} 
                 billingCodes={dataValues?.encounters?.billingCodes}
                 suggestedBillingCodes={dataValues?.encounters?.suggestedBillingCodes}
-                key ={reloadKey}
+                key ={reloadKeyTwo}
                 
                 
                 />
@@ -128,7 +136,10 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
         </TouchableOpacity>
       )}
             <View style={styles.bottomButtons}>
-                <BottomButtons navGoHome={navGoHome} toggleEditMode={toggleEditMode} />
+                <BottomButtons 
+                navGoHome={navGoHome} 
+                toggleEditMode={toggleEditMode} 
+                />
             </View>
         </View>
     );

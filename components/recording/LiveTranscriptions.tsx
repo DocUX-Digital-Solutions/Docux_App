@@ -60,7 +60,6 @@ const startStreaming = async (
       './worklets/recording-processor.js',
     )
   } catch (error) {
-    console.log(`Add module error ${error}`)
   }
   const mediaRecorder = new AudioWorkletNode(
     audioContext,
@@ -79,7 +78,6 @@ const startStreaming = async (
 
   source1.connect(mediaRecorder).connect(destination)
   mediaRecorder.port.onmessageerror = error => {
-    console.log(`Error receving message from worklet ${error}`)
   }
 
   const audioDataIterator = pEventIterator<
@@ -128,7 +126,6 @@ const startStreaming = async (
     ShowSpeakerLabel: true,
   })
   const data = await transcribeClient.send(command)
-  console.log('Transcribe sesssion established ', data.SessionId)
 
   if (data.TranscriptResultStream) {
     for await (const event of data.TranscriptResultStream) {

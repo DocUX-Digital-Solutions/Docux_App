@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Keyboard, TextInput,TouchableOpacity, Text, StyleSheet, View, Animated } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const SOAPBox = ({soapNotesInput }) => {
+const SOAPBox = ({soapNotesInput, editText}) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");
     const [dataDict, setDataDict] = useState(null);
     const [soapNotes, setSoapNotes] = useState(soapNotesInput);
-    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+    //const [editText, setEditText] = useState(false);
     
-
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
         setTextButton((prev) => (prev === "VIEW" ? "HIDE" : "VIEW"));
@@ -20,28 +19,13 @@ const SOAPBox = ({soapNotesInput }) => {
     useEffect(() => {
 
     const proccessNotes = () =>{
-        console.log(soapNotes)
+        //console.log(soapNotes)
 
 
     }
     proccessNotes()
 
 },[]);
-useEffect(() => {
-        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (e) => {
-          setIsKeyboardVisible(true);
-        });
-    
-        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-          setIsKeyboardVisible(false);
-        });
-    
-        // Cleanup the listeners on component unmount
-        return () => {
-          keyboardDidHideListener.remove();
-          keyboardDidShowListener.remove();
-        };
-      }, []);
 const formatString = (input) =>{
     // Remove 'diagnosticTestingText' from the string
     const cleanedInput = input.replace('Text', '');
@@ -72,7 +56,7 @@ const formatString = (input) =>{
       return Object.entries(soapNotes).map(([key, value]) => (
         <View key={key} style={styles.noteContainer}>
           <Text style={styles.boldText}>{formatString(key)}:</Text>
-          {isKeyboardVisible ? (
+          {editText ? (
           <TextInput
             style={styles.normalText}
             value={value}
@@ -82,9 +66,9 @@ const formatString = (input) =>{
             scrollEnabled={false}  
             
           />):(
-            <TouchableOpacity onPress={() => setIsKeyboardVisible(true)}>
+            <View>
             <Text style={styles.normalTextNoBorder}>{value}</Text>
-            </TouchableOpacity>
+            </View>
           )}
         </View>
       ));

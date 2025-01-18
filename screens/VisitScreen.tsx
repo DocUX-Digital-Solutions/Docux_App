@@ -143,12 +143,11 @@ async function getFileData() {
           },
         }),
       });
-      //console.log("??")
+      console.log("??")
       console.log(transcribeClient)
   }
   const fetchJSONFile = async (jsonFileKey, sessionData) => {
     try {
-      return
       // Ensure credentials are available
       //const credentials = await Auth.currentCredentials();
       //console.log('Credentials:', credentials);

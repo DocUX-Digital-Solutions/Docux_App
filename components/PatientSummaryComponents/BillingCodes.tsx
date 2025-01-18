@@ -5,7 +5,6 @@ import Svg, { Path } from 'react-native-svg';
 import BillingCodeSuggested from './BillingCodeSuggested';
 import BillingCodeIncluded from './BillingCodeIncluded';
 const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
-    console.log({billingCodes, suggestedBillingCodes})
     const [searchValue, setSearchValue] = useState("");
     const searchBarRef = useRef(null);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -65,7 +64,6 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
         setCodesIncluded(selectedCodes);
         setSuggestedCodes(sugestedItems);
         }catch(error){
-            console.log(error)
         }
 
 
@@ -98,9 +96,9 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
 
     const renderCodesIncluded = () => {
         return codesIncluded.length > 0 ? (
-        codesIncluded.map((code) => (
+        codesIncluded.map((code, index) => (
             <BillingCodeIncluded
-                key={code.codeNumber}
+                key={`${code.codeNumber}-${index}`}
                 codeInfo={code}
                 onRemove={() => removeCode(code.codeNumber)} // Pass the removal function
             />
@@ -111,9 +109,9 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
 
     const renderCodesSuggested = () => {
         return suggestedCodes.length > 0 ? (
-            suggestedCodes.map((code) => (
+            suggestedCodes.map((code, index) => (
                 <BillingCodeSuggested
-                    key={code.codeNumber}
+                    key={`${code.codeNumber}-${index}`}
                     codeInfo={code}
                     onRemove={() => addCode(code)} // Add the selected code to `codesIncluded`
                 />
@@ -124,9 +122,9 @@ const BillingCodes = ({billingCodes, suggestedBillingCodes}) => {
     };
     const renderCodesSuggestedSearch = () => {
         return suggestedCodeSearch.length > 0 ? (
-            suggestedCodeSearch.map((code) => (
+            suggestedCodeSearch.map((code, index) => (
                 <BillingCodeSuggested
-                    key={code.codeNumber}
+                    key={`${code.codeNumber}-${index}`}
                     codeInfo={code}
                     onRemove={() => addCode(code)} // Add the selected code to `codesIncluded`
                 />

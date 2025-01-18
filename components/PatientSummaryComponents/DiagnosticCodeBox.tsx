@@ -31,7 +31,6 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
             const totalItems = [];
             const selectedCodes = [];
             const sugestedItems = [];
-            console.log(diagnosticCodes)
             try{
             for (let i = 0; i < diagnosticCodes.length; i++) {
                 try{
@@ -68,7 +67,6 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
             setCodesIncluded(selectedCodes);
             setSuggestedCodes(sugestedItems);
             }catch(error){
-                console.log(error)
             }
     
     

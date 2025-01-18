@@ -99,7 +99,6 @@ const Recording: React.FC = () => {
   }
 
   const handleRecordingStopped = async () => {
-    console.log('Recording stopped. Proceeding to batch records...')
     try {
       await audioProducer.current.batchRecords()
       if (recordingStoppedPromiseRef.current) {

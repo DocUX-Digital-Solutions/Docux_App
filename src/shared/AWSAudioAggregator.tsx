@@ -104,7 +104,6 @@ export class AWSAudioAggregator {
       client
         .send(command)
         .then(() => {
-          console.log('Batching completed successfully.')
           resolve()
         })
         .catch(error => {

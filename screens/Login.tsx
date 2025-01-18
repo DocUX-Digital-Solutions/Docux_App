@@ -21,7 +21,6 @@ const LoginScreen = ({ navigation }) => {
     const apiName = 'DataApi';
     const path = '/appointments';
     const sessionData = await Auth.currentAuthenticatedUser()
-    console.log(sessionData)
   }
   fetchData()
   async function rememberDevice() {

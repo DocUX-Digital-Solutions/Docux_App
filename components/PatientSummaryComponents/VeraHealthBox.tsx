@@ -15,7 +15,11 @@ const VeraHealthBox = () => {
     const [suggestedCodes, setSuggestedCodes] = useState([]);
     const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([]);
     const [codesIncluded, setCodesIncluded] = useState([]);
-    const [suggestedQuestion, setSuggestedQuestion ] = useState(['Short' ,'Medium Length','A much longer button title to test resizing']);
+    const [suggestedQuestion, setSuggestedQuestion ] = useState([
+        {id:1, data:'Short'} ,
+        {id:2, data:'Medium Length'},
+        {id:3, data: 'A much longer button title to test resizing'}
+    ]);
     const removeCode = (codeNumberToRemove) => {
         setCodesIncluded((prevCodes) => prevCodes.filter((code) => code.codeNumber !== codeNumberToRemove));
     };
@@ -64,7 +68,6 @@ const VeraHealthBox = () => {
     };
 
     const handleSuggestedClicked = (question) =>{
-        console.log(question);
         setSearchValue(question);
         setSuggestedQuestion((prevQuestions) => prevQuestions.filter(q => q !== question));
         
@@ -88,8 +91,8 @@ const VeraHealthBox = () => {
         );
     };
     const renderItemSuggested = ({item}) => (
-        <TouchableOpacity style={styles.buttonSuggested} onPress={()=>handleSuggestedClicked(item)}>
-            <Text style={styles.buttonSuggestedText}>{item}</Text>
+        <TouchableOpacity style={styles.buttonSuggested} onPress={()=>handleSuggestedClicked(item.data)}>
+            <Text style={styles.buttonSuggestedText}>{item.data}</Text>
         </TouchableOpacity>
     );
 
@@ -132,6 +135,7 @@ const VeraHealthBox = () => {
                 </View>
                 {isDropdownVisible && (
                     <Animated.View>
+                        
                         <FlatList
                 data={suggestedQuestion}
                 renderItem={renderItemSuggested}

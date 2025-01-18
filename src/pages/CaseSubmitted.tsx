@@ -34,7 +34,6 @@ const CaseSubmitted: React.FC = () => {
 
   const handlePrintAWS = () => {
     // todo implement
-    console.log('Printing to AWS')
   }
 
   const handleClose = () => {
