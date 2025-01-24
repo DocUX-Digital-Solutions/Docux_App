@@ -57,7 +57,7 @@ const fetchData1 = async () => {
       identityPoolId: VITE_REACT_APP_IDENTITY_POOL_ID,
       logins: {
         "cognito-idp.us-east-1.amazonaws.com/us-east-1_ZRXeRemoP": sessionData.signInUserSession.accessToken.jwtToken, // Use the real token here
-      },
+      }, 
     }),
   });
   const jsonFileKey = 'Elbow1/clinical_transcript.json';
@@ -69,14 +69,10 @@ const fetchData1 = async () => {
   try {
     const response1 = await fetch('https://docux-demo-clinical-document-bucket.s3.us-east-1.amazonaws.com/Elbow1/transcript.json');
     const blob = await response1.blob();
-    //console.log(response1)
     // Convert the blob to a string or process it as needed
     //const text = await blob.text();
-    //console.log('File content:', text);
     const command = new GetObjectCommand(params);
-    //console.log(command)
     const response = await s3Client.send(command);
-    //console.log(response)
     // Read the body from S3 (stream) and convert to string
     //const bodyContents = await streamToString(response.Body);
     
@@ -94,7 +90,6 @@ async function getFileData() {
 
       // Remove 'public/' from the URL (if necessary)
       const modifiedUrl = url.replace('/public', '');  // Adjust the URL
-      console.log(modifiedUrl)
       // Fetch the data from the modified URL
       const response = await fetch(modifiedUrl);
       
@@ -106,7 +101,7 @@ async function getFileData() {
       // Parse the response as JSON (or other formats as needed)
       const data = await response.json();
       
-      console.log('Fetched Data:', data);  // Log the fetched data
+      console.log('Fetched Data:', 20202);  // Log the fetched data
       return data;  // Return the fetched data
   } catch (error) {
       console.error('Error fetching data:', error);
@@ -127,8 +122,8 @@ async function getFileData() {
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
-        //console.log(response)
-        console.log(JSON.stringify(response, null, 2));
+        console.log(20)
+        //console.log(JSON.stringify(response, null, 2));
       })
       .catch((error) => {
       });
@@ -144,7 +139,7 @@ async function getFileData() {
         }),
       });
       console.log("??")
-      console.log(transcribeClient)
+      //console.log(transcribeClient)
   }
   const fetchJSONFile = async (jsonFileKey, sessionData) => {
     try {
@@ -153,12 +148,12 @@ async function getFileData() {
       //console.log('Credentials:', credentials);
       const result = await Storage.get('Elbow1/summary.json');
   
-      console.log('File fetched successfully212:', result);
+      //console.log('File fetched successfully212:', result);
       const response = await fetch(result); // result should be a URL if it's a public file or signed URL
-      console.log(response)
+      //console.log(response)
     // Read the response body as text
       const textContent = await response.text();
-      console.log('File fetched successfully111:', textContent);
+      //console.log('File fetched successfully111:', textContent);
     } catch (error) {
       console.error('Error fetching JSON file:1', error);
     }
@@ -171,7 +166,7 @@ async function getFileData() {
   
       const jsonFileKey = 'Elbow1/clinical_transcript.json';
       fetchJSONFile(jsonFileKey, { identityId: 'us-east-1:8ea5e5a7-33b8-40a2-908e-97791ed5d401' });
-      return
+      
       // Replace 'Elbow1/clinical_transcript.json' with the path from the response
       //const jsonFileKey = 'Elbow1/clinical_transcript.json';
       const sessionData = await Auth.currentAuthenticatedUser()

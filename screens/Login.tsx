@@ -23,14 +23,6 @@ const LoginScreen = ({ navigation }) => {
     const sessionData = await Auth.currentAuthenticatedUser()
   }
   fetchData()
-  async function rememberDevice() {
-    try {
-      const result = await Auth.rememberDevice();
-      //console.log(result);
-    } catch (error) {
-      console.log('Error remembering device', error);
-    }
-  }
   const clickFunction = () =>{
     setLoading(true);
     setRefreshKey((prevKey) => prevKey + 1);
@@ -76,7 +68,6 @@ const LoginScreen = ({ navigation }) => {
         setButtonStateText("Verify")
         
       } else {
-        //console.log('User signed in:', user);
         // Navigate to the next screen (e.g., home screen)
       }
     } catch (error) {

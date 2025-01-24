@@ -72,25 +72,20 @@ const Oscilloscope = ({ recordingval }) => {
       });
   
       const { transcription: { fullText } } = result;
-      console.log({ fullText });
     } catch (err) {
       console.error({ err });
     }
   };
   const stopRecording = async () => {
-    console.log(39393)
     if (recording) {
       try {
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI();
-        console.log(uri)
         //const audioBytes = await recording.getDataAsync();
         convertSpeechToText(uri);
         setRecordingUri(uri);
         setRecording(null);
       } catch (error) {
-        console.log("?>?>?")
-        console.log(error)
       }
     }
   };

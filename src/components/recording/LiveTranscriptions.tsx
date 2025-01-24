@@ -128,7 +128,6 @@ const startStreaming = async (
     ShowSpeakerLabel: true,
   })
   const data = await transcribeClient.send(command)
-  console.log('Transcribe sesssion established ', data.SessionId)
 
   if (data.TranscriptResultStream) {
     for await (const event of data.TranscriptResultStream) {

@@ -18,13 +18,6 @@ const SOAPBox = ({soapNotesInput, editText}) => {
     };
     useEffect(() => {
 
-    const proccessNotes = () =>{
-        //console.log(soapNotes)
-
-
-    }
-    proccessNotes()
-
 },[]);
 const formatString = (input) =>{
     // Remove 'diagnosticTestingText' from the string

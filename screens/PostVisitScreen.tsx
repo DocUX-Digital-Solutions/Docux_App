@@ -2,14 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import SideMenu from '../components/SharedComponents/SideMenu';
 import MainPostVisitComponentsBox from '../components/PatientSummaryComponents/MainPostVisitComponentsBox';
-
+import {
+  S3Client,
+  CreateBucketCommand,
+  DeleteBucketCommand,
+  GetObjectCommand
+} from "@aws-sdk/client-s3";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
+import { Auth, API, Storage } from 'aws-amplify';
 const PostVisitPage = ({ route }) => {
   const [isSideMenuVisible, setSideMenuVisible] = useState(false);
   const { navigation, patientItem } = route.params;
+  const [transcriptData, setTranscriptData] = useState([]);
 
   // Animated values for width and opacity
   const sideMenuWidth = useState(new Animated.Value(0))[0];
   const mainBoxOpacity = useState(new Animated.Value(1))[0];
+
+
+ 
 
   useEffect(() => {
     // Trigger animations when `isSideMenuVisible` changes
@@ -47,6 +58,7 @@ const PostVisitPage = ({ route }) => {
           setSideMenuVisible={setSideMenuVisible}
           patientItem={patientItem}
           navigation={navigation}
+          transcriptData={transcriptData}
         />
     </View>
   );
@@ -56,7 +68,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     
-    marginTop:"20%",
   },
   sideMenuContainer: {
   },

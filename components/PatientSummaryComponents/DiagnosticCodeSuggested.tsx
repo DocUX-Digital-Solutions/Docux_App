@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
-const DiagnosticCodeSuggested = ({ codeInfo, onRemove }) => {
+const DiagnosticCodeSuggested = ({ codeInfo, onRemove,passData}) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() =>passData({header:codeInfo.codeNumber,data:codeInfo.description})}>
             <View style={styles.descriptionTextBox}>
                 <Text style={styles.codeText}>{codeInfo.codeNumber}</Text>
                 <Text style={styles.descriptionText}>{codeInfo.description}</Text>
@@ -11,7 +11,7 @@ const DiagnosticCodeSuggested = ({ codeInfo, onRemove }) => {
             <TouchableOpacity onPress={onRemove} style={styles.removeButton}>
                 <Text style={styles.removeButtonText}>add</Text>
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 };
 

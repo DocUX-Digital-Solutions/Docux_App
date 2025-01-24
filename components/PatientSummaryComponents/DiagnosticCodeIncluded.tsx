@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 
 const DiagnosticCodeIncluded = ({ codeInfo, onRemove }) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <View style={styles.descriptionTextBox}>
                 <Text style={styles.codeText}>{codeInfo.codeNumber}</Text>
                 <Text style={styles.descriptionText}>{codeInfo.description}</Text>
@@ -11,7 +11,7 @@ const DiagnosticCodeIncluded = ({ codeInfo, onRemove }) => {
             <TouchableOpacity onPress={onRemove} style={styles.removeButton}>
                 <Text style={styles.removeButtonText}>Remove</Text>
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
 };
 

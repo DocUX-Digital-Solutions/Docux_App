@@ -5,17 +5,22 @@ import Svg, { Path } from 'react-native-svg';
 import DiagnosticCodeSuggested from './DiagnosticCodeSuggested';  // Adjusted import name
 import DiagnosticCodeIncluded from './DiagnosticCodeIncluded';
 
-const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
+const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes, setPopUpHeader, setPopUpData, setIsVisible, allCodes}) => {
     const [searchValue, setSearchValue] = useState("");
     const searchBarRef = useRef(null);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [textButton, setTextButton] = useState("VIEW");
     const [fontColor, setFontColor] = useState("#000");
-    const [allCodes, setAllCodes] = useState([]);
+    //const [allCodes, setAllCodes] = useState([]);
     const [suggestedCodes, setSuggestedCodes] = useState([]);
     const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([]);
     const [codesIncluded, setCodesIncluded] = useState([]);
-
+    console.log(allCodes)
+    const passData = (data)=>{
+        setPopUpHeader(data.header)
+        setPopUpData(data.data)
+        setIsVisible(true);
+    }
     const removeCode = (codeNumberToRemove) => {
         setCodesIncluded((prevCodes) => prevCodes.filter((code) => code.codeNumber !== codeNumberToRemove));
     };
@@ -40,7 +45,7 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
                     var splitDict = {codeNumber:codesKeyList[0].replace(/\s+/g, ''), description: codesKeyList[1].replace(/\s+/g, '')};
                     
                     if (typeof splitDict === 'object' && splitDict !== null) {
-                    totalItems.push(splitDict);
+                    //totalItems.push(splitDict);
                     selectedCodes.push(splitDict);
                     }
                 }catch(error){
@@ -54,7 +59,7 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
                     var codesKeyList = suggestedDiagnosticCodes[i].split("-");
                     var splitDict = {codeNumber:codesKeyList[0], description: codesKeyList[1]};
                     if (typeof splitDict === 'object' && splitDict !== null) {
-                    totalItems.push(splitDict);
+                    //totalItems.push(splitDict);
                     sugestedItems.push(splitDict);
                     }
                 }catch(error){
@@ -63,7 +68,6 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
     
             }
     
-            setAllCodes(totalItems);
             setCodesIncluded(selectedCodes);
             setSuggestedCodes(sugestedItems);
             }catch(error){
@@ -117,6 +121,7 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes}) => {
                     key={code.codeNumber}
                     codeInfo={code}
                     onRemove={() => addCode(code)} // Add the selected code to `codesIncluded`
+                    passData={passData}
                 />
             ))
         ) : (

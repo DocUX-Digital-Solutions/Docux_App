@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import SideMenu from '../components/HomeScreenComponents/SideMenu';
 import MainBox from '../components/HomeScreenComponents/MainBox';
@@ -7,6 +7,8 @@ import { Auth } from 'aws-amplify';
 import { API } from 'aws-amplify';
 import Config from 'react-native-config';
 import axios from 'axios';
+import { VeraClient } from '../components/testingVera';
+import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 
 import { PatchAppointmentRequest } from '../src/hooks/useFetchAppointmentData'
 function HomeScreen({ navigation }) {
@@ -20,6 +22,76 @@ function HomeScreen({ navigation }) {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   const [categorizedAppointmentsSide, setCategorizedAppointmentsSide] = useState(null)
+  const [messages, setMessages] = useState([])
+
+  const makeAuthenticatedPostRequest = async (url, data, token) => {
+    try {
+      console.log(token)
+      const response = await axios.get(
+        'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search',
+        {
+          params: {
+            terms: "",
+            sf: 'code,name',
+            df: 'code,name',
+          },
+        },
+      )
+      const results = response.data[3] || []
+      return results.map((item: [string, string]) => ({
+        code: item[0],
+        name: item[1],
+      }))
+      //return response.data;
+    } catch (error) {
+      console.error('Error making authenticated POST request:', error);
+      throw error; // Handle the error appropriately
+    }
+  };
+const postDataToAPI = async () => {
+  const apiName = 'VeraAPI'; // Replace with your API Gateway name
+  const path = '/'; // Replace with your endpoint path
+  const sessionData = await Auth.currentAuthenticatedUser()
+  /*
+  const client = new SecretsManagerClient({
+    region: "us-east-1",
+    credentials: fromCognitoIdentityPool({
+      clientConfig: {
+        region: "us-east-1",
+      },
+      identityPoolId: "us-east-1:8ea5e5a7-33b8-40a2-908e-97791ed5d401",
+      logins: {
+        'cognito-idp.us-east-1.amazonaws.com/us-east-1_ZRXeRemoP': sessionData.signInUserSession.accessToken.jwtToken,
+      },
+    }),
+  })
+  console.log(client)
+  */
+  const token = sessionData.signInUserSession.accessToken.jwtToken; // Retrieve the token from storage (e.g., AsyncStorage)
+  const data = {question: 'ho'};
+  
+  makeAuthenticatedPostRequest('https://app.vera-health.ai/api/external/medical-api/', data, token)
+    .then(response => {
+      // Handle the successful response
+      console.log('Response:', response);
+    })
+    .catch(error => {
+      // Handle the error
+      console.error('Error1:', error);
+    });
+  const myInit = {
+    headers: {
+      Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
+    }
+  };
+  console.log(myInit)
+  try {
+    const response = await API.post(apiName, path, myInit);
+    console.log('Success:', response);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
   const fetchData = async () => {
     const apiName = 'DataApi';
@@ -30,17 +102,17 @@ function HomeScreen({ navigation }) {
         Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
       }
     };
-    //console.log(sessionData.signInUserSession.accessToken.jwtToken)
 
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
-        //console.log(response)
         setUnsortedData(response)
         groupAppointmentsByDate(response);
       })
       .catch((error) => {
       });
+    await postDataToAPI()
+      
   }
   useEffect(() => {
     if (unsortedData.length > 0) {

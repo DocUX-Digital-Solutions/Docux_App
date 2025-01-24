@@ -78,7 +78,7 @@ const TopMenuPatient = ({setSideMenuVisible, setFilterValue }) => {
                 </View>
                 <View style={styles.menuContainerRight}>
 
-                    <TouchableOpacity style={styles.iconContainer} onPress={console.log(2)}>
+                    <TouchableOpacity style={styles.iconContainer} onPress={()=>console.log(2)}>
                         <Icon name="microphone" size={25} color="#000" />
                     </TouchableOpacity>
 
@@ -86,10 +86,10 @@ const TopMenuPatient = ({setSideMenuVisible, setFilterValue }) => {
                         <Icon name={magnifyIcon} size={25} color="#000" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.iconContainer} onPress={console.log(2)}>
+                    <TouchableOpacity style={styles.iconContainer} onPress={()=>console.log(2)}>
                         <Icon name="bell-outline" size={25} color="#000" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.iconContainer} onPress={console.log(2)}>
+                    <TouchableOpacity style={styles.iconContainer} onPress={()=>console.log(2)}>
                         <Icon name="account-circle-outline" size={25} color="#000" />
                     </TouchableOpacity>
 

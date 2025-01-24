@@ -39,6 +39,11 @@
       "name": "DataApi",
       "endpoint": "https://demo.mydocux.com/api",
       "region": "us-east-1"
+    },
+    {
+      "name": "VeraAPI",
+      "endpoint": "https://app.vera-health.ai/api/external/medical-api",
+      "region": "us-east-1"
     }
   ],
   "predictions": {
