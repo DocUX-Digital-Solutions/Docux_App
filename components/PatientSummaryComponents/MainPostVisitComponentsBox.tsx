@@ -39,7 +39,6 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
   
   const min = 1; // Minimum value
   const max = 100; // Maximum value
-  console.log(patientItem)
   const callAllCodes = async ()=>{
     await makeAuthenticatedPostRequest()
   }
@@ -117,7 +116,7 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
           setReloadKey((prev) => prev + 1);
           setReloadKeyOne((prev) => prev + 1);
           setReloadKeyTwo((prev) => prev + 1);
-          console.log(30303)
+          console.log(response)
           fetchTranscript(response?.encounters?.transcriptionReference)
         })
         .catch((error) => {
