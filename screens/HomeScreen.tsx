@@ -26,7 +26,6 @@ function HomeScreen({ navigation }) {
 
   const makeAuthenticatedPostRequest = async (url, data, token) => {
     try {
-      console.log(token)
       const response = await axios.get(
         'https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search',
         {
@@ -65,7 +64,6 @@ const postDataToAPI = async () => {
       },
     }),
   })
-  console.log(client)
   */
   const token = sessionData.signInUserSession.accessToken.jwtToken; // Retrieve the token from storage (e.g., AsyncStorage)
   const data = {question: 'ho'};
@@ -84,7 +82,6 @@ const postDataToAPI = async () => {
       Authorization: `Bearer ${sessionData.signInUserSession.accessToken.jwtToken}`
     }
   };
-  console.log(myInit)
   try {
     const response = await API.post(apiName, path, myInit);
     console.log('Success:', response);

@@ -72,7 +72,7 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
       const s3Client = new S3Client({
         region: 'us-east-1', // Your region
         credentials: {
-
+       
         },
       });
 

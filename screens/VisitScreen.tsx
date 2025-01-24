@@ -101,7 +101,6 @@ async function getFileData() {
       // Parse the response as JSON (or other formats as needed)
       const data = await response.json();
       
-      console.log('Fetched Data:', 20202);  // Log the fetched data
       return data;  // Return the fetched data
   } catch (error) {
       console.error('Error fetching data:', error);
@@ -122,12 +121,10 @@ async function getFileData() {
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
-        console.log(20)
-        //console.log(JSON.stringify(response, null, 2));
       })
       .catch((error) => {
       });
-      getJSONFile();
+
       const transcribeClient = new TranscribeStreamingClient({
         region: VITE_REACT_APP_AWS_REGION,
         credentials: fromCognitoIdentityPool({
@@ -138,7 +135,6 @@ async function getFileData() {
           },
         }),
       });
-      console.log("??")
       //console.log(transcribeClient)
   }
   const fetchJSONFile = async (jsonFileKey, sessionData) => {
@@ -161,71 +157,9 @@ async function getFileData() {
   
   // Usage example:
 
-  async function getJSONFile() {
-    try {
+
   
-      const jsonFileKey = 'Elbow1/clinical_transcript.json';
-      fetchJSONFile(jsonFileKey, { identityId: 'us-east-1:8ea5e5a7-33b8-40a2-908e-97791ed5d401' });
-      
-      // Replace 'Elbow1/clinical_transcript.json' with the path from the response
-      //const jsonFileKey = 'Elbow1/clinical_transcript.json';
-      const sessionData = await Auth.currentAuthenticatedUser()
-      // Get the signed URL for the JSON file
-      const fileList = await Storage.list('/');
-      console.log(fileList)
-      const result = await Storage.get(jsonFileKey, {
-        level: 'protected',
-        identityId: sessionData.signInUserSession.accessToken.jwtToken // the identityId of that user
-      });
-      const fileUrl = await Storage.get(jsonFileKey, { download: true });
-      console.log(fileUrl)
-      // Fetch the file content
-      const response = await fileUrl.Body.text();
-      const jsonData = JSON.parse(response);
-     
-      //global.Buffer = global.Buffer || Buffer;
-      /*
-      const s3Client = new S3Client({
-  region: VITE_REACT_APP_AWS_REGION,
-  credentials: fromCognitoIdentityPool({
-    clientConfig: {
-      region: VITE_REACT_APP_AWS_REGION,
-    },
-    identityPoolId: VITE_REACT_APP_IDENTITY_POOL_ID,
-    logins: {
-      'cognito-idp.us-east-1.amazonaws.com/us-east-1_ZRXeRemoP': sessionData.signInUserSession.accessToken.jwtToken, // Adjust to your setup
-    },
-  }),
-});
-*/
-    } catch (error) {
-      console.error('Error fetching JSON file:', error);
-    }
-  }
-  
-  const authenticateUser = () => {
-    const poolData = {
-      UserPoolId: your_user_pool_id, // Your user pool ID
-      ClientId: '33m4rkeea9dmj9q3v2m1hmgsb0', // Your app client ID
-    };
-    const userPool = new CognitoUserPool(poolData);
-    //console.log( userPool.getCurrentUser())
-    /*
-    const userData = { Username: username, Pool: userPool };
-    const authenticationDetails = new AuthenticationDetails({ Username: username, Password: password });
-  
-    const cognitoUser = new CognitoUser(userData);
-    cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: (result) => {
-        const idToken = result.getIdToken().getJwtToken();
-        // Use the idToken as needed
-      },
-      onFailure: (err) => {
-        console.error(err);
-      },
-    });
-    */
-  };
+
   useEffect(() => {
       const fetchAndGroupAppointments = async () => {
         try {

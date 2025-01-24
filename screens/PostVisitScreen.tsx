@@ -18,17 +18,7 @@ const PostVisitPage = ({ route }) => {
   // Animated values for width and opacity
   const sideMenuWidth = useState(new Animated.Value(0))[0];
   const mainBoxOpacity = useState(new Animated.Value(1))[0];
-  const uploadFile = async () => {
-    try {
-      const response = await Storage.put('test.txt', 'Hello world!', {
-        level: 'public', // Change to 'private' or 'protected' if necessary
-      });
-      console.log('File uploaded successfully to path:', response.key);
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    }
-  };
-  const fetchTranscript = async () => {
+   const fetchTranscript = async () => {
     /*
     try {
       const s3Client = new S3Client({
@@ -77,46 +67,10 @@ const PostVisitPage = ({ route }) => {
       });
     });
   };
-const fetchJSONFile = async () => {
-  try {
-    //uploadFile()
-
-    fetchTranscript()
-    // List all files in the 'Elbow1' directory
-    try {
-      const result = await Storage.list('');
-      console.log('Objects in S3:', result);
-    } catch (error) {
-      console.error('Error listing objects:', error);
-    }
-  
-    const fileList = await Storage.list('', { level: 'public' });
-
-    console.log('Files in Elbow1:', fileList);
-
-    // Find the specific file 'summary.json'
-    const file = fileList.find(file => file.key === 'Elbow1/summary.json');
-    if (file) {
-      const result = await Storage.get(file.key, { level: 'public' });
-
-      console.log('File URL:', result);
-      const response = await fetch(result);
-      const textContent = await response.text();
-      console.log('File content:', textContent);
-    } else {
-      console.error('summary.json not found in Elbow1');
-    }
-  } catch (error) {
-    console.error('Error fetching JSON file:', error);
-  }
-};
-
-
- 
 
   useEffect(() => {
     // Trigger animations when `isSideMenuVisible` changes
-    fetchJSONFile()
+    fetchTranscript()
     if (isSideMenuVisible) {
       Animated.timing(sideMenuWidth, {
         toValue: 95, // 95% width for side menu

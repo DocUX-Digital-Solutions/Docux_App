@@ -15,7 +15,6 @@ const DiagnosticCodeBox = ({diagnosticCodes, suggestedDiagnosticCodes, setPopUpH
     const [suggestedCodes, setSuggestedCodes] = useState([]);
     const [suggestedCodeSearch, setSuggestedCodeSearch] = useState([]);
     const [codesIncluded, setCodesIncluded] = useState([]);
-    console.log(allCodes)
     const passData = (data)=>{
         setPopUpHeader(data.header)
         setPopUpData(data.data)
