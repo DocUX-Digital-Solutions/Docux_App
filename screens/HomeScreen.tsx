@@ -125,6 +125,7 @@ const postDataToAPI = async () => {
         await fetchData();
       } catch (error) {
         console.error("Error fetching and grouping appointments:", error);
+        navigation.replace("Login");
       }
     };
 

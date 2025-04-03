@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { ActivityIndicator, Text, ImageBackground, View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing the icon library
 import { Auth } from 'aws-amplify';
@@ -17,12 +17,17 @@ const LoginScreen = ({ navigation }) => {
   const [buttonStateText,setButtonStateText] = useState("LOGIN");
   const [loading, setLoading] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
-  const fetchData = async () => {
-    const apiName = 'DataApi';
-    const path = '/appointments';
-    const sessionData = await Auth.currentAuthenticatedUser()
-  }
-  fetchData()
+  const [updateError, setUpdateError] = useState(100);
+
+   useEffect(() => {
+    const fetchData = async () => {
+      const apiName = 'DataApi';
+      const path = '/appointments';
+      const sessionData = await Auth.currentAuthenticatedUser()
+    }
+    fetchData()
+      
+    }, []); 
   const clickFunction = () =>{
     setLoading(true);
     setRefreshKey((prevKey) => prevKey + 1);
@@ -45,19 +50,25 @@ const LoginScreen = ({ navigation }) => {
       navigation.replace("Home");
     } catch (error) {
       console.error('Error confirming MFA:', error);
-    }
+      setLoading(false);
+      setUpdateError((prev) => prev+1);
+    } 
   }
-
+  const setUpdateErrorMessageFunc = (message) =>{
+    setErrorMessage(message);
+    setUpdateError((prev) => prev+1);
+    setIsLoginWrong(true);
+  }
   const handleSignIn = async () => {
     if (!email.length) {
       setIsLoginWrong(true);
       setLoading(false);
-      setErrorMessage('Username cannot be empty');
+      setUpdateErrorMessageFunc('Username cannot be empty');
       return;
     } else if(!password.length){
       setIsLoginWrong(true);
       setLoading(false);
-      setErrorMessage('Password cannot be empty');
+      setUpdateErrorMessageFunc('Password cannot be empty');
       return;
     } 
     try {
@@ -74,11 +85,11 @@ const LoginScreen = ({ navigation }) => {
       console.error('Error signing in:',  error.message);
       if (error.message.includes('User does not exist')) {
         setIsLoginWrong(true);
-        setErrorMessage('No user found');
+        setUpdateErrorMessageFunc('No user found');
       }
       else {
         setIsLoginWrong(true);
-        setErrorMessage('An error occurred. Please try again.');
+        setUpdateErrorMessageFunc('An error occurred. Please try again.');
       }
     }
     setLoading(false);
@@ -92,7 +103,8 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       console.error('Error confirming MFA code:', error);
       setIsLoginWrong(true);
-      setErrorMessage('Invalid MFA code. Please try again.');
+      setUpdateErrorMessageFunc('Invalid MFA code. Please try again.');
+      setLoading(false);
     }
   };
 
@@ -145,7 +157,7 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.inputContainer}>
+      <View style={styles.inputContainer} key={updateError}>
       {isLoginWrong && <Text style={styles.text}>{errorMessage}</Text>}
       </View>
       {step === 'mfa' && (
@@ -176,7 +188,7 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.replace("Home")}>
+      <TouchableOpacity style={styles.buttonForgot} onPress={()=> navigation.replace("ResetPassword")}>
         <Text style={styles.buttonTextForgot}>forgot password?</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>

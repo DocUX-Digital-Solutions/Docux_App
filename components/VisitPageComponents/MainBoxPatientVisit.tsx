@@ -6,6 +6,8 @@ import TopMenuPatient from '../SharedComponents/TopMenuPatient';
 import PatientCard from './PatientCard';
 import Oscilloscope from './Oscilloscope';
 import ConfirmEnd from './ConfirmEndPopUp';
+import LottieView from 'lottie-react-native';
+
 const MainBoxPatientVisit = ({navigation, setSideMenuVisible, patientItem }) => {
     const scrollY = useRef(new Animated.Value(0)).current;
     const [listHeight, setListHeight] = useState(0);
@@ -48,9 +50,8 @@ const MainBoxPatientVisit = ({navigation, setSideMenuVisible, patientItem }) => 
                 <TopMenuPatient setSideMenuVisible={setSideMenuVisible} setFilterValue={setSearchValue} />
             </View>*/}
             <View style={styles.patientBoxCard}><PatientCard /></View>
-            <View style={styles.oscilloscopeBox}>
+            
             <Oscilloscope recordingval={isRecording} />
-            </View>
             <View style={styles.bodyBox}>
                 <PatientTranscript />
             </View>
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end', // Center content horizontally
     },
     patientBoxCard: {
-        paddingBottom: 30,
+        paddingBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },

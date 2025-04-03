@@ -7,7 +7,7 @@ const PatientCard = ({stateItems,item,navigation}) => {
     const [opacityValue, setOpacityValue] = useState(1);
     const [appointmentTime, setAppointmentTime] = useState(null)
     const [statusPatent,setStatusPatent] = useState(item.status)
-    const [navigateScreen,setNavigateScreen] = useState( stateItems ? "PostVisitPage" : "VisitPage")
+    const [navigateScreen,setNavigateScreen] = useState( stateItems ? "VisitPage" : "VisitPage")
 
     function formatTime(timeAppointment){
         const date = new Date(timeAppointment);
