@@ -83,8 +83,8 @@ const postDataToAPI = async () => {
     }
   };
   try {
-    const response = await API.post(apiName, path, myInit);
-    console.log('Success:', response);
+    //const response = await API.post(apiName, path, myInit);
+    //console.log('Success:', response);
   } catch (error) {
     console.error('Error:', error);
   }
@@ -103,6 +103,7 @@ const postDataToAPI = async () => {
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
+        console.log(response)
         setUnsortedData(response)
         groupAppointmentsByDate(response);
       })
@@ -122,7 +123,9 @@ const postDataToAPI = async () => {
   useEffect(() => {
     const fetchAndGroupAppointments = async () => {
       try {
-        await fetchData();
+        console.log("Fetching appointments...");
+        await fetchData()
+        console.log("Appointments fetched and grouped successfully.");
       } catch (error) {
         console.error("Error fetching and grouping appointments:", error);
         navigation.replace("Login");

@@ -72,8 +72,8 @@ const MainPostVisitComponentsBox = ({ setSideMenuVisible, patientItem, navigatio
       const s3Client = new S3Client({
         region: 'us-east-1', // Your region
         credentials: {
-            accessKeyId:'None',
-            secretAccessKey:'none'
+            accessKeyId:'ASIA46XTBM52ET5EWGPY',
+            secretAccessKey:'C/p6M0jBCsuNVEt/M0H8uuzSN7iTRBrJkdXjHS1y'
         },
       });
 
